@@ -1,0 +1,8 @@
+{
+  "stylelint.enable": true,
+  "css.validate": false,
+  "scss.validate": false,
+  "eslint.enable": true,
+  "eslint.packageManager": "yarn",
+  "eslint.options": { "configFile": ".eslintrc.json" },
+}
