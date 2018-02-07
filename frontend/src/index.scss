@@ -1,5 +1,5 @@
 body{
-    background: lighten($color: #e0ffe2, $amount: 30);
+    background: lighten($color: #dd7474, $amount: 30);
     text-align: center;
 }
 .title-bar{
@@ -20,4 +20,29 @@ input[type=submit] {
 }
 .container{
     margin-top: 5%;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: rgb(53, 99, 70);
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+li a:hover {
+    background-color: rgb(31, 88, 65);
 }

@@ -9,7 +9,7 @@ class FormToSubmit extends Component {
     }
 
     handleChange(e) {
-        if (e === undefined || !(e.target.value instanceof (String))) {
+        if (!e.target.value instanceof (String)) {
             return;
         }
 
