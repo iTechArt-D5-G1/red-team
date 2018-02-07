@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import FormToSubmit from './FormToSubmit';
 import SurveysList from './SurveysList';
+import axios from 'axios';
+
+const ServerURL = "http://http://localhost:8081/";
 
 class MainPageContent extends Component {
     constructor(props) {
@@ -11,7 +14,8 @@ class MainPageContent extends Component {
     }
 
     callback(data) {
-        alert('Not Implement: get server data From that point ant pass it to SurveysList');
+        alert('Not implemented part: wait till server side is enable');
+        var requestData = axios.get( ServerURL + 'MethodName/' + data);
     }
 
 

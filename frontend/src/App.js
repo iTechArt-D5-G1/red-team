@@ -9,8 +9,6 @@ import MainPageContent from './Components/MainPageContent';
 import SecondPageContent from './Components/SecondPageContent';
 
 
-const ServerURL = "http://http://localhost:8081/";
-
 class App extends Component {
     render() {
         return (
