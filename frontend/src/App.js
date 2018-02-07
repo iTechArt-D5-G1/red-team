@@ -5,8 +5,8 @@ import {
     Link
   } from 'react-router-dom'
 import './dependences';
-import MainPageContent from './MainPageContent';
-import SecondPageContent from './SecondPageContent';
+import MainPageContent from './Components/MainPageContent';
+import SecondPageContent from './Components/SecondPageContent';
 
 class App extends Component {
     render() {
