@@ -6,7 +6,7 @@ import {
   } from 'react-router-dom'
 import './dependences';
 import MainPageContent from './Components/MainPageContent';
-import SecondPageContent from './Components/SecondPageContent';
+import HelloWorldPage from './Components/HelloWorldPage';
 import LoginPageContent from './Components/LoginPageContent';
 
 class App extends Component {
@@ -22,12 +22,12 @@ class App extends Component {
                     <div>
                     <ul>
                         <li><Link to="/">Main Page</Link></li>
-                        <li><Link to="/second">Second Page</Link></li>
+                        <li><Link to="/hello">Second Page</Link></li>
                         <li><Link to="/login">Sign in</Link></li>
                     </ul>
 
                     <Route exact path="/" component={MainPageContent}/>
-                    <Route path="/second" component={SecondPageContent}/>
+                    <Route path="/hello" component={HelloWorldPage}/>
                     <Route path="/login" component={LoginPageContent}/>
                     </div>
                 </Router>

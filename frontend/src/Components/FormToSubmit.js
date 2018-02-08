@@ -16,7 +16,12 @@ class FormToSubmit extends Component {
         const reg = /^\d+$/;
         const ourData = e.target.value;
 
-        if (reg.test(ourData[ourData.length - 1])) { this.setState({ message: ourData }); } else { e.target.value = ourData.substring(0, ourData.length - 1); }
+        if (reg.test(ourData[ourData.length - 1])) {
+            this.setState({ message: ourData });
+        } else {
+            e.target.value = ourData.substring(0, ourData.length - 1);
+        }
+
     }
 
     handleSubmit() {
