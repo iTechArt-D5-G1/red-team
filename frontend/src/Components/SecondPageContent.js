@@ -4,13 +4,11 @@ class SecondPageContent extends Component{
     render(){
         return(
             <div className = 'Container'>
-                <p>Second page occure!</p>
+                <p>Hello World!</p>
             </div>
         );
     }
 }
-
-
 
 
 export default SecondPageContent;
