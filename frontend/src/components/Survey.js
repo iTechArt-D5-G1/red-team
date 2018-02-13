@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types'
 
 const Survey = ({onClick, text}) =>(
-<li
+<div className = 'col-md-12'
     onClick={onClick}
   >
     {text}
-  </li>
+  </div>
 )
 
 Survey.propTypes = {

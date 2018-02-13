@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Survey from './Survey';
 
 const SurveysList  = ({surveys, onSurveyClick}) =>(
-     <ul>
+     <div className = 'row'>
      {surveys.map(survey =>
        <Survey
          key={survey.id}
@@ -12,7 +12,7 @@ const SurveysList  = ({surveys, onSurveyClick}) =>(
          class = {'surveys-list__content'}
 />
      )}
-   </ul>
+   </div>
 )
 
 

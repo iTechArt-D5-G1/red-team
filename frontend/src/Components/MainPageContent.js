@@ -27,9 +27,9 @@ class MainPageContent extends Component {
                 <div className='row'>
                     <FormToSubmit />
                 </div>
-                <div className='row'>
-                    <GetSurveysList />
-                </div>
+
+                <GetSurveysList />
+
             </div>
         );
     }
