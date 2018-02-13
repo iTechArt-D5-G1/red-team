@@ -3,13 +3,12 @@ import PropTypes from 'prop-types'
 import Survey from './Survey';
 
 const SurveysList  = ({surveys, onSurveyClick}) =>(
-     <div className = 'row'>
+     <div className = 'row surveys-list'>
      {surveys.map(survey =>
        <Survey
          key={survey.id}
          {...survey}
          onClick={() => onSurveyClick()}
-         class = {'surveys-list__content'}
 />
      )}
    </div>

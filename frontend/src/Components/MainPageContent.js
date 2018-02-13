@@ -23,7 +23,7 @@ class MainPageContent extends Component {
 
     render() {
         return (
-            <div className='container'>
+            <div className='container main_page'>
                 <div className='row'>
                     <FormToSubmit />
                 </div>

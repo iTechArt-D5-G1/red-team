@@ -4,7 +4,7 @@ import './Styles/forms.scss';
 const LoginPageContent = () =>(
         <div className='container'>
             <form className='login_form'>
-                <input type='text' value='input text value' />
+                <input className = 'login_form__input' type='text' value='input text value' />
             </form>
         </div>
 )
