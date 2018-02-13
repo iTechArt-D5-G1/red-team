@@ -1,8 +1,18 @@
 import { connect } from 'react-redux'
 import SurveysList from '../components/SurveysList';
 
-const getSurveys = (surveys) => {
-    return surveys;
+
+const getSurversFromServerSide = (server) =>{
+    server.fetchDev(10);
+    if(server.isFetching == false)
+        return server.surveysArr;
+}
+
+
+const getSurveys = (state) => {
+    //uncomment when ready
+    //return serverAndLocalSurveys = surveys.concat(getSurversFromServerSide(state.server))
+    return state.surveys;
 }
 
 const tempOnSurveyClick = () =>{
@@ -10,7 +20,7 @@ const tempOnSurveyClick = () =>{
 }
 
 const mapStateToProps = (state) => ({
-  surveys: getSurveys(state.surveys)
+  surveys: getSurveys(state)
 })
 
 
