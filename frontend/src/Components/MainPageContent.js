@@ -1,9 +1,11 @@
-import React, { Component } from 'react';
-import FormToSubmit from './FormToSubmit';
-import SurveysList from './SurveysList';
 import axios from 'axios';
+import React, { Component } from 'react';
+import FormToSubmit from '../containers/FormToSubmit';
+import GetSurveysList from '../containers/GetSurveysList';
+import { addSurvey } from '../actions/action-creators';
+import { store } from '../index';
 
-const ServerURL = "http://http://localhost:8081/";
+const ServerURL = 'http://http://localhost:8081/';
 
 class MainPageContent extends Component {
     constructor(props) {
@@ -15,20 +17,20 @@ class MainPageContent extends Component {
 
     callback(data) {
         alert('Not implemented part: wait till server side is enable');
-        var requestData = axios.get( ServerURL + 'MethodName/' + data);
+        const requestData = axios.get(`${ServerURL}MethodName/${data}`);
     }
 
 
     render() {
         return (
-                <div className='container'>
-                    <div className='row'>
-                        <FormToSubmit call={this.callback} />
-                    </div>
-                    <div className='row'>
-                        <SurveysList data={this.state.test} />
-                    </div>
+            <div className='container'>
+                <div className='row'>
+                    <FormToSubmit />
                 </div>
+                <div className='row'>
+                    <GetSurveysList />
+                </div>
+            </div>
         );
     }
 }

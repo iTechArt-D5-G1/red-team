@@ -4,38 +4,27 @@ import {
     Route,
     Link
   } from 'react-router-dom'
-import './dependences';
-import MainPageContent from './Components/MainPageContent';
-import HelloWorldPage from './Components/HelloWorldPage';
-import LoginPageContent from './Components/LoginPageContent';
 
-class App extends Component {
+  import MainPageContent from './MainPageContent';
+  import HelloWorldPage from './HelloWorldPage';
+  import LoginPageContent from './LoginPageContent';
 
-
-
-
-
-    render() {
-        return (
-            <div>
-                <Router>
-                    <div>
+const App = () => (
+        <div>
+            <Router>
+                <div>
                     <ul>
                         <li><Link to="/">Main Page</Link></li>
                         <li><Link to="/hello">Second Page</Link></li>
                         <li><Link to="/login">Sign in</Link></li>
                     </ul>
-
                     <Route exact path="/" component={MainPageContent}/>
                     <Route path="/hello" component={HelloWorldPage}/>
                     <Route path="/login" component={LoginPageContent}/>
-                    </div>
-                </Router>
-            </div>
-
-        );
-    }
-}
+                </div>
+            </Router>
+        </div>
+)
 
 
 export default App;
