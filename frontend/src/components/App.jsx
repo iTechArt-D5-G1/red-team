@@ -5,9 +5,9 @@ import {
     Link,
 } from 'react-router-dom';
 
-import MainPageContent from './MainPageContent';
-import HelloWorldPage from './HelloWorldPage';
-import LoginPageContent from './LoginPageContent';
+import MainPageContent from './MainPageContent.jsx';
+import HelloWorldPage from './HelloWorldPage.jsx';
+import LoginPageContent from './LoginPageContent.jsx';
 
 const App = () => (
     <div>

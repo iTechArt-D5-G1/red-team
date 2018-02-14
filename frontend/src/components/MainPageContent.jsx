@@ -1,5 +1,5 @@
 import React from 'react';
-import FormToSubmit from '../containers/FormToSubmit';
+import FormToSubmit from '../containers/FormToSubmit.jsx';
 import GetSurveysList from '../containers/GetSurveysList';
 
 

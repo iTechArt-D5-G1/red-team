@@ -5,9 +5,6 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = merge(common, {
-    devServer: {
-        contentBase: path.resolve(__dirname, 'public'),
-    },
     devtool: 'source-map',
     plugins: [
         new UglifyJSPlugin({

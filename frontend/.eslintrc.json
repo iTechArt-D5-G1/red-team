@@ -7,7 +7,7 @@
         }],
         "react/jsx-filename-extension":
         [1,
-            { "extensions": [".js", ".jsx"] }
+            { "extensions": [".jsx"] }
         ],
         "max-len": [
             "warn",

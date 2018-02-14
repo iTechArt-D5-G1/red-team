@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Survey from './Survey';
+import Survey from './Survey.jsx';
 
 const SurveysList = ({ surveys, onSurveyClick }) => (
     <div className='row surveys-list'>
