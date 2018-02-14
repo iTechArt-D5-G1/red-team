@@ -4,7 +4,7 @@ const common = require('./webpack.common');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const webpack = require('webpack');
 
-module.exports = merge(common,{
+module.exports = merge(common, {
     devServer: {
         contentBase: path.resolve(__dirname, 'public'),
     },

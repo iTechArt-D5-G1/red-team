@@ -11,7 +11,7 @@ module.exports = {
         rules: [
             {
                 test: /\.jsx?$/,
-                loader: 'babel-loader',
+                use: ['babel-loader', 'eslint-loader'],
                 exclude: /node_modules/,
             },
             {
@@ -20,25 +20,19 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                use: [{
-                    loader: 'style-loader',
-                }, {
-                    loader: 'css-loader',
-                }, {
-                    loader: 'sass-loader',
-                }],
+                use: ['style-loader', 'css-loader', 'sass-loader', 'stylint-loader'],
             },
             {
                 test: /\.(gif|png|jpe?g|svg)$/i,
                 use: [
                     'file-loader',
                     {
-                      loader: 'image-webpack-loader',
-                      options: {
-                        bypassOnDebug: true,
-                      },
+                        loader: 'image-webpack-loader',
+                        options: {
+                            bypassOnDebug: true,
+                        },
                     },
-                  ],
+                ],
             },
         ],
     },

@@ -1,36 +1,32 @@
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import SurveysList from '../components/SurveysList';
 
 
-const getSurversFromServerSide = (server) =>{
-    server.fetchDev(10);
-    if(server.isFetching == false)
-        return server.surveysArr;
-}
+// const getSurversFromServerSide = server => server.surveysArr;
+
+// server.fetchDev(10);
 
 
-const getSurveys = (state) => {
-    //uncomment when ready
-    //return serverAndLocalSurveys = surveys.concat(getSurversFromServerSide(state.server))
-    return state.surveys;
-}
+//  return serverAndLocalSurveys = surveys.concat(getSurversFromServerSide(state.server));
+const getSurveys = state => state.surveys;
 
-const tempOnSurveyClick = () =>{
+
+const tempOnSurveyClick = () => {
     alert('click');
-}
+};
 
-const mapStateToProps = (state) => ({
-  surveys: getSurveys(state)
-})
+const mapStateToProps = state => ({
+    surveys: getSurveys(state),
+});
 
 
 const mapDispatchToProps = {
-    onSurveyClick:tempOnSurveyClick
-}
+    onSurveyClick: tempOnSurveyClick,
+};
 
 const GetSurveysList = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SurveysList)
+    mapStateToProps,
+    mapDispatchToProps,
+)(SurveysList);
 
-export default GetSurveysList
+export default GetSurveysList;
