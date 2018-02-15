@@ -2,13 +2,13 @@ import { connect } from 'react-redux';
 import SurveysList from '../components/SurveysList/SurveysList.jsx';
 
 
-// const getSurversFromServerSide = server => server.surveysArr;
+const getSurversFromServerSide = (server) => {
+    server.fetchDev(10);
+    return server.surveysArr;
+};
 
-// server.fetchDev(10);
 
-
-//  return serverAndLocalSurveys = surveys.concat(getSurversFromServerSide(state.server));
-const getSurveys = state => state.surveys;
+const getSurveys = state => state.surveys.concat(getSurversFromServerSide(state.server));
 
 
 const tempOnSurveyClick = () => {
