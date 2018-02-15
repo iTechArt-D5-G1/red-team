@@ -11,9 +11,10 @@ import './components/Styles/index.scss';
 import App from './components/App.jsx';
 
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
+const store = createStoreWithMiddleware(reducer);
 
 ReactDOM.render(
-    <Provider store={createStoreWithMiddleware(reducer)}>
+    <Provider store={store}>
         <App />
     </Provider>,
     document.getElementById('app'),

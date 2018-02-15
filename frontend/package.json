@@ -2,7 +2,7 @@
   "name": "d5-g1-lab-frontend",
   "version": "0.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "index.jsx",
   "scripts": {
     "start": "webpack-dev-server --open --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js"
