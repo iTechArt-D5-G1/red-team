@@ -4,51 +4,76 @@ import { connect } from 'react-redux';
 import { addSurvey } from '../actions/action-creators';
 
 
-const FormToSubmit = ({ dispatch }) => {
-    let input;
+class FormToSubmit extends React.Component {
+    constructor(props) {
+        super(props);
 
-    return (
-        <div className='col-md-12 form-to-submit'>
-            <p className='form-to-submit__header lead'>Count of models to show:</p>
-            <form onSubmit={(e) => {
-                e.preventDefault();
-                if (!input.value.trim()) {
-                    return;
-                }
-                dispatch(addSurvey(input.value));
-                input.value = '';
-            }}
-            >
-                <input
-                    onChange={(e) => {
-                        if (!(e.target.value instanceof (String))) {
-                            return;
-                        }
-                        const reg = /^\d+$/;
-                        const ourData = e.target.value;
+        this.state = {
+            input: '',
+        };
 
-                        if (reg.test(ourData[ourData.length - 1])) {
-                            e.target.value = ourData.substring(0, ourData.length - 1);
-                        }
-                    }}
-                    ref={(node) => {
-                        input = node;
-                    }}
-                    className='form-to-submit__input-field'
-                />
-                <br />
-                <button type='submit' className='form-to-submit__submit-button'>
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+
+    handleInputChange(e) {
+        if ((e.target.value instanceof (String))) {
+            return;
+        }
+        const reg = /^\d+$/;
+        const ourData = e.target.value;
+
+        if (!reg.test(ourData[ourData.length - 1])) {
+            e.target.value = ourData.substring(0, ourData.length - 1);
+        }
+        this.setState({ input: e.target.value });
+    }
+
+    handleSubmit(e) {
+        const { input } = this.state;
+        const { dispatch } = this.props;
+        e.preventDefault();
+        if (!input.trim()) {
+            return;
+        }
+        dispatch(addSurvey(input));
+        this.setState({ input: '' });
+    }
+
+
+    render() {
+        const { input } = this.state;
+        return (
+            <div className='col-md-12 form-to-submit'>
+                <p className='form-to-submit__header lead'>Count of models to show:</p>
+                <form onSubmit={this.handleSubmit}>
+                    <input
+                        onChange={this.handleInputChange}
+                        className='form-to-submit__input-field'
+                        value={input}
+                    />
+                    <br />
+                    <button type='submit' className='form-to-submit__submit-button'>
             Submit
-                </button>
-            </form>
-        </div>
-    );
-};
+                    </button>
+                </form>
+            </div>
+        );
+    }
+}
 
 FormToSubmit.propTypes = {
     dispatch: PropTypes.func.isRequired,
 };
 
-const SubmitForm = connect()(FormToSubmit);
+function mapStateToProps(state) {
+    const { surveys } = state.surveys;
+    return {
+        surveys,
+    };
+}
 
-export default SubmitForm;
+const SumbitForm = connect(mapStateToProps)(FormToSubmit);
+
+export default SumbitForm;

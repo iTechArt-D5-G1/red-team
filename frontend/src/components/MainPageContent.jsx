@@ -1,7 +1,7 @@
 import React from 'react';
-import FormToSubmit from '../containers/FormToSubmit.jsx';
+// import FormToSubmit from '../containers/FormToSubmit.jsx';
 import GetSurveysList from '../containers/GetSurveysList';
-
+import FormToSubmit from '../containers/FormToSubmit.jsx';
 
 const MainPageContent = () => (
     <div className='container main_page'>
