@@ -4,14 +4,18 @@ import {
     Route,
     Link,
 } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
 
 import MainPageContent from './MainPageContent.jsx';
 import HelloWorldPage from './HelloWorldPage.jsx';
 import LoginPageContent from './LoginPageContent.jsx';
 
+
+const history = createBrowserHistory();
+
 const App = () => (
     <div>
-        <Router>
+        <Router history={history}>
             <div>
                 <ul>
                     <li><Link to='/'>Main Page</Link></li>

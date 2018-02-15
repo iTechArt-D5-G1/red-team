@@ -41,6 +41,7 @@
   "dependencies": {
     "axios": "^0.13.1",
     "bootstrap": "^4.0.0",
+    "history": "^4.7.2",
     "jquery": "^3.3.1",
     "popper.js": "^1.12.9",
     "prop-types": "^15.6.0",
