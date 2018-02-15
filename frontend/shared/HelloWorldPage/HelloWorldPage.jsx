@@ -1,5 +1,5 @@
 import React from 'react';
-import './Styles/hello-world-page.scss';
+import './hello-world-page.scss';
 
 const HelloWorldPage = () => (
     <div className='Container hello-world-page'>

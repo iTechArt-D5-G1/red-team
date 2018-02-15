@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import SurveysList from '../components/SurveysList.jsx';
+import SurveysList from '../components/SurveysList/SurveysList.jsx';
 
 
 // const getSurversFromServerSide = server => server.surveysArr;

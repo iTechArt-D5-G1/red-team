@@ -1,5 +1,5 @@
 import React from 'react';
-import './Styles/forms.scss';
+import './forms.scss';
 
 const LoginPageContent = () => (
     <div className='container'>

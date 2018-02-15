@@ -6,9 +6,9 @@ import {
 } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 
-import MainPageContent from './MainPageContent.jsx';
-import HelloWorldPage from './HelloWorldPage.jsx';
-import LoginPageContent from './LoginPageContent.jsx';
+import MainPageContent from '../shared/MainPage/MainPageContent.jsx';
+import HelloWorldPage from '../shared/HelloWorldPage/HelloWorldPage.jsx';
+import LoginPageContent from '../auth/components/Login/LoginPageContent.jsx';
 
 
 const history = createBrowserHistory();

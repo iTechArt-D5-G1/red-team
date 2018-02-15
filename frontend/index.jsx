@@ -5,10 +5,11 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
-import reducer from './reducers';
-import './components/Styles/index.scss';
+import reducer from './surveys/reducers';
 
-import App from './components/App.jsx';
+import App from './router/App.jsx';
+
+import './index.scss';
 
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 const store = createStoreWithMiddleware(reducer);
