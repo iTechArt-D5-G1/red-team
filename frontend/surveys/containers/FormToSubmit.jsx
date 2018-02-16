@@ -41,7 +41,6 @@ class FormToSubmit extends React.Component {
         this.setState({ input: '' });
     }
 
-
     render() {
         const { input } = this.state;
         return (
@@ -75,5 +74,6 @@ function mapStateToProps(state) {
 }
 
 const SumbitForm = connect(mapStateToProps)(FormToSubmit);
+
 
 export default SumbitForm;

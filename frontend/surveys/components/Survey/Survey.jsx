@@ -16,4 +16,5 @@ Survey.propTypes = {
     text: PropTypes.string.isRequired,
 };
 
+
 export default Survey;

@@ -1,4 +1,3 @@
-
 const server = (state = { isFetching: false, surveysArr: [] }, action) => {
     switch (action.type) {
         case 'Start_Dev_Search':

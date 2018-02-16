@@ -13,7 +13,6 @@ const SurveysList = ({ surveys, onSurveyClick }) => (
     </div>
 );
 
-
 SurveysList.propTypes = {
     surveys: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.number.isRequired,

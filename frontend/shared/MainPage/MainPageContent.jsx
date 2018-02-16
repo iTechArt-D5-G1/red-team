@@ -1,5 +1,4 @@
 import React from 'react';
-
 import GetSurveysList from '../../surveys/containers/GetSurveysList';
 import FormToSubmit from '../../surveys/containers/FormToSubmit.jsx';
 
@@ -12,5 +11,6 @@ const MainPageContent = () => (
         <GetSurveysList />
     </div>
 );
+
 
 export default MainPageContent;
