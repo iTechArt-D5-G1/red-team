@@ -7,9 +7,8 @@ import thunk from 'redux-thunk';
 
 import reducer from './surveys/reducers';
 
-import App from './router/App.jsx';
+import App from './app/App.jsx';
 
-import './index.scss';
 
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 const store = createStoreWithMiddleware(reducer);

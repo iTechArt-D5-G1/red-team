@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import SurveysList from '../components/SurveysList/SurveysList.jsx';
-
+import HttpUtility from '../../shared/utils/http';
 // server.fetchDev(10);
-const getSurversFromServerSide = server => server.surveysArr;
+const getSurversFromServerSide = () => HttpUtility.GetSurveys();
 
 const getSurveys = state => state.surveys.concat(getSurversFromServerSide(state.server));
 
