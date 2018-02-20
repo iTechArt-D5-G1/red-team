@@ -5,9 +5,11 @@ import {
     Link,
 } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
+
 import MainPageContent from '../shared/MainPage/MainPageContent.jsx';
 import HelloWorldPage from '../shared/HelloWorldPage/HelloWorldPage.jsx';
 import LoginPageContent from '../auth/components/Login/LoginPageContent.jsx';
+
 import './app.scss';
 
 const history = createBrowserHistory();

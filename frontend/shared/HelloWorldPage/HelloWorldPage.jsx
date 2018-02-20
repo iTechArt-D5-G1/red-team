@@ -1,4 +1,5 @@
 import React from 'react';
+
 import './hello-world-page.scss';
 
 const HelloWorldPage = () => (

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import Survey from '../Survey/Survey.jsx';
 
 const SurveysList = ({ surveys, onSurveyClick }) => (
