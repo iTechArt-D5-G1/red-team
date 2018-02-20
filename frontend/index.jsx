@@ -19,3 +19,12 @@ ReactDOM.render(
     </Provider>,
     document.getElementById('app'),
 );
+
+if (module.hot) {
+    // Whenever a new version of App.js is available
+    module.hot.accept('./app', () => {
+        // Require the new version and render it instead
+        const NextApp = App;
+        ReactDOM.render(<NextApp />, 'app');
+    });
+}
