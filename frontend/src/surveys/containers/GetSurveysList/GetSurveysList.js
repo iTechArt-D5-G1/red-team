@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import SurveysList from '../../components/SurveysList';
-import HttpUtility from '../../../shared/utils';
+import HttpUtility from '../../utils';
 // server.fetchDev(10);
 const getSurversFromServerSide = () => HttpUtility.GetSurveys();
 
