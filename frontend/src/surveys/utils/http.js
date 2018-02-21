@@ -4,15 +4,16 @@ const axios = require('axios');
 
 
 class HttpUtility {
-    static GetSurveys() {
-        return axios.get(ServerUrl).then(
-            (response) => {
-                console.log(response);
-            },
-            (err) => {
-                console.log(err);
-            },
-        );
+    static async GetSurveys() {
+        try {
+            const response = await axios.get(ServerUrl);
+            const { data } = response.data;
+            console.log(data);
+            return data;
+        } catch (err) {
+            console.log(err);
+            return null;
+        }
     }
 }
 
