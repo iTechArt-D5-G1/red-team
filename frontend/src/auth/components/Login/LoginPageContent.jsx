@@ -2,10 +2,12 @@ import React from 'react';
 
 import './forms.scss';
 
-const LoginPageContent = () => (
-    <div className='container'>
+const LoginPageContent = onSubmit => (
+    <div className='container' onSubmit={onSubmit}>
         <form className='login_form'>
-            <input className='login_form__input' type='text' value='input text value' />
+            <p><input className='login_form__login_imput' type='text' /></p>
+            <p><input className='login_form__password_input' type='text' /></p>
+            <button >Login</button>
         </form>
     </div>
 );
