@@ -1,7 +1,9 @@
+@import "../stylesheets/partials/themeColors.scss";
+
 body {
     text-align: center;
 
-    background: lighten($color: #dd7474, $amount: 30);
+    background: $backgroundColor;
 }
 
 .title-bar {
@@ -36,7 +38,7 @@ ul {
 
     list-style-type: none;
 
-    background-color: rgb(53, 99, 70);
+    background-color: $mainColor;
 }
 
 li {
@@ -56,5 +58,5 @@ li a {
 }
 
 li a:hover {
-    background-color: rgb(31, 88, 65);
+    background-color: $onMainColorHover;
 }
