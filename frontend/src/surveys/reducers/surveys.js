@@ -1,4 +1,4 @@
-import '../actions/action-creators';
+import '../actions/actionCreators';
 import { ADD_SURVEY } from '../actions/actions';
 
 const surveys = (state = [], action) => {
