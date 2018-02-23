@@ -6,31 +6,11 @@ body {
     background: $backgroundColor;
 }
 
-.title-bar {
-    padding-top: 2%;
-    padding-bottom: 2%;
-
-    border-style: round($number: 40);
-    background: lighten($color: #51ff9a, $amount: 30);
-}
-
-input[type="submit"] {
-    margin: 8px 0;
-    padding: 10px 14px;
-    border: none;
-
-    cursor: pointer;
-
-    color: white;
-    border-radius: 4px;
-    background-color: lighten($color: #07ff6e, $amount: 30);
-}
-
 .container {
     margin-top: 5%;
 }
 
-ul {
+.menu {
     overflow: hidden;
 
     margin: 0;
@@ -41,11 +21,11 @@ ul {
     background-color: $mainColor;
 }
 
-li {
+.menu__btn {
     float: left;
 }
 
-li a {
+.menu__btn a {
     display: block;
 
     padding: 14px 16px;
@@ -56,6 +36,6 @@ li a {
     color: white;
 }
 
-li a:hover {
+.menu__btn a:hover {
     background-color: $onMainColorHover;
 }
