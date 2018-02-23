@@ -15,20 +15,18 @@ import './app.scss';
 const history = createBrowserHistory();
 
 const App = () => (
-    <div>
-        <Router history={history}>
-            <div>
-                <ul>
-                    <li><Link to='/'>Main Page</Link></li>
-                    <li><Link to='/hello'>Second Page</Link></li>
-                    <li><Link to='/login'>Sign in</Link></li>
-                </ul>
-                <Route exact path='/' component={MainPageContent} />
-                <Route path='/hello' component={HelloWorldPage} />
-                <Route path='/login' component={LoginPageContent} />
-            </div>
-        </Router>
-    </div>
+    <Router history={history}>
+        <div>
+            <ul>
+                <li><Link to='/'>Main Page</Link></li>
+                <li><Link to='/hello'>Second Page</Link></li>
+                <li><Link to='/login'>Sign in</Link></li>
+            </ul>
+            <Route exact path='/' component={MainPageContent} />
+            <Route path='/hello' component={HelloWorldPage} />
+            <Route path='/login' component={LoginPageContent} />
+        </div>
+    </Router>
 );
 
 export default App;
