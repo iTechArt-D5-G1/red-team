@@ -1,6 +1,6 @@
 @import "../../../stylesheets/partials/themeColors.scss";
 
-.login_form {
+.form {
     position: fixed;
 
     top: 50%;
@@ -17,11 +17,13 @@
 
     background-color: $deepBackgroundLevelColor;
 
-    input {
+    .form__login_imput,
+    .form__password_imput {
         width: 50%;
+        margin-top: 15%;
     }
 
-    button {
+    .form__login_btn {
 
         width: 50%;
 
