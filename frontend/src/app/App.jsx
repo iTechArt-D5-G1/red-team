@@ -17,10 +17,10 @@ const history = createBrowserHistory();
 const App = () => (
     <Router history={history}>
         <div>
-            <ul>
-                <li><Link to='/'>Main Page</Link></li>
-                <li><Link to='/hello'>Second Page</Link></li>
-                <li><Link to='/login'>Sign in</Link></li>
+            <ul className='menu'>
+                <li className='menu__btn'><Link to='/'>Main Page</Link></li>
+                <li className='menu__btn'><Link to='/hello'>Second Page</Link></li>
+                <li className='menu__btn'><Link to='/login'>Sign in</Link></li>
             </ul>
             <Route exact path='/' component={MainPageContent} />
             <Route path='/hello' component={HelloWorldPage} />
