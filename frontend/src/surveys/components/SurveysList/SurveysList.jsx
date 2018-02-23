@@ -22,5 +22,4 @@ SurveysList.propTypes = {
     onSurveyClick: PropTypes.func.isRequired,
 };
 
-
 export default SurveysList;

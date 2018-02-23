@@ -7,5 +7,4 @@ const surveyApp = combineReducers({
     server,
 });
 
-
 export default surveyApp;

@@ -24,5 +24,4 @@ const GetSurveysList = connect(
     mapDispatchToProps,
 )(SurveysList);
 
-
 export default GetSurveysList;

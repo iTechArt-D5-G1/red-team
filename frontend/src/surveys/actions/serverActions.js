@@ -1,11 +1,9 @@
 const axios = require('axios');
 
-// reducer to indicate that our api call has started
 export const startDevSearch = () => ({
     type: 'Start_Dev_Search',
 });
 
-// reducer to indicate we have received all our data from the api
 export const endDevSearch = surveysArr => ({
     type: 'End_Dev_Search',
     surveysArr,
@@ -28,4 +26,3 @@ export const fetchDev = (maxCount) => {
         );
     };
 };
-

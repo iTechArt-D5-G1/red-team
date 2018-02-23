@@ -16,5 +16,4 @@ const surveys = (state = [], action) => {
     }
 };
 
-
 export default surveys;

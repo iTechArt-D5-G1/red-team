@@ -13,5 +13,4 @@ const MainPageContent = () => (
     </div>
 );
 
-
 export default MainPageContent;

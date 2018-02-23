@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 import { addSurvey } from '../../actions';
 
-
 class FormToSubmit extends React.Component {
     constructor(props) {
         super(props);
@@ -16,7 +15,6 @@ class FormToSubmit extends React.Component {
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-
 
     handleInputChange(e) {
         if ((e.target.value instanceof (String))) {
@@ -75,6 +73,5 @@ function mapStateToProps(state) {
 }
 
 const SumbitForm = connect(mapStateToProps)(FormToSubmit);
-
 
 export default SumbitForm;

@@ -8,5 +8,4 @@ const HelloWorldPage = () => (
     </div>
 );
 
-
 export default HelloWorldPage;
