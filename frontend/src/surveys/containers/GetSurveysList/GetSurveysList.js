@@ -2,10 +2,11 @@ import { connect } from 'react-redux';
 
 import SurveysList from '../../components/SurveysList';
 import HttpUtility from '../../utils';
+
 // server.fetchDev(10);
 const getSurversFromServerSide = () => HttpUtility.GetSurveys();
 
-const getSurveys = state => state.surveys.concat(getSurversFromServerSide(state.server));
+const getSurveys = state => state.surveys.concat(getSurversFromServerSide());
 
 const tempOnSurveyClick = () => {
     alert('click');
