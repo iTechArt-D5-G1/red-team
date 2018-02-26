@@ -11,12 +11,9 @@ class FormToSubmit extends React.Component {
         this.state = {
             input: '',
         };
-
-        this.handleInputChange = this.handleInputChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleInputChange(e) {
+    handleInputChange = (e) => {
         if ((e.target.value instanceof (String))) {
             return;
         }
@@ -29,7 +26,7 @@ class FormToSubmit extends React.Component {
         this.setState({ input: e.target.value });
     }
 
-    handleSubmit(e) {
+    handleSubmit = (e) => {
         const { input } = this.state;
         const { dispatch } = this.props;
         e.preventDefault();
