@@ -3,16 +3,21 @@ import PropTypes from 'prop-types';
 
 import Survey from '../Survey/Survey.jsx';
 
-const SurveysList = ({ surveys, onSurveyClick }) => (
-    <div className='row surveys-list'>
-        {surveys.map(survey =>
-            (<Survey
-                key={survey.id}
-                {...survey}
-                onClick={() => onSurveyClick()}
-            />))}
-    </div>
-);
+class SurveysList extends React.Component {
+    renderSurveys = survey => (<Survey
+        id={survey.id}
+        {...survey}
+        onClick={() => this.props.onSurveyClick()}
+    />)
+
+    render() {
+        return (
+            <div className='row surveys-list'>
+                {this.props.surveys.map(this.renderSurveys)}
+            </div>
+        );
+    }
+}
 
 SurveysList.propTypes = {
     surveys: PropTypes.arrayOf(PropTypes.shape({
