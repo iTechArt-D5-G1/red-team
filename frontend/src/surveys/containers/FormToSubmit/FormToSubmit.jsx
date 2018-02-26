@@ -18,10 +18,10 @@ class FormToSubmit extends React.Component {
             return;
         }
         const reg = /^\d+$/;
-        const ourData = e.target.value;
+        const targetValue = e.target.value;
 
-        if (!reg.test(ourData[ourData.length - 1])) {
-            e.target.value = ourData.substring(0, ourData.length - 1);
+        if (!reg.test(targetValue[targetValue.length - 1])) {
+            e.target.value = targetValue.substring(0, targetValue.length - 1);
         }
         this.setState({ input: e.target.value });
     }
