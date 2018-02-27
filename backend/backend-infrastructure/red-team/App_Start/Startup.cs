@@ -5,7 +5,6 @@ using Autofac.Integration.WebApi;
 using Microsoft.Owin;
 using Owin;
 using red_team.backend_infrastructure.Repositories;
-using red_team.backend_infrastructure.Repositories.Interfaces;
 using red_team.backend_infrastructure.WebApi.Controllers;
 using red_team.Repositories;
 
@@ -26,11 +25,12 @@ namespace red_team.backend_infrastructure.WebApi.App_Start
                 defaults: new { id = RouteParameter.Optional }
             );
             builder.RegisterType<ValueController>();
+            builder.RegisterType<UnitOfWork>().As<UnitOfWork>();
             builder.RegisterType<SurveyContext>().As<SurveyContext>();
 
             var container = builder.Build();
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
-
+        
             app.UseWebApi(config);  
             
             Database.SetInitializer(new SurveyDbInitializer());

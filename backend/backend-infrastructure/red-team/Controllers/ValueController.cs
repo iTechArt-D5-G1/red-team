@@ -6,10 +6,11 @@ namespace red_team.backend_infrastructure.WebApi.Controllers
 {
     public class ValueController : ApiController
     {
-        private readonly UnitOfWork unit;
-        public ValueController()
+        private UnitOfWork unit;
+ 
+        public ValueController(UnitOfWork _unit)
         {
-            unit = new UnitOfWork();
+            unit = _unit;
         }
         public Survey GetSurveyById(int Id)
         {

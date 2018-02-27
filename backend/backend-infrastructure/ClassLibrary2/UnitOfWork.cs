@@ -1,5 +1,4 @@
 ﻿using red_team.backend_infrastructure.Repositories;
-using red_team.Repositories.Interfaces;
 using System;
 
 namespace red_team.Repositories

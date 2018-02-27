@@ -1,5 +1,4 @@
-﻿
-namespace red_team.backend_infrastructure.Foundation
+﻿namespace red_team.backend_infrastructure.Foundation
 {
     public class Survey
     {
