@@ -1,10 +1,13 @@
 import { Survey } from '../../models/survey';
-import { AxiosInstance } from './axiosInstance.js';
+import { ServerUrl } from '../../server.config';
+
+const axios = require('axios');
 
 class HttpUtility {
     static async GetSurveys() {
         try {
-            const response = await AxiosInstance.get();
+            const response = axios.get(ServerUrl);
+            console.log(response);
             const { data } = response.data;
             const surveys = data.map(s => Survey(s.id, s.text));
             console.log(data);
