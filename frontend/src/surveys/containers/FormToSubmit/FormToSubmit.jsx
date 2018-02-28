@@ -28,12 +28,11 @@ class FormToSubmit extends React.Component {
 
     handleSubmit = (e) => {
         const { input } = this.state;
-        const { dispatch } = this.props;
         e.preventDefault();
         if (!input.trim()) {
             return;
         }
-        dispatch(addSurvey(input));
+        this.props.submitSurvey(input);
         this.setState({ input: '' });
     }
 
@@ -59,7 +58,7 @@ class FormToSubmit extends React.Component {
 }
 
 FormToSubmit.propTypes = {
-    dispatch: PropTypes.func.isRequired,
+    submitSurvey: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -69,6 +68,10 @@ function mapStateToProps(state) {
     };
 }
 
-const SumbitForm = connect(mapStateToProps)(FormToSubmit);
+const mapDispatchToProps = dispatch => ({
+    submitSurvey: survey => dispatch(addSurvey(survey)),
+});
+
+const SumbitForm = connect(mapStateToProps, mapDispatchToProps)(FormToSubmit);
 
 export default SumbitForm;
