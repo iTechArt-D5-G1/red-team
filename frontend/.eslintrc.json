@@ -6,9 +6,14 @@
           "components": [ "Link" ],
           "specialLink": [ "to" ]
         }],
-        "react/jsx-filename-extension":
-        [1,
-            { "extensions": [".jsx"] }
+        "no-multiple-empty-lines": [
+            "error",
+            {
+                "max": 1
+            }
+        ],
+        "prefer-arrow-callback": [
+            "error"
         ],
         "max-len": [
             "warn",
