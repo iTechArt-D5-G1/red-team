@@ -1,6 +1,6 @@
 import React from 'react';
 
-import GetSurveysList from '../../containers/GetSurveysList';
+import SurveysListContainer from '../../containers/SurveysListContainer';
 import FormToSubmit from '../../containers/FormToSubmit';
 
 const MainPageContent = () => (
@@ -9,7 +9,7 @@ const MainPageContent = () => (
             <FormToSubmit />
         </div>
 
-        <GetSurveysList />
+        <SurveysListContainer />
     </div>
 );
 
