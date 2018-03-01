@@ -49,9 +49,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\ISurveyContext.cs" />
-    <Compile Include="Migrations\201802231753379_InitialCreate.cs" />
-    <Compile Include="Migrations\201802231753379_InitialCreate.Designer.cs">
-      <DependentUpon>201802231753379_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201802280714073_Initial.cs" />
+    <Compile Include="Migrations\201802280714073_Initial.Designer.cs">
+      <DependentUpon>201802280714073_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -69,8 +69,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201802231753379_InitialCreate.resx">
-      <DependentUpon>201802231753379_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201802280714073_Initial.resx">
+      <DependentUpon>201802280714073_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

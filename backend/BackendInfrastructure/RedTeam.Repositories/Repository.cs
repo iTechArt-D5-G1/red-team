@@ -5,9 +5,10 @@ using RedTeam.Repositories.Interfaces;
 
 namespace RedTeam.Repositories
 {
-    public class Repository<TEntity> : IRepository<Survey>
+    public sealed class Repository : IRepository<Survey>
     {
         private readonly SurveyContext context;
+
         public Repository(SurveyContext _context)
         {
             context = _context;

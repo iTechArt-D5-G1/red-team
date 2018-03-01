@@ -1,8 +1,8 @@
-﻿using RedTeam.BackendInfrastructure.Foundation;
+﻿using System.Web.Http;
+using RedTeam.BackendInfrastructure.Foundation;
 using RedTeam.Repositories;
-using System.Web.Http;
 
-namespace RedTeam.BackendInfrastructure.WebApi.WebApi.Controllers
+namespace RedTeam.BackendInfrastructure.WebApi.Controllers
 {
     public class ValueController : ApiController
     {
@@ -12,9 +12,10 @@ namespace RedTeam.BackendInfrastructure.WebApi.WebApi.Controllers
         {
             unit = _unit;
         }
-        public Survey GetSurveyById(int Id)
+
+        public Survey GetSurveyById(int id)
         {
-            return unit.Surveys.GetByIdAsync(Id);
+            return unit.Surveys.GetByIdAsync(id);
         }
     }
 }

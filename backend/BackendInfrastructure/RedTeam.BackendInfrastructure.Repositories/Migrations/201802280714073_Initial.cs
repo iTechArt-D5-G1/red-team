@@ -2,7 +2,7 @@ namespace RedTeam.BackendInfrastructure.Repositories.Migrations
 {
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class Initial : DbMigration
     {
         public override void Up()
         {
@@ -12,8 +12,8 @@ namespace RedTeam.BackendInfrastructure.Repositories.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Name = c.String(),
-                        CreationDate = c.String(), 
-                })
+                        CreationDate = c.String(),
+                    })
                 .PrimaryKey(t => t.Id);
             
         }
