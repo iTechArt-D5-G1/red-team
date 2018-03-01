@@ -23,7 +23,7 @@ function getSurveys() {
         return surveys;
     } catch (err) {
         console.log(err);
-        return null;
+        throw err;
     }
 }
 

@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 import surveys from './surveys';
-import server from './server';
+import serverSurveys from './serverSurveys';
 
 const surveyApp = combineReducers({
     surveys,
-    server,
+    serverSurveys,
 });
 
 export default surveyApp;

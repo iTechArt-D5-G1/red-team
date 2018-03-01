@@ -1,9 +1,9 @@
 import '../actions/surveyActionCreators';
-import { ADD_SURVEY } from '../actions/actions';
+import { surveyConstants } from '../actions/actions';
 
 const surveys = (state = [], action) => {
     switch (action.type) {
-        case ADD_SURVEY:
+        case surveyConstants.ADD_SURVEY:
             return [
                 ...state,
                 {

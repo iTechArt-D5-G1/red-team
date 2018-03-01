@@ -1,6 +1,6 @@
 import { serverConstants } from '../actions/';
 
-const server = (state = [], action) => {
+const serverSurveys = (state = [], action) => {
     switch (action.type) {
         case serverConstants.GET_SURVEYS:
             return [
@@ -14,4 +14,4 @@ const server = (state = [], action) => {
     }
 };
 
-export default server;
+export default serverSurveys;

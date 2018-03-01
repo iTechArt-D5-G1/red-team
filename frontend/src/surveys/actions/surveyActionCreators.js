@@ -1,4 +1,4 @@
-import { ADD_SURVEY } from './actions';
+import { surveyConstants } from './actions';
 
 let nextSurveyId = 0;
 
@@ -8,7 +8,7 @@ function IdInc() {
 }
 
 export const addSurvey = text => ({
-    type: ADD_SURVEY,
+    type: surveyConstants.ADD_SURVEY,
     id: IdInc(),
     text,
 });
