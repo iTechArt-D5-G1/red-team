@@ -1,12 +1,11 @@
 import { connect } from 'react-redux';
 
 import SurveysList from '../../components/SurveysList';
-import HttpUtility from '../../utils';
+import { getSurveys as getSurveysAction } from '../../actions/';
 
-// server.fetchDev(10);
-const getSurversFromServerSide = () => HttpUtility.GetSurveys();
+const getSurversFromServerSide = dispatch => dispatch(getSurveysAction);
 
-const getSurveys = state => state.surveys.concat(getSurversFromServerSide());
+const getSurveys = state => state.surveys;
 
 const tempOnSurveyClick = () => {
     alert('click');
@@ -16,9 +15,10 @@ const mapStateToProps = state => ({
     surveys: getSurveys(state),
 });
 
-const mapDispatchToProps = {
+const mapDispatchToProps = dispatch => ({
     onSurveyClick: tempOnSurveyClick,
-};
+    serverSurveys: getSurversFromServerSide(dispatch),
+});
 
 const GetSurveysList = connect(
     mapStateToProps,

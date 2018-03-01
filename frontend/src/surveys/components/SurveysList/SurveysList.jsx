@@ -5,7 +5,7 @@ import Survey from '../Survey/Survey.jsx';
 
 class SurveysList extends React.Component {
     renderSurveys = survey => (<Survey
-        id={survey.id}
+        key={survey.id}
         {...survey}
         onClick={() => this.props.onSurveyClick()}
     />)
