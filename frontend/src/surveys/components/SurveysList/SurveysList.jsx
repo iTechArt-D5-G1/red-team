@@ -7,6 +7,7 @@ class SurveysList extends React.Component {
     onSurveyClick = () => {
         alert('click');
     };
+
     renderSurveys = survey => (<Survey
         key={survey.id}
         {...survey}
@@ -24,6 +25,10 @@ class SurveysList extends React.Component {
 
 SurveysList.propTypes = {
     surveys: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        text: PropTypes.string.isRequired,
+    }).isRequired).isRequired,
+    serverSurveys: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.number.isRequired,
         text: PropTypes.string.isRequired,
     }).isRequired).isRequired,
