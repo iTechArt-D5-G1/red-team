@@ -27,7 +27,7 @@
     float: left;
 }
 
-.menu__btn a {
+.menu_link {
     display: block;
 
     padding: 14px 16px;
@@ -38,6 +38,6 @@
     color: $menuButtonsColor;
 }
 
-.menu__btn a:hover {
+.menu_link:hover {
     background-color: $onMainColorHover;
 }

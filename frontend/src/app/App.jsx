@@ -20,9 +20,9 @@ const App = () => (
             <header>
                 <nav>
                     <ul className='menu'>
-                        <li className='menu__btn'><Link to='/'>Main Page</Link></li>
-                        <li className='menu__btn'><Link to='/hello'>Second Page</Link></li>
-                        <li className='menu__btn'><Link to='/login'>Sign in</Link></li>
+                        <li className='menu__btn'><Link to='/' className='menu_link'>Main Page</Link></li>
+                        <li className='menu__btn'><Link to='/hello' className='menu_link'>Second Page</Link></li>
+                        <li className='menu__btn'><Link to='/login' className='menu_link'>Sign in</Link></li>
                     </ul>
                 </nav>
             </header>
