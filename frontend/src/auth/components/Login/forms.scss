@@ -16,29 +16,29 @@
     border-style: round($number: 30);
 
     background-color: $deepBackgroundLevelColor;
+}
 
-    .form__login_imput,
-    .form__password_imput {
-        width: 50%;
-        margin-top: 15%;
-    }
+.form__login_imput,
+.form__password_imput {
+    width: 50%;
+    margin-top: 15%;
+}
 
-    .form__login_btn {
+.form__login_btn {
 
-        width: 50%;
+    width: 50%;
 
-        margin: 8px 0;
-        padding: 14px 20px;
+    margin: 8px 0;
+    padding: 14px 20px;
 
-        border: none;
+    border: none;
 
-        cursor: pointer;
+    cursor: pointer;
 
-        color: white;
-        background-color: $mainColor;
-    }
+    color: white;
+    background-color: $mainColor;
+}
 
-    .login_form__login_imput {
-        margin-top: 10%;
-    }
+.login_form__login_imput {
+    margin-top: 10%;
 }

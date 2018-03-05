@@ -11,7 +11,6 @@ class SurveyListErrorHandler extends React.Component {
     }
 
     componentDidCatch(error, info) {
-        // Display fallback UI
         this.setState({ hasError: true });
         console.log(info);
     }

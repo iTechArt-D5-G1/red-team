@@ -1,1 +1,1 @@
-export { default } from './MainPageContent.jsx';
+export { default } from './MainPage.jsx';

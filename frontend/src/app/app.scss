@@ -1,6 +1,8 @@
 @import "../stylesheets/partials/themeColors.scss";
 
-body {
+.content {
+    height: 100%;
+
     text-align: center;
 
     background: $backgroundColor;

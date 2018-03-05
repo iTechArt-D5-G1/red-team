@@ -5,8 +5,8 @@ import SurveyListErrorHandler from '../../containers/SurveysListContainer/Survey
 import FormToSubmit from '../../containers/FormToSubmit/FormToSubmit.jsx';
 import FromToSubmitErrorHandler from '../../containers/FormToSubmit/FormToSubmitErrorHandler.jsx';
 
-const MainPageContent = () => (
-    <div className='container main_page'>
+const MainPage = () => (
+    <article className='container main_page'>
         <div className='row'>
             <FromToSubmitErrorHandler>
                 <FormToSubmit />
@@ -16,7 +16,7 @@ const MainPageContent = () => (
         <SurveyListErrorHandler>
             <SurveysListContainer />
         </SurveyListErrorHandler>
-    </div>
+    </article>
 );
 
-export default MainPageContent;
+export default MainPage;

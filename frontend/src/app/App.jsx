@@ -6,9 +6,9 @@ import {
 } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 
-import MainPageContent from '../surveys/components/MainPage/MainPageContent.jsx';
+import MainPage from '../surveys/components/MainPage/MainPage.jsx';
 import HelloWorldPage from '../shared/HelloWorldPage/HelloWorldPage.jsx';
-import LoginPageContent from '../auth/components/Login/LoginPageContent.jsx';
+import LoginPage from '../auth/components/Login/LoginPage.jsx';
 
 import './app.scss';
 
@@ -16,16 +16,20 @@ const history = createBrowserHistory();
 
 const App = () => (
     <Router history={history}>
-        <div>
-            <ul className='menu'>
-                <li className='menu__btn'><Link to='/'>Main Page</Link></li>
-                <li className='menu__btn'><Link to='/hello'>Second Page</Link></li>
-                <li className='menu__btn'><Link to='/login'>Sign in</Link></li>
-            </ul>
-            <Route exact path='/' component={MainPageContent} />
-            <Route path='/hello' component={HelloWorldPage} />
-            <Route path='/login' component={LoginPageContent} />
-        </div>
+        <article className='content'>
+            <header>
+                <nav>
+                    <ul className='menu'>
+                        <li className='menu__btn'><Link to='/'>Main Page</Link></li>
+                        <li className='menu__btn'><Link to='/hello'>Second Page</Link></li>
+                        <li className='menu__btn'><Link to='/login'>Sign in</Link></li>
+                    </ul>
+                </nav>
+            </header>
+            <Route className='content__element' exact path='/' component={MainPage} />
+            <Route className='content__element' path='/hello' component={HelloWorldPage} />
+            <Route className='content__element' path='/login' component={LoginPage} />
+        </article >
     </Router>
 );
 

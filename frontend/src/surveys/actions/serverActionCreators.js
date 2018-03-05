@@ -6,7 +6,6 @@ function fetchSurveysFromServerSide() {
     return data;
 }
 
-
 export const getSurveys = () => ({
     type: serverConstants.GET_SURVEYS,
     surveys: fetchSurveysFromServerSide(),
