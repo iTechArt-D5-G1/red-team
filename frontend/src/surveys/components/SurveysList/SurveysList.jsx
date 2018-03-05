@@ -4,10 +4,13 @@ import PropTypes from 'prop-types';
 import Survey from '../Survey/Survey.jsx';
 
 class SurveysList extends React.Component {
+    onSurveyClick = () => {
+        alert('click');
+    };
     renderSurveys = survey => (<Survey
         key={survey.id}
         {...survey}
-        onClick={() => this.props.onSurveyClick()}
+        onClick={() => this.onSurveyClick()}
     />)
 
     render() {
@@ -24,7 +27,6 @@ SurveysList.propTypes = {
         id: PropTypes.number.isRequired,
         text: PropTypes.string.isRequired,
     }).isRequired).isRequired,
-    onSurveyClick: PropTypes.func.isRequired,
 };
 
 export default SurveysList;
