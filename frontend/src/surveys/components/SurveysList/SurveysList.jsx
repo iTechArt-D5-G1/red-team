@@ -5,7 +5,6 @@ import Survey from '../Survey/Survey.jsx';
 
 class SurveysList extends React.Component {
     onSurveyClick = () => {
-        alert('click');
     };
 
     renderSurveys = survey => (<Survey

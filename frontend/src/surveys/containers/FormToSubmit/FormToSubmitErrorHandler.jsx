@@ -10,9 +10,8 @@ class FormToSubmitErrorHandler extends React.Component {
         };
     }
 
-    componentDidCatch(error, info) {
+    componentDidCatch() {
         this.setState({ hasError: true });
-        console.log(info);
     }
 
     render() {
