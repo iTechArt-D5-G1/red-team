@@ -35,9 +35,9 @@ ReactDOM.render(
                         </ul>
                     </nav>
                 </header>
-                <Route className='content__element' exact path='/' component={MainPage} />
-                <Route className='content__element' path='/hello' component={HelloWorldPage} />
-                <Route className='content__element' path='/login' component={LoginPage} />
+                <Route exact path='/' component={MainPage} />
+                <Route path='/hello' component={HelloWorldPage} />
+                <Route path='/login' component={LoginPage} />
             </article >
         </Router>
     </Provider>,
