@@ -1,6 +1,5 @@
 import React from 'react';
 
-import './forms.scss';
 import './LoginPage.scss';
 
 const LoginPage = onSubmit => (
