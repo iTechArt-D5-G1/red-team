@@ -6,7 +6,7 @@ import FormToSubmit from '../../containers/FormToSubmit/FormToSubmit.jsx';
 import FromToSubmitErrorHandler from '../../containers/FormToSubmit/FormToSubmitErrorHandler.jsx';
 import './MainPage.scss';
 
-const MainPage = () => (
+const Surveys = () => (
     <article className='container main_page'>
         <div className='row'>
             <FromToSubmitErrorHandler>
@@ -20,4 +20,4 @@ const MainPage = () => (
     </article>
 );
 
-export default MainPage;
+export default Surveys;

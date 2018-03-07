@@ -11,7 +11,7 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { createBrowserHistory } from 'history';
 
-import MainPage from './surveys/components/MainPage/MainPage.jsx';
+import Surveys from './surveys/components/Surveys/Surveys.jsx';
 import HelloWorldPage from './shared/HelloWorldPage/HelloWorldPage.jsx';
 import LoginPage from './auth/components/Login/LoginPage.jsx';
 import reducer from './surveys/reducers';
@@ -35,7 +35,7 @@ ReactDOM.render(
                         </ul>
                     </nav>
                 </header>
-                <Route exact path='/' component={MainPage} />
+                <Route exact path='/' component={Surveys} />
                 <Route path='/hello' component={HelloWorldPage} />
                 <Route path='/login' component={LoginPage} />
             </article >
@@ -46,9 +46,9 @@ ReactDOM.render(
 
 if (module.hot) {
     // Whenever a new version of App.js is available
-    module.hot.accept('./surveys/components/MainPage', () => {
+    module.hot.accept('./surveys/components/Surveys', () => {
         // Require the new version and render it instead
-        const NextApp = MainPage;
+        const NextApp = Surveys;
         ReactDOM.render(<NextApp />, 'app');
     });
 }
