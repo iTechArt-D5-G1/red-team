@@ -11,7 +11,7 @@ class LoginPage extends Component {
 
     render() {
         return (
-            <section className='container'>
+            <section>
                 <form className='form' onSubmit={this.onSubmit}>
                     <p><input className='form__login-imput' type='text' /></p>
                     <p><input className='form__password-input' type='text' /></p>
