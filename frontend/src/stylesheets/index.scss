@@ -1,5 +1,9 @@
 @import "./partials/themeColors.scss";
 
+* {
+    box-sizing: border-box;
+}
+
 .content {
     height: 100%;
 
