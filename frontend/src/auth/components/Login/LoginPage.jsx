@@ -1,15 +1,25 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import './LoginPage.scss';
 
-const LoginPage = onSubmit => (
-    <section className='container' onSubmit={onSubmit}>
-        <form className='form'>
-            <p><input className='form__login-imput' type='text' /></p>
-            <p><input className='form__password-input' type='text' /></p>
-            <button className='form__login-btn'>Login</button>
-        </form>
-    </section>
-);
+// const LoginPage = onSubmit => (
+class LoginPage extends Component {
+    onSubmit = (e) => {
+        e.preventDefault();
+        alert('submit occurred!');
+    }
+
+    render() {
+        return (
+            <section className='container'>
+                <form className='form' onSubmit={this.onSubmit}>
+                    <p><input className='form__login-imput' type='text' /></p>
+                    <p><input className='form__password-input' type='text' /></p>
+                    <button className='form__login-btn'>Login</button>
+                </form>
+            </section>
+        );
+    }
+}
 
 export default LoginPage;
