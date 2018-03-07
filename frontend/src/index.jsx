@@ -15,7 +15,7 @@ import MainPage from './surveys/components/MainPage/MainPage.jsx';
 import HelloWorldPage from './shared/HelloWorldPage/HelloWorldPage.jsx';
 import LoginPage from './auth/components/Login/LoginPage.jsx';
 import reducer from './surveys/reducers';
-import './stylesheets/index.scss';
+import './assets/stylesheets/index.scss';
 
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 const store = createStoreWithMiddleware(reducer);
