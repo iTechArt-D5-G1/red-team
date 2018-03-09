@@ -59,8 +59,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\IRepository.cs" />
+    <Compile Include="Interfaces\IServise.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Repository.cs" />
+    <Compile Include="Servise.cs" />
     <Compile Include="UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

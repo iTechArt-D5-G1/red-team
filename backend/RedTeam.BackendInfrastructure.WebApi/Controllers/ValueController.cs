@@ -1,21 +1,21 @@
 ﻿using System.Web.Http;
 using RedTeam.BackendInfrastructure.Foundation;
-using RedTeam.Repositories;
+using RedTeam.Repositories.Interfaces;
 
 namespace RedTeam.BackendInfrastructure.WebApi.Controllers
 {
     public class ValueController : ApiController
     {
-        private readonly UnitOfWork unit;
+        readonly IServise _servise;
  
-        public ValueController(UnitOfWork _unit)
+        public ValueController(IServise servise)
         {
-            unit = _unit;
+            _servise = servise;
         }
 
-        public Survey GetSurveyById(int id)
+        public Survey GetById(int id)
         {
-            return unit.Surveys.GetByIdAsync(id);
+            return _servise.GetById(id);
         }
     }
 }

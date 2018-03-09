@@ -48,14 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\ISurveyContext.cs" />
-    <Compile Include="Migrations\201802280714073_Initial.cs" />
-    <Compile Include="Migrations\201802280714073_Initial.Designer.cs">
-      <DependentUpon>201802280714073_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Interfaces\IContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SurveyContext.cs" />
+    <Compile Include="Context.cs" />
     <Compile Include="SurveyDbInitializer.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -67,11 +62,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201802280714073_Initial.resx">
-      <DependentUpon>201802280714073_Initial.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
