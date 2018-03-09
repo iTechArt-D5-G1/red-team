@@ -1,8 +1,7 @@
 ﻿using System;
 using RedTeam.Repositories.Interfaces;
-using RedTeam.BackendInfrastructure.Foundation;
-using RedTeam.BackendInfrastructure.Repositories;
 using System.Threading.Tasks;
+using RedTeam.SurveyMaster.Foundation;
 
 namespace RedTeam.Repositories
 {

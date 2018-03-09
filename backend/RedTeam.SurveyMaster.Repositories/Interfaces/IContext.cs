@@ -1,7 +1,7 @@
 ﻿using System.Data.Entity;
 using System.Threading.Tasks;
 
-namespace RedTeam.BackendInfrastructure.Repositories.Interfaces
+namespace RedTeam.SurveyMaster.Repositories.Interfaces
 {
     public interface IContext<T> where T: class 
     {

@@ -1,6 +1,6 @@
 ﻿using System.Linq;
-using RedTeam.BackendInfrastructure.Repositories.Interfaces;
 using RedTeam.Repositories.Interfaces;
+using RedTeam.SurveyMaster.Repositories.Interfaces;
 
 namespace RedTeam.Repositories
 {

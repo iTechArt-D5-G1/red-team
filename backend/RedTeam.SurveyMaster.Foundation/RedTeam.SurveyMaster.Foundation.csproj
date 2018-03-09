@@ -7,8 +7,8 @@
     <ProjectGuid>{4D8AEA46-927E-4399-9E82-D34EA1E500C9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RedTeam.BackendInfrastructure.Foundation</RootNamespace>
-    <AssemblyName>RedTeam.BackendInfrastructure.Foundation</AssemblyName>
+    <RootNamespace>RedTeam.SurveyMaster.Foundation</RootNamespace>
+    <AssemblyName>RedTeam.SurveyMaster.Foundation</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

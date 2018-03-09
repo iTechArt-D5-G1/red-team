@@ -1,7 +1,7 @@
-﻿using RedTeam.BackendInfrastructure.Foundation;
-using System.Data.Entity;
+﻿using System.Data.Entity;
+using RedTeam.SurveyMaster.Foundation;
 
-namespace RedTeam.BackendInfrastructure.Repositories
+namespace RedTeam.SurveyMaster.Repositories
 {
     public sealed class SurveyDbInitializer : DropCreateDatabaseAlways<Context<Survey>>
     {

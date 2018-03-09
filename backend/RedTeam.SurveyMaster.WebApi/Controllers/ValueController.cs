@@ -1,8 +1,8 @@
 ﻿using System.Web.Http;
-using RedTeam.BackendInfrastructure.Foundation;
 using RedTeam.Repositories.Interfaces;
+using RedTeam.SurveyMaster.Foundation;
 
-namespace RedTeam.BackendInfrastructure.WebApi.Controllers
+namespace RedTeam.SurveyMaster.WebApi.Controllers
 {
     public class ValueController : ApiController
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RedTeam.BackendInfrastructure.Foundation
+namespace RedTeam.SurveyMaster.Foundation
 {
     public class Survey : IDisposable
     {

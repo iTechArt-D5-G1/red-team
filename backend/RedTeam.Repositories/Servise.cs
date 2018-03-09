@@ -1,6 +1,6 @@
 ﻿using System;
-using RedTeam.BackendInfrastructure.Foundation;
 using RedTeam.Repositories.Interfaces;
+using RedTeam.SurveyMaster.Foundation;
 
 namespace RedTeam.Repositories
 {

@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using RedTeam.BackendInfrastructure.Foundation;
+using RedTeam.SurveyMaster.Foundation;
 
 namespace RedTeam.Repositories.Interfaces
 {

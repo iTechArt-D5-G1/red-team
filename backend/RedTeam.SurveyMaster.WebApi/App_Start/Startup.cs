@@ -4,16 +4,16 @@ using Autofac;
 using Autofac.Integration.WebApi;
 using Microsoft.Owin;
 using Owin;
-using RedTeam.BackendInfrastructure.Repositories;
-using RedTeam.BackendInfrastructure.Repositories.Interfaces;
-using RedTeam.BackendInfrastructure.WebApi;
-using RedTeam.BackendInfrastructure.WebApi.Controllers;
 using RedTeam.Repositories;
 using RedTeam.Repositories.Interfaces;
+using RedTeam.SurveyMaster.WebApi;
+using RedTeam.SurveyMaster.WebApi.Controllers;
+using RedTeam.SurveyMaster.Repositories;
+using RedTeam.SurveyMaster.Repositories.Interfaces;
 
 [assembly: OwinStartup(typeof(Startup))]
 
-namespace RedTeam.BackendInfrastructure.WebApi
+namespace RedTeam.SurveyMaster.WebApi
 {
     public sealed class Startup
     {

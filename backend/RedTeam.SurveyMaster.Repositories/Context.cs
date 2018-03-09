@@ -1,8 +1,8 @@
 ﻿using System.Data.Entity;
 using System.Threading.Tasks;
-using RedTeam.BackendInfrastructure.Repositories.Interfaces;
+using RedTeam.SurveyMaster.Repositories.Interfaces;
 
-namespace RedTeam.BackendInfrastructure.Repositories
+namespace RedTeam.SurveyMaster.Repositories
 {
     public class Context<T>: DbContext, IContext<T> where T: class
     {

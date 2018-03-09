@@ -12,8 +12,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RedTeam.BackendInfrastructure.WebApi</RootNamespace>
-    <AssemblyName>RedTeam.BackendInfrastructure.WebApi</AssemblyName>
+    <RootNamespace>RedTeam.SurveyMaster.WebApi</RootNamespace>
+    <AssemblyName>RedTeam.SurveyMaster.WebApi</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -139,7 +139,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\Startup.cs" />
@@ -151,13 +153,13 @@
       <Project>{abefc461-c4f5-4cb1-94b4-f570f084474a}</Project>
       <Name>RedTeam.Repositories</Name>
     </ProjectReference>
-    <ProjectReference Include="..\RedTeam.BackendInfrastructure.Foundation\RedTeam.BackendInfrastructure.Foundation.csproj">
-      <Project>{4d8aea46-927e-4399-9e82-d34ea1e500c9}</Project>
-      <Name>RedTeam.BackendInfrastructure.Foundation</Name>
+    <ProjectReference Include="..\RedTeam.SurveyMaster.Foundation\RedTeam.SurveyMaster.Foundation.csproj">
+      <Project>{4D8AEA46-927E-4399-9E82-D34EA1E500C9}</Project>
+      <Name>RedTeam.SurveyMaster.Foundation</Name>
     </ProjectReference>
-    <ProjectReference Include="..\RedTeam.BackendInfrastructure.Repositories\RedTeam.BackendInfrastructure.Repositories.csproj">
-      <Project>{01b8501e-7672-4c1f-9d87-ebff90a4ced2}</Project>
-      <Name>RedTeam.BackendInfrastructure.Repositories</Name>
+    <ProjectReference Include="..\RedTeam.SurveyMaster.Repositories\RedTeam.SurveyMaster.Repositories.csproj">
+      <Project>{01B8501E-7672-4C1F-9D87-EBFF90A4CED2}</Project>
+      <Name>RedTeam.SurveyMaster.Repositories</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
