@@ -1,4 +1,4 @@
-import { HttpUtility } from '../utils/http.js';
+import { HttpUtility } from '../../utils/http.js';
 import { Survey } from '../../models/survey.js';
 
 async function getSurveys() {
