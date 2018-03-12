@@ -1,15 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { Survey as SurveyModel } from './../../../models/survey';
 import Survey from '../Survey/Survey.jsx';
 
 class SurveysList extends React.Component {
+    componentWillMount() {
+        this.props.getSurveys();
+    }
+
     onSurveyClick = () => {
     };
 
     renderSurveys = survey => (<Survey
-        key={survey.id}
-        {...survey}
+        key={survey.surveys.id}
+        {...survey.surveys}
         onClick={() => this.onSurveyClick()}
     />)
 
@@ -23,14 +28,8 @@ class SurveysList extends React.Component {
 }
 
 SurveysList.propTypes = {
-    surveys: PropTypes.arrayOf(PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        text: PropTypes.string.isRequired,
-    }).isRequired).isRequired,
-    serverSurveys: PropTypes.arrayOf(PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        text: PropTypes.string.isRequired,
-    }).isRequired).isRequired,
+    surveys: PropTypes.arrayOf(PropTypes.instanceOf(SurveyModel)).isRequired,
+    getSurveys: PropTypes.func.isRequired,
 };
 
 export default SurveysList;

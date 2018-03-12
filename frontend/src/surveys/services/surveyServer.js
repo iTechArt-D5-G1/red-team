@@ -1,7 +1,7 @@
 import { HttpUtility } from '../utils/http.js';
 import { Survey } from '../../models/survey.js';
 
-async function getSurveysFromServerSide() {
+async function getSurveys() {
     try {
         const axiosInstance = HttpUtility.axiosInstanceCreate();
         const response = await axiosInstance.get('/surveys');
@@ -13,6 +13,16 @@ async function getSurveysFromServerSide() {
     }
 }
 
+async function addSurvey(survey) {
+    try {
+        const axiosInstance = HttpUtility.axiosInstanceCreate();
+        await axiosInstance.post('/surveys', survey);
+    } catch (err) {
+        throw err;
+    }
+}
+
 export const surveyService = {
-    getSurveys: getSurveysFromServerSide,
+    getSurveys,
+    addSurvey,
 };

@@ -3,17 +3,12 @@ import { connect } from 'react-redux';
 import SurveysList from '../../components/SurveysList';
 import { getSurveys as getSurveysAction } from '../../actions/';
 
-const getSurversFromServerSide = (dispatch) => {
-    dispatch(getSurveysAction);
-};
-const getSurveys = state => state.surveys;
-
 const mapStateToProps = state => ({
-    surveys: getSurveys(state),
+    surveys: state.surveys,
 });
 
 const mapDispatchToProps = dispatch => ({
-    serverSurveys: getSurversFromServerSide(dispatch),
+    getSurveys: () => dispatch(getSurveysAction),
 });
 
 const GetSurveysList = connect(
