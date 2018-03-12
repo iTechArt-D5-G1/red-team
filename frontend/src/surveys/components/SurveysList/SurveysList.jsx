@@ -9,14 +9,10 @@ class SurveysList extends React.Component {
         this.props.getSurveys();
     }
 
-    onSurveyClick = () => {
-    };
-
     renderSurveys = survey => (<Survey
         key={survey.surveys.id}
         {...survey.surveys}
-        onClick={() => this.onSurveyClick()}
-    />)
+    />);
 
     render() {
         return (

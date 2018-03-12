@@ -46,6 +46,9 @@
             "error",
             4
         ],
+        "react/jsx-no-bind": [
+            "error"
+        ],
         "jsx-quotes": [
             "error",
             "prefer-single"
