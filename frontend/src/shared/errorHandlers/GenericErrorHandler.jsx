@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-class FormToSubmitErrorHandler extends React.Component {
+class GenericErrorHandler extends React.Component {
     constructor(props) {
         super(props);
 
@@ -22,8 +22,8 @@ class FormToSubmitErrorHandler extends React.Component {
     }
 }
 
-FormToSubmitErrorHandler.propTypes = {
+GenericErrorHandler.propTypes = {
     children: PropTypes.element.isRequired,
 };
 
-export default FormToSubmitErrorHandler;
+export default GenericErrorHandler;

@@ -12,7 +12,7 @@ import thunk from 'redux-thunk';
 import { createBrowserHistory } from 'history';
 
 import Surveys from './surveys/components/Surveys/Surveys.jsx';
-import HelloWorldPage from './shared/HelloWorldPage/HelloWorldPage.jsx';
+import HelloWorldPage from './shared/components/HelloWorldPage/HelloWorldPage.jsx';
 import LoginPage from './auth/components/Login/LoginPage.jsx';
 import reducer from './surveys/reducers';
 import './assets/stylesheets/index.scss';
