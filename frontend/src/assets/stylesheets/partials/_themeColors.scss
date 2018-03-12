@@ -1,5 +1,5 @@
 $mainColor: rgb(255, 255, 255);
-$onMainColorHover:  rgb(192, 192, 189);
-$backgroundColor: lighten($color: #dbdbd9, $amount: 10);
-$deepBackgroundLevelColor:lighten($color: #7f807b, $amount: 20);
+$onMainColorHover:  lighten($color:$mainColor, $amount: 10);
+$deepBackgroundLevelColor:rgb(145, 145, 145);
+$backgroundColor: lighten($color: $deepBackgroundLevelColor, $amount: 40);
 $menuButtonsColor:rgb(194, 194, 194);
