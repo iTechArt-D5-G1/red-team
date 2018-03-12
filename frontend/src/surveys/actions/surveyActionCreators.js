@@ -1,5 +1,5 @@
 import { surveyConstants } from './actions';
-import { surveyService } from '../services/surveyServer.js';
+import { surveyService } from '../services/survey.js';
 import { Survey } from '../../models/survey';
 
 let nextSurveyId = 0;

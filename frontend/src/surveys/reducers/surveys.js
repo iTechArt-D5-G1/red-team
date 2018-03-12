@@ -1,6 +1,6 @@
 import '../actions/surveyActionCreators';
 import { surveyConstants } from '../actions/actions';
-import { surveyService } from '../services/surveyServer.js';
+import { surveyService } from '../services/survey.js';
 
 const surveys = (state = [], action) => {
     switch (action.type) {
