@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import SurveysList from '../../components/SurveysList';
 import { getSurveys as getSurveysAction } from '../../actions/';
@@ -8,7 +9,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    getSurveys: () => dispatch(getSurveysAction),
+    getSurveys: bindActionCreators(getSurveysAction, dispatch),
 });
 
 const GetSurveysList = connect(

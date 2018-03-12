@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Survey as SurveyModel } from './../../../models/survey';
 import Survey from '../Survey/Survey.jsx';
 
 class SurveysList extends React.Component {
@@ -24,7 +23,7 @@ class SurveysList extends React.Component {
 }
 
 SurveysList.propTypes = {
-    surveys: PropTypes.arrayOf(PropTypes.instanceOf(SurveyModel)).isRequired,
+    surveys: PropTypes.arrayOf(PropTypes.instanceOf(Object)).isRequired,
     getSurveys: PropTypes.func.isRequired,
 };
 

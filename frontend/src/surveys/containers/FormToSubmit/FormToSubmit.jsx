@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import { addSurvey } from '../../actions';
 
@@ -69,7 +70,7 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = dispatch => ({
-    submitSurvey: survey => dispatch(addSurvey(survey)),
+    submitSurvey: bindActionCreators(addSurvey, dispatch),
 });
 
 const SumbitForm = connect(mapStateToProps, mapDispatchToProps)(FormToSubmit);
