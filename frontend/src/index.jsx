@@ -25,7 +25,7 @@ const history = createBrowserHistory();
 ReactDOM.render(
     <Provider store={store}>
         <Router history={history}>
-            <article className='content'>
+            <article className='app'>
                 <header>
                     <nav>
                         <ul className='menu'>
