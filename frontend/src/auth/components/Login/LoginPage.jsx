@@ -6,7 +6,6 @@ import './LoginPage.scss';
 class LoginPage extends Component {
     onSubmit = (e) => {
         e.preventDefault();
-        alert('submit occurred!');
     }
 
     render() {
