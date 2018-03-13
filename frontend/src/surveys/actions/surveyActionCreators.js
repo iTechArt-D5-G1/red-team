@@ -11,7 +11,7 @@ function IdInc() {
 
 export const addSurvey = text => ({
     type: surveyConstants.ADD_SURVEY,
-    survey: new Survey(IdInc(), text),
+    survey: surveyService.addSurvey(new Survey(IdInc(), text)),
 });
 
 export const getSurveys = () => ({

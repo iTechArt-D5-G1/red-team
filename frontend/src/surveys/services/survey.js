@@ -16,7 +16,8 @@ async function getSurveys() {
 async function addSurvey(survey) {
     try {
         const axiosInstance = HttpUtility.axiosInstanceCreate();
-        await axiosInstance.post('/surveys', survey);
+        await axiosInstance.post('/surveys', survey.text);
+        return survey;
     } catch (err) {
         throw err;
     }
