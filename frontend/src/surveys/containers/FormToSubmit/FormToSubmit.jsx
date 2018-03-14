@@ -5,6 +5,11 @@ import { bindActionCreators } from 'redux';
 
 import { addSurvey } from '../../actions';
 
+const isLastElementNumber = (stringToCheck) => {
+    const numbersOnlyPattern = /^\d+$/;
+    return numbersOnlyPattern.test(stringToCheck[stringToCheck.length - 1]);
+};
+
 class FormToSubmit extends React.Component {
     constructor(props) {
         super(props);
@@ -18,10 +23,8 @@ class FormToSubmit extends React.Component {
         if ((e.target.value instanceof (String))) {
             return;
         }
-        const reg = /^\d+$/;
         const targetValue = e.target.value;
-
-        if (!reg.test(targetValue[targetValue.length - 1])) {
+        if (!isLastElementNumber(targetValue)) {
             e.target.value = targetValue.substring(0, targetValue.length - 1);
         }
         this.setState({ input: e.target.value });
