@@ -1,10 +1,11 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 
 namespace RedTeam.Repositories.Interfaces
 {
     public interface IRepository<TEntity> where TEntity : class
     {
-        void SaveAsync();
+        Task<int> SaveAsync();
 
         void Update(TEntity entity);
 

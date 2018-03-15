@@ -1,21 +1,21 @@
 ﻿using System.Web.Http;
 using RedTeam.Repositories.Interfaces;
-using RedTeam.SurveyMaster.Foundation;
+using RedTeam.SurveyMaster.Repositories.Interfaces;
 
 namespace RedTeam.SurveyMaster.WebApi.Controllers
 {
     public class ValueController : ApiController
     {
-        readonly IServise _servise;
+        private readonly IServise _servise;
  
         public ValueController(IServise servise)
         {
             _servise = servise;
         }
 
-        public Survey GetById(int id)
+        public void GetById(int id)
         {
-            return _servise.GetById(id);
+            _servise.GetById(id);
         }
     }
 }

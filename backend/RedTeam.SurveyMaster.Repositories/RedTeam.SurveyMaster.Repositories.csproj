@@ -48,9 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Context.cs" />
-    <Compile Include="Interfaces\IContext.cs" />
+    <Compile Include="Interfaces\IServise.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Servise.cs" />
     <Compile Include="SurveyDbInitializer.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -58,6 +58,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RedTeam.Repositories\RedTeam.Repositories.csproj">
+      <Project>{abefc461-c4f5-4cb1-94b4-f570f084474a}</Project>
+      <Name>RedTeam.Repositories</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RedTeam.SurveyMaster.Foundation\RedTeam.SurveyMaster.Foundation.csproj">
       <Project>{4D8AEA46-927E-4399-9E82-D34EA1E500C9}</Project>
       <Name>RedTeam.SurveyMaster.Foundation</Name>

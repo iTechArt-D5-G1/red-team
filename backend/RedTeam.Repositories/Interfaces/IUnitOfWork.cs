@@ -1,14 +1,13 @@
 ﻿using System.Threading.Tasks;
-using RedTeam.SurveyMaster.Foundation;
 
 namespace RedTeam.Repositories.Interfaces
 {
     public interface IUnitOfWork
     {
-        Task Save();
+        Task Commit();
+
+        void Rollback();
 
         void Dispose();
-
-        Survey GetById(int id);
     }
 }

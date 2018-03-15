@@ -1,26 +1,27 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using RedTeam.Repositories.Interfaces;
-using RedTeam.SurveyMaster.Repositories.Interfaces;
 
 namespace RedTeam.Repositories
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
-        readonly IContext<TEntity> _db;
+        private readonly IContext _db;
 
-        public Repository(IContext<TEntity> db)
+        public Repository(IContext db)
         {  
             _db = db;
         }
 
-        TEntity IRepository<TEntity>.GetById(int id)
-        {
-            return _db.GetById(id);
-        }
+        //TEntity IRepository<TEntity>.GetById(int id)
+        //{
+        //    _db.Set()
+        //    return _db.GetById(id);
+        //}
 
-        public async void SaveAsync()
+        public async Task<int> SaveAsync()
         {
-            await _db.SaveChangesAsync();
+            return await _db.SaveChangesAsync();
         }
 
         public void Delete(TEntity entity)
@@ -34,6 +35,11 @@ namespace RedTeam.Repositories
         }
 
         public void Update(TEntity entity)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public TEntity GetById(int id)
         {
             throw new System.NotImplementedException();
         }

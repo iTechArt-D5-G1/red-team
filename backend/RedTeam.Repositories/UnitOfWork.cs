@@ -1,17 +1,25 @@
 ﻿using System;
 using RedTeam.Repositories.Interfaces;
 using System.Threading.Tasks;
-using RedTeam.SurveyMaster.Foundation;
 
 namespace RedTeam.Repositories
 {
     public class UnitOfWork : IDisposable, IUnitOfWork
     {
-        readonly IRepository<Survey> _repository;
+        private readonly IContext _context;
 
-        public UnitOfWork(IRepository<Survey> repository)
+        public UnitOfWork(IContext context)
         {
-            _repository = repository;
+            _context = context;
+        }
+        public void Rollback()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task Commit()
+        {
+            return _context.SaveChangesAsync();
         }
 
         public void Dispose()
@@ -20,23 +28,8 @@ namespace RedTeam.Repositories
             GC.SuppressFinalize(this); 
         }
 
-        public Survey GetById(int id)
-        {
-           return _repository.GetById(id);
-        }
-
-        public void Save()
-        {
-             _repository.SaveAsync();
-        }
-
-
         protected virtual void Dispose(bool disposing)
         { }
-
-        Task IUnitOfWork.Save()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
+

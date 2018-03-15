@@ -58,23 +58,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Context.cs" />
+    <Compile Include="Interfaces\IContext.cs" />
+    <Compile Include="Interfaces\IDbContext.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
-    <Compile Include="Interfaces\IServise.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Repository.cs" />
-    <Compile Include="Servise.cs" />
     <Compile Include="UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\RedTeam.SurveyMaster.Foundation\RedTeam.SurveyMaster.Foundation.csproj">
-      <Project>{4d8aea46-927e-4399-9e82-d34ea1e500c9}</Project>
-      <Name>RedTeam.SurveyMaster.Foundation</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RedTeam.SurveyMaster.Repositories\RedTeam.SurveyMaster.Repositories.csproj">
-      <Project>{01b8501e-7672-4c1f-9d87-ebff90a4ced2}</Project>
-      <Name>RedTeam.SurveyMaster.Repositories</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
