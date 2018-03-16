@@ -6,10 +6,12 @@ import HeaderMenu from './../HeaderMenu/HeaderMenu.jsx';
 import './App.scss';
 
 const App = ({ children }) => (
-    <article className='app'>
+    <main className='app'>
         <HeaderMenu />
-        {children}
-    </article >
+        <article className='app__element'>
+            {children}
+        </article>
+    </main >
 );
 
 App.propTypes = {
