@@ -5,18 +5,30 @@ import Survey from '../Survey/Survey.jsx';
 
 class SurveysList extends React.Component {
     componentWillMount() {
-        this.props.getSurveys();
+        this.props.fetchSurveys();
     }
 
     renderSurveys = survey => (<Survey
-        key={survey.surveys.id}
-        {...survey.surveys}
+        key={survey.id}
+        {...survey}
     />);
 
     render() {
+        const { isFetching, isError } = this.props;
         return (
             <div className='row surveys-list'>
-                {this.props.surveys.map(this.renderSurveys)}
+                <div className='col-md-12'>
+                    { isFetching &&
+                    <h4>Fetching process ... </h4>
+                    }
+                    {!isError &&
+                    this.props.surveys.map(this.renderSurveys)
+                    }
+                    {
+                        isError &&
+                        <h4> Error durign surveys request </h4>
+                    }
+                </div>
             </div>
         );
     }
@@ -24,7 +36,9 @@ class SurveysList extends React.Component {
 
 SurveysList.propTypes = {
     surveys: PropTypes.arrayOf(PropTypes.instanceOf(Object)).isRequired,
-    getSurveys: PropTypes.func.isRequired,
+    fetchSurveys: PropTypes.func.isRequired,
+    isError: PropTypes.bool.isRequired,
+    isFetching: PropTypes.bool.isRequired,
 };
 
 export default SurveysList;

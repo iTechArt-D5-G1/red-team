@@ -14,7 +14,29 @@ export const addSurvey = text => ({
     survey: surveyService.addSurvey(new Survey(IdInc(), text)),
 });
 
-export const getSurveys = () => ({
-    type: surveyConstants.GET_SURVEYS,
-    surveys: surveyService.getSurveys(),
+    // dev
+export const requestSuccess = requestedData => ({
+    type: surveyConstants.SURVEYS_REQUEST_SUCCESS,
+    surveys: requestedData,
 });
+export const requestError = () => ({
+    type: surveyConstants.SURVEYS_REQUEST_ERROR,
+});
+
+export const requestInit = () => ({
+    type: surveyConstants.SURVEYS_REQUEST_INIT,
+});
+
+export function surveysRequest() {
+    return (dispatch) => {
+        requestInit();
+        surveyService.getSurveys()
+            .then((requestedData) => {
+                dispatch(requestSuccess(requestedData));
+            })
+            .catch(() => {
+                dispatch(requestError());
+            });
+    };
+}
+

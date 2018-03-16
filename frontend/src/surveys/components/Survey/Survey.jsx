@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Survey = ({ text }) => (
-    <div className='col-md-12'>
+    <div>
         {text}
     </div>
 );

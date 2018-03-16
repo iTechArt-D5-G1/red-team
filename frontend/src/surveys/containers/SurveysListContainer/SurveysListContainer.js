@@ -2,14 +2,16 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import SurveysList from '../../components/SurveysList';
-import { getSurveys as getSurveysAction } from '../../actions/';
+import { surveysRequest } from '../../actions/';
 
 const mapStateToProps = state => ({
-    surveys: state.surveys,
+    surveys: state.surveys.surveys,
+    isError: state.surveys.isError,
+    isFetching: state.surveys.isFetching,
 });
 
 const mapDispatchToProps = dispatch => ({
-    getSurveys: bindActionCreators(getSurveysAction, dispatch),
+    fetchSurveys: bindActionCreators(surveysRequest, dispatch),
 });
 
 const GetSurveysList = connect(
