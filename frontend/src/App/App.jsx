@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import HeaderMenu from './../HeaderMenu/HeaderMenu.jsx';
+import HeaderMenu from '../shared/components/HeaderMenu/HeaderMenu.jsx';
 
 import './App.scss';
 
