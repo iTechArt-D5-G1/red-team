@@ -9,12 +9,6 @@ function IdInc() {
     return nextSurveyId;
 }
 
-export const addSurvey = text => ({
-    type: surveyConstants.ADD_SURVEY,
-    survey: surveyService.addSurvey(new Survey(IdInc(), text)),
-});
-
-    // dev
 export const requestSuccess = requestedData => ({
     type: surveyConstants.SURVEYS_REQUEST_SUCCESS,
     surveys: requestedData,
@@ -40,3 +34,15 @@ export function surveysRequest() {
     };
 }
 
+export function addSurvey(text) {
+    return (dispatch) => {
+        requestInit();
+        surveyService.addSurvey(new Survey(IdInc(), text))
+            .then((requestedData) => {
+                dispatch(requestSuccess(requestedData));
+            })
+            .catch(() => {
+                dispatch(requestError());
+            });
+    };
+}
