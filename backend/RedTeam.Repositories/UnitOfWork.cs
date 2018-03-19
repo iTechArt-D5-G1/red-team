@@ -17,9 +17,9 @@ namespace RedTeam.Repositories
             throw new NotImplementedException();
         }
 
-        public Task Commit()
+        public async Task<int> Commit()
         {
-            return _context.SaveChangesAsync();
+            return await _context.SaveAsync();
         }
 
         public void Dispose()

@@ -2,30 +2,20 @@
 using System.Threading.Tasks;
 using RedTeam.Repositories.Interfaces;
 
-namespace RedTeam.SurveyMaster.Repositories
+namespace RedTeam.Repositories
 {
-    public abstract class Context: DbContext, IDbContext, IContext
+    public class Context: DbContext, IContext
     {
-        private readonly IContext _context;
+        private readonly DbContext _dbContext;
 
-        private readonly IDbContext _db;
-
-        public Context(IContext context, IDbContext db)
+        public Context(DbContext dbContext)
         {
-            _db = db;
-            _context = context;
+            _dbContext = dbContext;
         }
 
-        public override DbSet<TEntity> Set<TEntity>() => _db.Set<TEntity>();
-
-        public override Task<int> SaveChangesAsync()
+        public async Task<int> SaveAsync()
         {
-            return _context.SaveChangesAsync();
+            return await _dbContext.SaveChangesAsync();
         }
-
-        //public Survey GetById(int id)
-        //{
-        //    return Objects.Find(id);
-        //}
     }
 }

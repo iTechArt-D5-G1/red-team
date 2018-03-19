@@ -1,14 +1,14 @@
-﻿using System.Data.Entity;
-using System.Web.Http;
+﻿using Owin;
 using Autofac;
-using Autofac.Integration.WebApi;
 using Microsoft.Owin;
-using Owin;
+using System.Web.Http;
+using System.Data.Entity;
 using RedTeam.Repositories;
-using RedTeam.Repositories.Interfaces;
+using Autofac.Integration.WebApi;
 using RedTeam.SurveyMaster.WebApi;
-using RedTeam.SurveyMaster.WebApi.Controllers;
+using RedTeam.Repositories.Interfaces;
 using RedTeam.SurveyMaster.Repositories;
+using RedTeam.SurveyMaster.WebApi.Controllers;
 using RedTeam.SurveyMaster.Repositories.Interfaces;
 
 [assembly: OwinStartup(typeof(Startup))]
@@ -27,19 +27,18 @@ namespace RedTeam.SurveyMaster.WebApi
                 "api/{controller}/{id}",
                 new { id = RouteParameter.Optional }
             );
-            builder.RegisterType<ValueController>();
+            builder.RegisterType<ValueController>().InstancePerRequest(); ;
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>();
-            builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>));
-            //builder.RegisterGeneric(typeof(Context)).As(typeof(IContext));
+            builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>)); 
             builder.RegisterType<Servise>().As<IServise>();
             builder.RegisterType<Context>().As<IContext>();
+            builder.RegisterType<DbContext>().AsSelf();
 
             var container = builder.Build();
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
         
             app.UseWebApi(config);  
             
-            Database.SetInitializer(new SurveyDbInitializer());
         }
     }
 }

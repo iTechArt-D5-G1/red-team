@@ -1,4 +1,5 @@
-﻿using RedTeam.Repositories.Interfaces;
+﻿using System;
+using RedTeam.Repositories.Interfaces;
 using RedTeam.SurveyMaster.Foundation;
 using RedTeam.SurveyMaster.Repositories.Interfaces;
 
@@ -18,27 +19,18 @@ namespace RedTeam.SurveyMaster.Repositories
 
         public Survey GetById(int id)
         {
-            return _repository.GetById(id);
+            using (null)
+            {
+                try
+                {
+                    return _repository.GetById(id);
+                }
+                catch (Exception)
+                {
+                    _unit.Rollback();
+                    throw;
+                }
+            }
         }
-
-        public void Save()
-        {
-            _repository.SaveAsync();
-        }
-
-        //public void GetById(int id)
-        //{
-        //    using (null)
-        //    {
-        //        try
-        //        {
-        //            _unit.Commit();
-        //        }
-        //        catch (Exception)
-        //        {
-        //            _unit.Rollback();
-        //        }
-        //    }
-        //}
     }
 }

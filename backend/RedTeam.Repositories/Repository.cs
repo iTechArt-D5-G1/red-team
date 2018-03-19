@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Data.Entity;
+using System.Linq;
 using System.Threading.Tasks;
 using RedTeam.Repositories.Interfaces;
 
@@ -6,22 +7,27 @@ namespace RedTeam.Repositories
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
-        private readonly IContext _db;
+        private readonly DbSet<TEntity> _dbSet;
 
-        public Repository(IContext db)
-        {  
-            _db = db;
+        private readonly IContext _context;
+
+        private readonly IDbContext _dbContext;
+
+        public Repository(IDbContext dbContext, IContext context)
+        {
+            _context = context;
+            _dbContext = dbContext;
+            _dbSet = dbContext.Set<TEntity>();
         }
 
-        //TEntity IRepository<TEntity>.GetById(int id)
-        //{
-        //    _db.Set()
-        //    return _db.GetById(id);
-        //}
+        public TEntity GetById(int id)
+        {
+            return _dbSet.Find(id);
+        }
 
         public async Task<int> SaveAsync()
         {
-            return await _db.SaveChangesAsync();
+            return await _context.SaveAsync();
         }
 
         public void Delete(TEntity entity)
@@ -39,9 +45,9 @@ namespace RedTeam.Repositories
             throw new System.NotImplementedException();
         }
 
-        public TEntity GetById(int id)
-        {
-            throw new System.NotImplementedException();
-        }
+        //public TEntity GetById(int id)
+        //{
+        //    throw new System.NotImplementedException();
+        //}
     }
 }

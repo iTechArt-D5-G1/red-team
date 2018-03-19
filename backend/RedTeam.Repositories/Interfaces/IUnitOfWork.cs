@@ -4,7 +4,7 @@ namespace RedTeam.Repositories.Interfaces
 {
     public interface IUnitOfWork
     {
-        Task Commit();
+        Task<int> Commit();
 
         void Rollback();
 

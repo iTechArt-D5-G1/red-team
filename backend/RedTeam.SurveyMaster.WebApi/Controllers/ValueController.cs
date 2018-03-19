@@ -1,5 +1,5 @@
 ﻿using System.Web.Http;
-using RedTeam.Repositories.Interfaces;
+using RedTeam.SurveyMaster.Foundation;
 using RedTeam.SurveyMaster.Repositories.Interfaces;
 
 namespace RedTeam.SurveyMaster.WebApi.Controllers
@@ -13,9 +13,9 @@ namespace RedTeam.SurveyMaster.WebApi.Controllers
             _servise = servise;
         }
 
-        public void GetById(int id)
+        public Survey GetById(int id)
         {
-            _servise.GetById(id);
+            return _servise.GetById(id);
         }
     }
 }
