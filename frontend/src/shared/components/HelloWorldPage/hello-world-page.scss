@@ -1,23 +1,18 @@
 .hello-world-page {
-    width: inherit;
-    height: inherit;
 
     text-align: center;
-
-    background-image: url("hello-world-page-background.png");
-    background-repeat: no-repeat;
-    background-position: center top;
 }
 
-.hello-world-page__content {
-    display: inline;
+.hello-world-page__text {
+    display: block;
 
     margin-top: 10%;
 
     text-align: center;
 
-    background-color: white;
-
     font-size: 200%;
 }
 
+.hello-world-page__image {
+    border-radius: 8px;
+}
