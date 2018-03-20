@@ -19,13 +19,12 @@ class SurveysList extends React.Component {
             <div className='row surveys-list'>
                 <div className='col-md-12'>
                     { isFetching &&
-                    <h4>Fetching process ... </h4>
+                        <h4>Fetching process ... </h4>
                     }
-                    {!isError &&
-                    this.props.surveys.map(this.renderSurveys)
+                    { !isError &&
+                        this.props.surveys.map(this.renderSurveys)
                     }
-                    {
-                        isError &&
+                    { isError &&
                         <h4> Error durign surveys request </h4>
                     }
                 </div>
