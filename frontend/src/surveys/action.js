@@ -1,6 +1,10 @@
-import { surveyConstants } from './actions';
-import { surveyService } from '../services/survey.js';
-import { Survey } from '../../models/survey';
+import { surveyService } from './services/survey.js';
+import { Survey } from '../models/survey';
+
+export const SURVEYS_REQUEST_INIT = 'SURVEYS_REQUEST_INIT';
+export const SURVEYS_REQUEST_SUCCESS = 'SURVEYS_REQUEST_SUCCESS';
+export const SURVEYS_REQUEST_ERROR = 'SURVEYS_REQUEST_ERROR';
+export const ADD_SURVEY = 'ADD_SURVEY';
 
 let nextSurveyId = 0;
 
@@ -10,15 +14,15 @@ function IdInc() {
 }
 
 export const requestSuccess = requestedData => ({
-    type: surveyConstants.SURVEYS_REQUEST_SUCCESS,
+    type: SURVEYS_REQUEST_SUCCESS,
     surveys: requestedData,
 });
 export const requestError = () => ({
-    type: surveyConstants.SURVEYS_REQUEST_ERROR,
+    type: SURVEYS_REQUEST_ERROR,
 });
 
 export const requestInit = () => ({
-    type: surveyConstants.SURVEYS_REQUEST_INIT,
+    type: SURVEYS_REQUEST_INIT,
 });
 
 export function surveysRequest() {

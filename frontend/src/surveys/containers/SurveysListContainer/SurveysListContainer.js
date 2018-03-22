@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import SurveysList from '../../components/SurveysList';
-import { surveysRequest } from '../../actions/';
+import { surveysRequest } from '../../action';
 
 const mapStateToProps = state => ({
     surveys: state.surveys.surveys,

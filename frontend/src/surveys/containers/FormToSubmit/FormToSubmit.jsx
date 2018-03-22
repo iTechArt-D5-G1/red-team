@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import { addSurvey } from '../../actions';
+import { addSurvey } from '../../action';
 
 const isLastElementNumber = (stringToCheck) => {
     const numbersOnlyPattern = /^\d+$/;
