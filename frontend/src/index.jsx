@@ -10,7 +10,7 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { createBrowserHistory } from 'history';
 
-import App from './App/App.jsx';
+import App from './app/App.jsx';
 import reducer from './surveys/reducers';
 import Surveys from './surveys/components/Surveys/Surveys.jsx';
 import HelloWorldPage from './shared/helloWorld/HelloWorldPage.jsx';
@@ -36,7 +36,7 @@ ReactDOM.render(
 
 if (module.hot) {
     // Whenever a new version of App.js is available
-    module.hot.accept('./App/App.jsx', () => {
+    module.hot.accept('./app/App.jsx', () => {
         // Require the new version and render it instead
         const NextApp = App;
         ReactDOM.render(<NextApp />, 'app');
