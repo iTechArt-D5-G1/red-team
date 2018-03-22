@@ -6,9 +6,10 @@ namespace RedTeam.SurveyMaster.WebApi.Controllers
 {
     public class ValueController : ApiController
     {
-        private readonly IServise _servise;
+        private readonly ISurveyServise _servise;
+
  
-        public ValueController(IServise servise)
+        public ValueController(ISurveyServise servise)
         {
             _servise = servise;
         }

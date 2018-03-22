@@ -60,9 +60,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\IServise.cs" />
+    <Compile Include="Interfaces\ISurveyServise.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Servise.cs" />
+    <Compile Include="SurveyServise.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -7,6 +7,7 @@ using RedTeam.Repositories;
 using Autofac.Integration.WebApi;
 using RedTeam.SurveyMaster.WebApi;
 using RedTeam.Repositories.Interfaces;
+using RedTeam.SurveyMaster.Foundation;
 using RedTeam.SurveyMaster.Repositories;
 using RedTeam.SurveyMaster.WebApi.Controllers;
 using RedTeam.SurveyMaster.Repositories.Interfaces;
@@ -21,23 +22,26 @@ namespace RedTeam.SurveyMaster.WebApi
         {
             var builder = new ContainerBuilder();
             var config = new HttpConfiguration();
+            app.Use<GlobalExceptionMiddleware>();
+    
             config.MapHttpAttributeRoutes();
             config.Routes.MapHttpRoute(
                 "DefaultApi",
                 "api/{controller}/{id}",
                 new { id = RouteParameter.Optional }
             );
-            builder.RegisterType<ValueController>().InstancePerRequest(); ;
+            builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>));
+            builder.RegisterType<ValueController>();
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>();
-            builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>)); 
-            builder.RegisterType<Servise>().As<IServise>();
-            builder.RegisterType<Context>().As<IContext>();
+            builder.RegisterType<Repository<Survey>>().As<IRepository<Survey>>();
+            builder.RegisterType<SurveyServise>().As<ISurveyServise>();
+            builder.RegisterType<Context>().As<IContext>().As<IDbContext>();
             builder.RegisterType<DbContext>().AsSelf();
-
             var container = builder.Build();
+
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
-        
-            app.UseWebApi(config);  
+
+            app.UseWebApi(config);
             
         }
     }

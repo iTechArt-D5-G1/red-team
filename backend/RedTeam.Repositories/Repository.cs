@@ -13,6 +13,7 @@ namespace RedTeam.Repositories
 
         private readonly IDbContext _dbContext;
 
+
         public Repository(IDbContext dbContext, IContext context)
         {
             _context = context;
@@ -44,10 +45,5 @@ namespace RedTeam.Repositories
         {
             throw new System.NotImplementedException();
         }
-
-        //public TEntity GetById(int id)
-        //{
-        //    throw new System.NotImplementedException();
-        //}
     }
 }

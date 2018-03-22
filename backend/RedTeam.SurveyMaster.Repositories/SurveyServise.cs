@@ -5,13 +5,14 @@ using RedTeam.SurveyMaster.Repositories.Interfaces;
 
 namespace RedTeam.SurveyMaster.Repositories
 {
-    public class Servise: IServise
+    public class SurveyServise: ISurveyServise
     {
         private readonly IUnitOfWork _unit;
 
-        private readonly IRepository<Survey> _repository;        
+        private readonly IRepository<Survey> _repository;
 
-        public Servise(IUnitOfWork unit, IRepository<Survey> repository)
+
+        public SurveyServise(IUnitOfWork unit, IRepository<Survey> repository)
         {
             _unit = unit;
             _repository = repository;
@@ -19,7 +20,7 @@ namespace RedTeam.SurveyMaster.Repositories
 
         public Survey GetById(int id)
         {
-            using (null)
+            using (var unit =_unit)
             {
                 try
                 {
@@ -27,7 +28,7 @@ namespace RedTeam.SurveyMaster.Repositories
                 }
                 catch (Exception)
                 {
-                    _unit.Rollback();
+                    unit.Rollback();
                     throw;
                 }
             }

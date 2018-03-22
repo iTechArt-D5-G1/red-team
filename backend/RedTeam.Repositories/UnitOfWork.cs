@@ -8,10 +8,12 @@ namespace RedTeam.Repositories
     {
         private readonly IContext _context;
 
+
         public UnitOfWork(IContext context)
         {
             _context = context;
         }
+
         public void Rollback()
         {
             throw new NotImplementedException();

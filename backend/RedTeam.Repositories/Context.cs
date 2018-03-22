@@ -4,9 +4,10 @@ using RedTeam.Repositories.Interfaces;
 
 namespace RedTeam.Repositories
 {
-    public class Context: DbContext, IContext
+    public class Context: DbContext, IContext, IDbContext
     {
         private readonly DbContext _dbContext;
+
 
         public Context(DbContext dbContext)
         {

@@ -2,7 +2,7 @@
 
 namespace RedTeam.SurveyMaster.Repositories.Interfaces
 {
-    public interface IServise
+    public interface ISurveyServise
     {
         Survey GetById(int id);
     }
