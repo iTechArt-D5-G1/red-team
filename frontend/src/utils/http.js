@@ -18,5 +18,5 @@ const axiosInstanceCreate = () => {
 };
 
 export const HttpUtility = {
-    axiosInstanceCreate,
+    InstanceCreate: axiosInstanceCreate,
 };

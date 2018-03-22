@@ -3,8 +3,8 @@ import { Survey } from '../../models/survey.js';
 
 async function getSurveys() {
     try {
-        const axiosInstance = HttpUtility.axiosInstanceCreate();
-        const response = await axiosInstance.get('/surveys');
+        const instance = HttpUtility.InstanceCreate();
+        const response = await instance.get('/surveys');
         const { data } = response.data;
         const surveys = data.map(s => Survey(s.id, s.text));
         return surveys;
@@ -15,8 +15,8 @@ async function getSurveys() {
 
 async function addSurvey(survey) {
     try {
-        const axiosInstance = HttpUtility.axiosInstanceCreate();
-        await axiosInstance.post('/surveys', survey.text);
+        const instance = HttpUtility.InstanceCreate();
+        await instance.post('/surveys', survey.text);
         return survey;
     } catch (err) {
         throw err;
