@@ -5,7 +5,7 @@ import { Survey } from '../../models/survey';
 const initialState = {
     isFetching: false,
     isError: false,
-    surveys: [new Survey(1, 'First survey'), new Survey(2, 'Second survey')],
+    surveys: [new Survey(1, 'First survey')],
 };
 
 const surveys = (state = initialState, action) => {
