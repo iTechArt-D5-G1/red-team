@@ -16,7 +16,7 @@ class GenericErrorHandler extends React.Component {
 
     render() {
         if (this.state.hasError) {
-            return <h1 >Some error occure in FormToSubmit component! </h1>;
+            return <h1 >Some error occure! </h1>;
         }
         return this.props.children;
     }
