@@ -1,9 +1,10 @@
+import { combineReducers } from 'redux';
 import {
     SURVEYS_REQUEST_INIT,
     SURVEYS_REQUEST_SUCCESS,
     SURVEYS_REQUEST_ERROR,
-    ADD_SURVEY } from '../action';
-import { Survey } from '../../models/survey';
+    ADD_SURVEY } from './action';
+import { Survey } from '../models/survey';
 
 const initialState = {
     isFetching: false,
@@ -42,4 +43,9 @@ const surveys = (state = initialState, action) => {
     }
 };
 
-export default surveys;
+const surveyApp = combineReducers({
+    surveys,
+});
+
+export default surveyApp;
+
