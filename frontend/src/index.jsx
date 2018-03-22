@@ -14,7 +14,6 @@ import App from './App/App.jsx';
 import reducer from './surveys/reducers';
 import Surveys from './surveys/components/Surveys/Surveys.jsx';
 import HelloWorldPage from './shared/components/HelloWorldPage/HelloWorldPage.jsx';
-import LoginPage from './auth/components/Login/LoginPage.jsx';
 
 import './assets/stylesheets/index.scss';
 
@@ -29,7 +28,6 @@ ReactDOM.render(
             <App >
                 <Route exact path='/' component={Surveys} />
                 <Route path='/hello' component={HelloWorldPage} />
-                <Route path='/login' component={LoginPage} />
             </App>
         </Router>
     </Provider>,
