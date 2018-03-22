@@ -26,27 +26,23 @@ export const requestInit = () => ({
 });
 
 export function surveysRequest() {
-    return (dispatch) => {
-        requestInit();
-        surveyService.getSurveys()
-            .then((requestedData) => {
-                dispatch(requestSuccess(requestedData));
-            })
-            .catch(() => {
-                dispatch(requestError());
-            });
+    return async (dispatch) => {
+        try {
+            const surveys = await surveyService.getSurveys();
+            dispatch(requestSuccess(surveys));
+        } catch (err) {
+            dispatch(requestError());
+        }
     };
 }
 
 export function addSurvey(text) {
-    return (dispatch) => {
-        requestInit();
-        surveyService.addSurvey(new Survey(IdInc(), text))
-            .then((requestedData) => {
-                dispatch(requestSuccess(requestedData));
-            })
-            .catch(() => {
-                dispatch(requestError());
-            });
+    return async (dispatch) => {
+        try {
+            const survey = await surveyService.addSurvey(new Survey(IdInc(), text));
+            dispatch(requestSuccess(survey));
+        } catch (err) {
+            dispatch(requestError());
+        }
     };
 }
