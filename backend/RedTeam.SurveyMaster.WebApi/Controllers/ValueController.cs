@@ -6,17 +6,17 @@ namespace RedTeam.SurveyMaster.WebApi.Controllers
 {
     public class ValueController : ApiController
     {
-        private readonly ISurveyServise _servise;
+        private readonly ISurveyService _service;
 
  
-        public ValueController(ISurveyServise servise)
+        public ValueController(ISurveyService service)
         {
-            _servise = servise;
+            _service = service;
         }
 
         public Survey GetById(int id)
         {
-            return _servise.GetById(id);
+            return _service.GetById(id);
         }
     }
 }

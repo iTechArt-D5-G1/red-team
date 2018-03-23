@@ -5,8 +5,8 @@ namespace RedTeam.Repositories.Interfaces
 {
     public interface IUnitOfWork : IDisposable
     {
-        Task<int> Commit();
+        IRepository<TEntity> GetRepository<TEntity>() where TEntity : class;
 
-        void Rollback();
+        Task SaveAsync();
     }
 }

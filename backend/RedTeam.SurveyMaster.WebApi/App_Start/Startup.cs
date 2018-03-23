@@ -32,11 +32,9 @@ namespace RedTeam.SurveyMaster.WebApi
             );
             builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>));
             builder.RegisterType<ValueController>();
-            builder.RegisterType<UnitOfWork>().As<IUnitOfWork>();
-            builder.RegisterType<Repository<Survey>>().As<IRepository<Survey>>();
-            builder.RegisterType<SurveyServise>().As<ISurveyServise>();
-            builder.RegisterType<Context>().As<IContext>().As<IDbContext>();
-            builder.RegisterType<DbContext>().AsSelf();
+            builder.RegisterType<SurveyMasterUnitOfWork>().As<ISurveyMasterUnitOfWork>();
+            builder.RegisterType<SurveyService>().As<ISurveyService>();
+            builder.RegisterType<SurveyMasterDbContext>().AsSelf();
             var container = builder.Build();
 
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);

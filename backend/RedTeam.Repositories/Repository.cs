@@ -1,49 +1,68 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using RedTeam.Repositories.Interfaces;
 
 namespace RedTeam.Repositories
 {
-    public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
+    public class Repository<TEntity> : IRepository<TEntity>
+        where TEntity : class
     {
+        protected readonly IDbContext Context;
+
         private readonly DbSet<TEntity> _dbSet;
 
-        private readonly IContext _context;
 
-        private readonly IDbContext _dbContext;
+        protected IQueryable<TEntity> DbSet => _dbSet;
 
 
-        public Repository(IDbContext dbContext, IContext context)
+        public Repository(IDbContext context)
         {
-            _context = context;
-            _dbContext = dbContext;
-            _dbSet = dbContext.Set<TEntity>();
+            Context = context;
+            _dbSet = context.Set<TEntity>();
         }
 
-        public TEntity GetById(int id)
+
+        public virtual TEntity Create(TEntity entity)
         {
-            return _dbSet.Find(id);
+            return _dbSet.Add(entity);
         }
 
-        public async Task<int> SaveAsync()
+        public virtual async Task<TEntity> GetByIdAsync(int id)
         {
-            return await _context.SaveAsync();
+            var user = await _dbSet.FindAsync(id);
+
+            return user;
         }
 
-        public void Delete(TEntity entity)
+        public virtual async Task<IReadOnlyCollection<TEntity>> GetAllAsync()
         {
-            throw new System.NotImplementedException();
+            var users = await _dbSet.ToListAsync();
+
+            return users;
         }
 
-        public IQueryable<TEntity> GetQuery()
+        public virtual IQueryable<TEntity> GetQuery()
         {
-            throw new System.NotImplementedException();
+            return _dbSet;
         }
 
-        public void Update(TEntity entity)
+        public virtual void Update(TEntity entity)
         {
-            throw new System.NotImplementedException();
+            if (!_dbSet.Local.Contains(entity))
+            {
+                Context.Entry(entity).State = EntityState.Modified;
+            }
+        }
+
+        public virtual void Delete(TEntity entity)
+        {
+            if (!_dbSet.Local.Contains(entity))
+            {
+                _dbSet.Attach(entity);
+            }
+            _dbSet.Remove(entity);
         }
     }
 }
