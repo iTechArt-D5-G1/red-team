@@ -13,15 +13,15 @@ function IdInc() {
     return nextSurveyId;
 }
 
-export const requestSuccess = requestedData => ({
+export const surveyRequestSuccess = requestedData => ({
     type: SURVEYS_REQUEST_SUCCESS,
     surveys: requestedData,
 });
-export const requestError = () => ({
+export const surveyRequestError = () => ({
     type: SURVEYS_REQUEST_ERROR,
 });
 
-export const requestInit = () => ({
+export const surveyRequestInit = () => ({
     type: SURVEYS_REQUEST_INIT,
 });
 
@@ -29,9 +29,9 @@ export function surveysRequest() {
     return async (dispatch) => {
         try {
             const surveys = await surveyService.getSurveys();
-            dispatch(requestSuccess(surveys));
+            dispatch(surveyRequestSuccess(surveys));
         } catch (err) {
-            dispatch(requestError());
+            dispatch(surveyRequestError());
         }
     };
 }
@@ -40,9 +40,9 @@ export function addSurvey(text) {
     return async (dispatch) => {
         try {
             const survey = await surveyService.addSurvey(new Survey(IdInc(), text));
-            dispatch(requestSuccess(survey));
+            dispatch(surveyRequestSuccess(survey));
         } catch (err) {
-            dispatch(requestError());
+            dispatch(surveyRequestError());
         }
     };
 }
