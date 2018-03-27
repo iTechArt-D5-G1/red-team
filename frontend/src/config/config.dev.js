@@ -1,1 +1,1 @@
-export const ServerUrl = 'https://github.com/axios/axios';
+export const ServerUrl = 'http://localhost:12345/';
