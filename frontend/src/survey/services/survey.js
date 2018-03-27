@@ -1,4 +1,4 @@
-import { HttpUtility } from '../../utils/http.js';
+import { HttpUtility } from '../../shared/utils/http.js';
 import { Survey } from '../../models/survey.js';
 import { SurveysApiUrl } from './../../config';
 

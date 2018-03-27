@@ -1,4 +1,4 @@
-import { ServerUrl } from './../config';
+import { ServerUrl } from './../../config';
 
 const axios = require('axios');
 
