@@ -9,7 +9,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { createBrowserHistory } from 'history';
-import { surveyRootPath, helloWorldPagePath } from './config';
+import { surveyRootPath, helloWorldPagePath } from './shared/routePath';
 import App from './app/App.jsx';
 import reducer from './survey/reducer';
 import Surveys from './survey/containers/Surveys/Surveys.jsx';
