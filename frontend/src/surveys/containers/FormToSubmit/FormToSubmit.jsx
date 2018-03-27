@@ -1,14 +1,16 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-
-import { addSurvey } from '../../action';
 
 const isLastElementNumber = (stringToCheck) => {
     const numbersOnlyPattern = /^\d+$/;
     return numbersOnlyPattern.test(stringToCheck[stringToCheck.length - 1]);
 };
+
+function NotImplementedException() {
+    this.name = 'Not implemented exception';
+    this.message = 'Part of app you trying reach is not yet implemented';
+    this.toString = () => this.message;
+}
 
 class FormToSubmit extends React.Component {
     constructor(props) {
@@ -36,8 +38,8 @@ class FormToSubmit extends React.Component {
         if (!input.trim()) {
             return;
         }
-        this.props.submitSurvey(input);
         this.setState({ input: '' });
+        throw new NotImplementedException();
     }
 
     render() {
@@ -61,10 +63,6 @@ class FormToSubmit extends React.Component {
     }
 }
 
-FormToSubmit.propTypes = {
-    submitSurvey: PropTypes.func.isRequired,
-};
-
 function mapStateToProps(state) {
     const { surveys } = state.surveys;
     return {
@@ -72,10 +70,6 @@ function mapStateToProps(state) {
     };
 }
 
-const mapDispatchToProps = dispatch => ({
-    submitSurvey: bindActionCreators(addSurvey, dispatch),
-});
-
-const SumbitForm = connect(mapStateToProps, mapDispatchToProps)(FormToSubmit);
+const SumbitForm = connect(mapStateToProps)(FormToSubmit);
 
 export default SumbitForm;

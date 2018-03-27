@@ -1,5 +1,4 @@
 import { surveyService } from './services/survey.js';
-import { Survey } from '../models/survey';
 
 export const SURVEYS_REQUEST_INIT = 'SURVEYS_REQUEST_INIT';
 export const SURVEYS_REQUEST_SUCCESS = 'SURVEYS_REQUEST_SUCCESS';
@@ -29,13 +28,3 @@ export function surveysRequest() {
     };
 }
 
-export function addSurvey(text) {
-    return async (dispatch) => {
-        try {
-            const survey = await surveyService.addSurvey(new Survey(undefined, text));
-            dispatch(surveyRequestSuccess(survey));
-        } catch (err) {
-            dispatch(surveyRequestError());
-        }
-    };
-}
