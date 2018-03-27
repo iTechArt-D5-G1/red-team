@@ -2,7 +2,7 @@ import {
     SURVEYS_REQUEST_INIT,
     SURVEYS_REQUEST_SUCCESS,
     SURVEYS_REQUEST_ERROR,
-    ADD_SURVEY } from './action';
+    ADD_SURVEY } from './actions';
 import { Survey } from '../models/survey';
 
 const initialState = {
