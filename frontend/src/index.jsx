@@ -13,7 +13,7 @@ import { createBrowserHistory } from 'history';
 import App from './app/App.jsx';
 import reducer from './surveys/reducer';
 import Surveys from './surveys/components/Surveys/Surveys.jsx';
-import HelloWorldPage from './shared/helloWorld/HelloWorldPage.jsx';
+import HelloWorldPage from './helloWorld/HelloWorldPage.jsx';
 
 import './assets/stylesheets/index.scss';
 
