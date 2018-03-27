@@ -1,4 +1,3 @@
-import { combineReducers } from 'redux';
 import {
     SURVEYS_REQUEST_INIT,
     SURVEYS_REQUEST_SUCCESS,
@@ -43,9 +42,5 @@ const surveys = (state = initialState, action) => {
     }
 };
 
-const surveyApp = combineReducers({
-    surveys,
-});
-
-export default surveyApp;
+export default surveys;
 

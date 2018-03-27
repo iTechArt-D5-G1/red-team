@@ -5,9 +5,9 @@ import SurveysList from '../../components/SurveysList';
 import { surveysRequest } from '../../action';
 
 const mapStateToProps = state => ({
-    surveys: state.surveys.surveys,
-    isError: state.surveys.isError,
-    isFetching: state.surveys.isFetching,
+    surveys: state.surveys,
+    isError: state.isError,
+    isFetching: state.isFetching,
 });
 
 const mapDispatchToProps = dispatch => ({
