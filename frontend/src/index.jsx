@@ -12,7 +12,7 @@ import { createBrowserHistory } from 'history';
 
 import App from './app/App.jsx';
 import reducer from './surveys/reducer';
-import Surveys from './surveys/components/Surveys/Surveys.jsx';
+import Surveys from './surveys/containers/Surveys/Surveys.jsx';
 import HelloWorldPage from './helloWorld/HelloWorldPage.jsx';
 
 import './index.scss';
