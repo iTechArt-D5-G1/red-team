@@ -1,6 +1,5 @@
 ﻿using System.Data.Entity;
 using RedTeam.Repositories.Interfaces;
-using RedTeam.SurveyMaster.Foundation;
 
 namespace RedTeam.SurveyMaster.Repositories
 {

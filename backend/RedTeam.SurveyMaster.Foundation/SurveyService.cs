@@ -1,9 +1,10 @@
 ﻿using System.Threading.Tasks;
 using RedTeam.Repositories.Interfaces;
 using RedTeam.SurveyMaster.Foundation;
+using RedTeam.SurveyMaster.Repositories;
 using RedTeam.SurveyMaster.Repositories.Interfaces;
 
-namespace RedTeam.SurveyMaster.Repositories
+namespace RedTeam.SurveyMaster.Foundation
 {
     //TODO: should be in foundation projet
     public class SurveyService: ISurveyService

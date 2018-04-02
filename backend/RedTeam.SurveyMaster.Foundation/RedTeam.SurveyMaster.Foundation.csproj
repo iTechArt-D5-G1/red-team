@@ -42,7 +42,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Survey.cs" />
+    <Compile Include="SurveyService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RedTeam.Repositories\RedTeam.Repositories.csproj">
+      <Project>{abefc461-c4f5-4cb1-94b4-f570f084474a}</Project>
+      <Name>RedTeam.Repositories</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RedTeam.SurveyMaster.Repositories\RedTeam.SurveyMaster.Repositories.csproj">
+      <Project>{01b8501e-7672-4c1f-9d87-ebff90a4ced2}</Project>
+      <Name>RedTeam.SurveyMaster.Repositories</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

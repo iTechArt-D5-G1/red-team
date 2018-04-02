@@ -1,5 +1,6 @@
 ﻿using System.Web.Http;
 using RedTeam.SurveyMaster.Foundation;
+using RedTeam.SurveyMaster.Repositories;
 using RedTeam.SurveyMaster.Repositories.Interfaces;
 
 namespace RedTeam.SurveyMaster.WebApi.Controllers
