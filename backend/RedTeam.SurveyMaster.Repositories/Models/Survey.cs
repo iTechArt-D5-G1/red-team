@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RedTeam.SurveyMaster.Foundation
+namespace RedTeam.SurveyMaster.Repositories
 {
     public class Survey 
     {
