@@ -5,6 +5,6 @@ namespace RedTeam.SurveyMaster.Repositories.Interfaces
 {
     public interface ISurveyService
     {
-        Survey GetById(int id);
+        Task<Survey> GetById(int id);
     }
 }

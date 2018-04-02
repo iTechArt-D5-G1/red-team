@@ -16,7 +16,7 @@ namespace RedTeam.SurveyMaster.WebApi.Controllers
 
         public Survey GetById(int id)
         {
-            return _service.GetById(id);
+            return _service.GetById(id).Result;
         }
     }
 }

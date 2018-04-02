@@ -18,10 +18,10 @@ namespace RedTeam.SurveyMaster.Repositories
             _unitOfWork = unitOfWork;
         }
 
-        //todo: make async
-        public Survey GetById(int id)
+        public async Task<Survey> GetById(int id)
         {
-            return _unitOfWork.GetRepository<Survey>().GetByIdAsync(id).Result;
+            var survey = await _unitOfWork.GetRepository<Survey>().GetByIdAsync(id);
+            return survey;
         }
     }
 }
