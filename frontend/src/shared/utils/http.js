@@ -17,6 +17,6 @@ const axiosInstanceCreate = () => {
     return instance;
 };
 
-export const HttpUtility = {
-    InstanceCreate: axiosInstanceCreate,
-};
+const Instance = axiosInstanceCreate();
+
+export default Instance;
