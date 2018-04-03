@@ -20,6 +20,7 @@ export const surveyRequestInit = () => ({
 export function surveysRequest() {
     return async (dispatch) => {
         try {
+            dispatch(surveyRequestInit());
             const surveys = await surveyService.getSurveys();
             dispatch(surveyRequestSuccess(surveys));
         } catch (err) {
