@@ -3,25 +3,13 @@ import { Survey } from '../../models/survey.js';
 import { SurveysApiUrl } from './../../config';
 
 async function getSurveys() {
-    try {
-        const instance = http();
-        const response = await instance.get(SurveysApiUrl);
-        const { data } = response.data;
-        const surveys = data.map(s => Survey(s.id, s.text));
-        return surveys;
-    } catch (err) {
-        throw err;
-    }
+    const response = await http.get(SurveysApiUrl);
+    return response.data.map(s => Survey(s.id, s.text));
 }
 
 async function addSurvey(survey) {
-    try {
-        const instance = http();
-        await instance.post(SurveysApiUrl, survey.text);
-        return survey;
-    } catch (err) {
-        throw err;
-    }
+    await http.post(SurveysApiUrl, survey.text);
+    return survey;
 }
 
 export const surveyService = {
