@@ -1,1 +1,1 @@
-export * from './config.dev.js';
+export * from './config.dev';

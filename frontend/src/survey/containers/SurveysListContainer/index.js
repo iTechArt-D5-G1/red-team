@@ -1,1 +1,1 @@
-export { default } from './SurveysListContainer.js';
+export { default } from './SurveysListContainer';

@@ -1,4 +1,4 @@
-import { surveyService } from './services/survey.js';
+import { surveyService } from './services/survey';
 
 export const SURVEYS_REQUEST_INIT = 'SURVEYS_REQUEST_INIT';
 export const SURVEYS_REQUEST_SUCCESS = 'SURVEYS_REQUEST_SUCCESS';

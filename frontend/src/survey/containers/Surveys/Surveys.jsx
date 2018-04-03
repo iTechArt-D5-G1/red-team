@@ -1,6 +1,6 @@
 import React from 'react';
 
-import SurveysListContainer from '../../containers/SurveysListContainer/SurveysListContainer.js';
+import SurveysListContainer from '../../containers/SurveysListContainer/SurveysListContainer';
 import FormToSubmit from '../../containers/FormToSubmit/FormToSubmit.jsx';
 import GenericErrorHandler from './../../../shared/errorHandlers/GenericErrorHandler.jsx';
 

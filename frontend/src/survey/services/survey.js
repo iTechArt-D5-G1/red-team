@@ -1,5 +1,5 @@
-import { http } from '../../shared/utils/http.js';
-import { Survey } from '../../models/survey.js';
+import { http } from '../../shared/utils/http';
+import { Survey } from '../../models/survey';
 import { SurveysApiUrl } from './../../config';
 
 async function getSurveys() {
