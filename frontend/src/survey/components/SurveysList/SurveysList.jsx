@@ -25,7 +25,7 @@ class SurveysList extends React.Component {
                         this.props.surveys.map(this.renderSurveys)
                     }
                     { isError &&
-                        <h4> Error durign surveys request </h4>
+                        <h4> Error during surveys request </h4>
                     }
                 </div>
             </div>
