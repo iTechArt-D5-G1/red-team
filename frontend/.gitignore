@@ -22,6 +22,7 @@ Thumbs.db
 tags
 
 # NPM packages folder.
+dist/
 node_modules/
 bundle.js
 bundle.js.map
