@@ -5,6 +5,10 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const webpack = require('webpack');
 
 module.exports = merge(common, {
+    output: {
+        filename: '[name].[chunkhash].js',
+        path: path.resolve(__dirname, './src/public/dist'),
+    },
     devtool: 'source-map',
     plugins: [
         new UglifyJSPlugin({
@@ -12,6 +16,10 @@ module.exports = merge(common, {
         }),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify('production'),
+        }),
+        new webpack.HashedModuleIdsPlugin(),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'chunk',
         }),
     ],
 });
