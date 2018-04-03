@@ -188,7 +188,6 @@
           </CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
           <servers defaultServer="">
-            <server name="OwinHost" exePath="{solutiondir}\packages\OwinHost.4.0.0\tools\OwinHost.exe" cmdArgs="-u {url}" url="http://localhost:12345/" workingDir="{projectdir}" />
             <server name="SelfHostServer" exePath="" cmdArgs="" url="http://localhost:59385/" workingDir="" />
           </servers>
         </WebProjectProperties>
