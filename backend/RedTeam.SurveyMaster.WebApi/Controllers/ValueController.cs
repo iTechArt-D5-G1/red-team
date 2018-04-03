@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using System.Threading.Tasks;
+using System.Web.Http;
 using RedTeam.SurveyMaster.Foundation;
 using RedTeam.SurveyMaster.Repositories;
 using RedTeam.SurveyMaster.Repositories.Interfaces;
@@ -15,9 +16,9 @@ namespace RedTeam.SurveyMaster.WebApi.Controllers
             _service = service;
         }
 
-        public Survey GetById(int id)
+        public async Task<Survey> GetById(int id)
         {
-            return _service.GetByIdAsync(id).Result;
+            return await _service.GetByIdAsync(id);
         }
     }
 }
