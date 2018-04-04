@@ -7,7 +7,7 @@ const webpack = require('webpack');
 module.exports = merge(common, {
     output: {
         filename: '[name].[chunkhash].js',
-        path: path.resolve(__dirname, './src/dist'),
+        path: path.resolve(__dirname, './dist'),
     },
     devtool: 'source-map',
     plugins: [
