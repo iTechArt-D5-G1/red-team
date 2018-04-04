@@ -1,5 +1,3 @@
-import { surveyService } from './services/survey';
-
 export const SURVEYS_REQUEST_INIT = 'SURVEYS_REQUEST_INIT';
 export const SURVEYS_REQUEST_SUCCESS = 'SURVEYS_REQUEST_SUCCESS';
 export const SURVEYS_REQUEST_ERROR = 'SURVEYS_REQUEST_ERROR';
@@ -18,10 +16,10 @@ export const surveyRequestInit = () => ({
 });
 
 export function surveysRequest() {
-    return async (dispatch) => {
+    return async (dispatch, getstate, services) => {
         try {
             dispatch(surveyRequestInit());
-            const surveys = await surveyService.getSurveys();
+            const surveys = await services.surveyService.getSurveys();
             dispatch(surveyRequestSuccess(surveys));
         } catch (err) {
             dispatch(surveyRequestError());

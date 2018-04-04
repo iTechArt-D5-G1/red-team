@@ -1,18 +1,18 @@
-import { http } from '../../shared/utils/http';
 import { Survey } from '../../models/survey';
 import { SurveysApiUrl } from './../../config';
 
-async function getSurveys() {
-    const response = await http.get(SurveysApiUrl);
-    return response.data.map(s => Survey(s.id, s.text));
-}
+export class SurveyService {
+    constructor(http) {
+        this.http = http;
+    }
 
-async function addSurvey(survey) {
-    await http.post(SurveysApiUrl, survey.text);
-    return survey;
-}
+    async getSurveys() {
+        const response = await this.http.get(SurveysApiUrl);
+        return response.data.map(s => Survey(s.id, s.text));
+    }
 
-export const surveyService = {
-    getSurveys,
-    addSurvey,
-};
+    async addSurvey(survey) {
+        await this.http.post(SurveysApiUrl, survey.text);
+        return survey;
+    }
+}
