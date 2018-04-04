@@ -17,4 +17,5 @@ const axiosInstanceCreate = () => {
     return instance;
 };
 
-export const instance = axiosInstanceCreate();
+const instance = axiosInstanceCreate();
+export default instance;
