@@ -24,13 +24,10 @@ namespace RedTeam.SurveyMaster.WebApi
             var builder = new ContainerBuilder();
             var config = new HttpConfiguration();
             app.Use<GlobalExceptionMiddleware>();
-
             RegisterRoutes(config);
             ConfigureAutofac(builder);
             var container = builder.Build();
-
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
-
             app.UseWebApi(config);
             
         }
