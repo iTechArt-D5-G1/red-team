@@ -10,9 +10,7 @@ namespace RedTeam.SurveyMaster.Foundation
     public class SurveyService: ISurveyService
     {
         private readonly ISurveyMasterUnitOfWork _unitOfWork;
-
-        private readonly IRepository<Survey> _repository;
-
+      
 
         public SurveyService(ISurveyMasterUnitOfWork unitOfWork)
         {
