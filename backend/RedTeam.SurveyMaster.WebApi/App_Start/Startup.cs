@@ -11,6 +11,7 @@ using RedTeam.SurveyMaster.Foundation;
 using RedTeam.SurveyMaster.Repositories;
 using RedTeam.SurveyMaster.WebApi.Controllers;
 using RedTeam.SurveyMaster.Repositories.Interfaces;
+using System;
 
 [assembly: OwinStartup(typeof(Startup))]
 
@@ -23,18 +24,9 @@ namespace RedTeam.SurveyMaster.WebApi
             var builder = new ContainerBuilder();
             var config = new HttpConfiguration();
             app.Use<GlobalExceptionMiddleware>();
-    
-            config.MapHttpAttributeRoutes();
-            config.Routes.MapHttpRoute(
-                "DefaultApi",
-                "api/{controller}/{id}",
-                new { id = RouteParameter.Optional }
-            );
-            builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>));
-            builder.RegisterType<ValueController>();
-            builder.RegisterType<SurveyMasterUnitOfWork>().As<ISurveyMasterUnitOfWork>();
-            builder.RegisterType<SurveyService>().As<ISurveyService>();
-            builder.RegisterType<SurveyMasterDbContext>().AsSelf();
+
+            RegisterRoutes(config);
+            ConfigureAutofac(builder);
             var container = builder.Build();
 
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
@@ -42,5 +34,25 @@ namespace RedTeam.SurveyMaster.WebApi
             app.UseWebApi(config);
             
         }
+
+        private void ConfigureAutofac(ContainerBuilder builder)
+        {
+            builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>));
+            builder.RegisterType<ValueController>();
+            builder.RegisterType<SurveyMasterUnitOfWork>().As<ISurveyMasterUnitOfWork>();
+            builder.RegisterType<SurveyService>().As<ISurveyService>();
+            builder.RegisterType<SurveyMasterDbContext>().AsSelf();
+        }
+
+        private void RegisterRoutes(HttpConfiguration config)
+        {
+            config.MapHttpAttributeRoutes();
+            config.Routes.MapHttpRoute(
+                "DefaultApi",
+                "api/{controller}/{id}",
+                new { id = RouteParameter.Optional }
+            );
+        }
+        
     }
 }
