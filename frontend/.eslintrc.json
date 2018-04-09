@@ -1,6 +1,20 @@
 {
+    "parser": "babel-eslint",
     "extends": "airbnb",
     "rules": {
+        "jsx-a11y/anchor-is-valid": [ "error", {
+          "components": [ "Link" ],
+          "specialLink": [ "to" ]
+        }],
+        "no-multiple-empty-lines": [
+            "error",
+            {
+                "max": 1
+            }
+        ],
+        "prefer-arrow-callback": [
+            "error"
+        ],
         "max-len": [
             "warn",
             140
@@ -31,6 +45,9 @@
         "react/jsx-indent-props": [
             "error",
             4
+        ],
+        "react/jsx-no-bind": [
+            "error"
         ],
         "jsx-quotes": [
             "error",

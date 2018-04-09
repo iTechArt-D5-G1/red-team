@@ -1,0 +1,30 @@
+@import "./../../../assets/stylesheets/partials/theme-colors.scss";
+
+.menu {
+
+    margin: 0;
+    padding: 0;
+
+    list-style-type: none;
+
+    text-align: left;
+
+    background-color: $mainColor;
+}
+
+.menu__btn {
+    display: inline;
+}
+
+.menu__link {
+
+    padding: 14px 16px;
+
+    text-decoration: none;
+
+    color: $menuButtonsColor;
+
+    & :hover {
+        background-color: $onMainColorHover;
+    }
+}

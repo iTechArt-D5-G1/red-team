@@ -4,5 +4,8 @@
   "scss.validate": false,
   "eslint.enable": true,
   "eslint.packageManager": "yarn",
-  "eslint.options": { "configFile": ".eslintrc.json" },
+"eslint.options": {
+    "configFile": ".eslintrc.json"
+},
+"files.eol": "\r\n",
 }
