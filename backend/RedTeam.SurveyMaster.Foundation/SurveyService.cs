@@ -6,7 +6,6 @@ using RedTeam.SurveyMaster.Repositories.Interfaces;
 
 namespace RedTeam.SurveyMaster.Foundation
 {
-    //TODO: should be in foundation projet
     public class SurveyService: ISurveyService
     {
         private readonly ISurveyMasterUnitOfWork _unitOfWork;
