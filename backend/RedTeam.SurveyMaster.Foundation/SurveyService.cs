@@ -1,8 +1,7 @@
 ﻿using System.Threading.Tasks;
-using RedTeam.Repositories.Interfaces;
-using RedTeam.SurveyMaster.Foundation;
-using RedTeam.SurveyMaster.Repositories;
+using RedTeam.SurveyMaster.Foundation.Interfaces;
 using RedTeam.SurveyMaster.Repositories.Interfaces;
+using RedTeam.SurveyMaster.Repositories.Models;
 
 namespace RedTeam.SurveyMaster.Foundation
 {
@@ -18,10 +17,9 @@ namespace RedTeam.SurveyMaster.Foundation
 
         public async Task<Survey> GetByIdAsync(int id)
         {
-            var selectedSurveyById = await _unitOfWork
-                .GetRepository<Survey>()
-                .GetByIdAsync(id);
-            return selectedSurveyById;
+            var surveyRepository = _unitOfWork.GetRepository<Survey>();
+            var surveySelectedById = await surveyRepository.GetByIdAsync(id);
+            return surveySelectedById;
         }
     }
 }
