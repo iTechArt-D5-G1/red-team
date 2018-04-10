@@ -20,23 +20,23 @@ namespace RedTeam.SurveyMaster.WebApi
     {
         public void Configuration(IAppBuilder app)
         {
-            var builder = new ContainerBuilder();
             var config = new HttpConfiguration();
             app.Use<GlobalExceptionMiddleware>();
             RegisterRoutes(config);
-            ConfigureAutofac(builder);
-            var container = builder.Build();
-            config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
+            ConfigureAutofac(config);
             app.UseWebApi(config);
         }
 
-        private void ConfigureAutofac(ContainerBuilder builder)
+        private void ConfigureAutofac(HttpConfiguration configuration)
         {
+            var builder = new ContainerBuilder();
             builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>));
             builder.RegisterType<ValueController>();
             builder.RegisterType<SurveyMasterUnitOfWork>().As<ISurveyMasterUnitOfWork>();
             builder.RegisterType<SurveyService>().As<ISurveyService>();
             builder.RegisterType<SurveyMasterDbContext>().AsSelf();
+            var container = builder.Build();
+            configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);
         }
 
         private void RegisterRoutes(HttpConfiguration config)
