@@ -30,11 +30,11 @@ namespace RedTeam.SurveyMaster.WebApi
         private void ConfigureAutofac(HttpConfiguration configuration)
         {
             var builder = new ContainerBuilder();
-            builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>));
+            builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>)).InstancePerLifetimeScope();
             builder.RegisterType<ValueController>();
-            builder.RegisterType<SurveyMasterUnitOfWork>().As<ISurveyMasterUnitOfWork>();
-            builder.RegisterType<SurveyService>().As<ISurveyService>();
-            builder.RegisterType<SurveyMasterDbContext>().AsSelf();
+            builder.RegisterType<SurveyMasterUnitOfWork>().As<ISurveyMasterUnitOfWork>().InstancePerLifetimeScope();
+            builder.RegisterType<SurveyService>().As<ISurveyService>().InstancePerLifetimeScope();
+            builder.RegisterType<SurveyMasterDbContext>().AsSelf().InstancePerLifetimeScope();
             var container = builder.Build();
             configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);
         }
