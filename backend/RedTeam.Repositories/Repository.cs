@@ -11,6 +11,7 @@ namespace RedTeam.Repositories
     {
         protected readonly IDbContext Context;
 
+
         private readonly DbSet<TEntity> _dbSet;
 
 

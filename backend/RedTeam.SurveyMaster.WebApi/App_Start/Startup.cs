@@ -2,7 +2,6 @@
 using Autofac;
 using Microsoft.Owin;
 using System.Web.Http;
-using System.Data.Entity;
 using RedTeam.Repositories;
 using Autofac.Integration.WebApi;
 using RedTeam.SurveyMaster.WebApi;
@@ -10,8 +9,8 @@ using RedTeam.Repositories.Interfaces;
 using RedTeam.SurveyMaster.Foundation;
 using RedTeam.SurveyMaster.Repositories;
 using RedTeam.SurveyMaster.WebApi.Controllers;
+using RedTeam.SurveyMaster.Foundation.Interfaces;
 using RedTeam.SurveyMaster.Repositories.Interfaces;
-using System;
 
 [assembly: OwinStartup(typeof(Startup))]
 
@@ -29,7 +28,6 @@ namespace RedTeam.SurveyMaster.WebApi
             var container = builder.Build();
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
             app.UseWebApi(config);
-            
         }
 
         private void ConfigureAutofac(ContainerBuilder builder)
@@ -50,6 +48,5 @@ namespace RedTeam.SurveyMaster.WebApi
                 new { id = RouteParameter.Optional }
             );
         }
-        
     }
 }

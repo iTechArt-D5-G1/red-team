@@ -20,7 +20,7 @@ namespace RedTeam.Repositories
 
             _disposed = false;
         }
-        
+
         public IRepository<TEntity> GetRepository<TEntity>() where TEntity : class
         {
             return _repositoryProvider.GetRepository<TEntity>();
@@ -36,7 +36,7 @@ namespace RedTeam.Repositories
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-        
+
         protected void RegisterRepository<TEntity, TRepository>() where TEntity : class where TRepository : IRepository<TEntity>
         {
             _repositoryProvider.RegisterRepository<TEntity, TRepository>();
@@ -59,4 +59,3 @@ namespace RedTeam.Repositories
         }
     }
 }
-

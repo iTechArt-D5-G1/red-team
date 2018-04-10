@@ -1,8 +1,7 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Http;
-using RedTeam.SurveyMaster.Foundation;
-using RedTeam.SurveyMaster.Repositories;
-using RedTeam.SurveyMaster.Repositories.Interfaces;
+using RedTeam.SurveyMaster.Foundation.Interfaces;
+using RedTeam.SurveyMaster.Repositories.Models;
 
 namespace RedTeam.SurveyMaster.WebApi.Controllers
 {

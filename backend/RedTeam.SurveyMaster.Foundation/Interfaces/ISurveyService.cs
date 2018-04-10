@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
+using RedTeam.SurveyMaster.Repositories.Models;
 
-namespace RedTeam.SurveyMaster.Repositories.Interfaces
+namespace RedTeam.SurveyMaster.Foundation.Interfaces
 {
     public interface ISurveyService
     {

@@ -1,7 +1,6 @@
 ﻿using System;
-using RedTeam.Repositories.Interfaces;
 
-namespace RedTeam.Repositories
+namespace RedTeam.Repositories.Interfaces
 {
     public interface IRepositoryProvider : IDisposable
     {

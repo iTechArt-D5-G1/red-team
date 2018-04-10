@@ -1,5 +1,6 @@
 ﻿using System.Data.Entity;
 using RedTeam.Repositories.Interfaces;
+using RedTeam.SurveyMaster.Repositories.Models;
 
 namespace RedTeam.SurveyMaster.Repositories
 {
@@ -9,7 +10,7 @@ namespace RedTeam.SurveyMaster.Repositories
 
 
         public DbSet<Survey> Surveys { get; set; }
-        
+
         public SurveyMasterDbContext()
             : base(ConnectionStringName)
         {

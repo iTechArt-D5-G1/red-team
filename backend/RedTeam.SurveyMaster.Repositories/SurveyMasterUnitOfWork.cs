@@ -1,4 +1,5 @@
 ﻿using RedTeam.Repositories;
+using RedTeam.SurveyMaster.Repositories.Interfaces;
 
 namespace RedTeam.SurveyMaster.Repositories
 {
@@ -8,7 +9,7 @@ namespace RedTeam.SurveyMaster.Repositories
         {
             RegisterRepositories();
         }
-        
+
         private void RegisterRepositories()
         {
             // register custom repositories here
