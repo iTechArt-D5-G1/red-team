@@ -5,6 +5,8 @@ using RedTeam.SurveyMaster.Repositories.Models;
 
 namespace RedTeam.SurveyMaster.WebApi.Controllers
 {
+    [AllowAnonymous]
+    [RoutePrefix("api/value")]
     public class ValueController : ApiController
     {
         private readonly ISurveyService _service;
@@ -15,6 +17,8 @@ namespace RedTeam.SurveyMaster.WebApi.Controllers
             _service = service;
         }
 
+        [HttpGet]
+        [Route("{id}")]
         public async Task<Survey> GetById(int id)
         {
             return await _service.GetByIdAsync(id);
