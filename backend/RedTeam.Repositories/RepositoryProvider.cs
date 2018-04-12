@@ -20,7 +20,7 @@ namespace RedTeam.Repositories
             _entityTypeToCustomRepositoryTypeMappings = new Dictionary<Type, Type>();
             _disposed = false;
         }
-        
+
         IRepository<TEntity> IRepositoryProvider.GetRepository<TEntity>()
         {
             return (IRepository<TEntity>)GetOrCreateRepository<TEntity>();
@@ -30,13 +30,13 @@ namespace RedTeam.Repositories
         {
             RegisterRepository<TEntity, TRepository>();
         }
-        
+
         public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-        
+
         private void RegisterRepository<TEntity, TRepository>()
         {
             _entityTypeToCustomRepositoryTypeMappings.Add(typeof(TEntity), typeof(TRepository));
@@ -56,6 +56,7 @@ namespace RedTeam.Repositories
 
             return repository;
         }
+
         private void Dispose(bool disposing)
         {
             if (!_disposed)

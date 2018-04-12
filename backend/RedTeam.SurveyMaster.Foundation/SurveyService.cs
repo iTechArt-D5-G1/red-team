@@ -8,7 +8,7 @@ namespace RedTeam.SurveyMaster.Foundation
     public class SurveyService: ISurveyService
     {
         private readonly ISurveyMasterUnitOfWork _unitOfWork;
-      
+
 
         public SurveyService(ISurveyMasterUnitOfWork unitOfWork)
         {
