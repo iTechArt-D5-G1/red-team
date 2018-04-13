@@ -1,0 +1,21 @@
+.log-in-page__header {
+    font-size: 20pt;
+    font-weight: 300;
+}
+
+.log-in-page {
+    position: relative;
+    top: 230px;
+
+    display: block;
+
+    width: 20%;
+    height: 20%;
+
+    margin: 0 auto;
+
+    border-color: rgba($color: #000, $alpha: 1);
+    border-radius: 6px;
+
+    background-color: rgba($color: #eee, $alpha: 1);
+}
