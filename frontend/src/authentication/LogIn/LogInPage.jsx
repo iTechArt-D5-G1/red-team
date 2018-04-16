@@ -1,24 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './log-in-page.scss';
-import { registrationPage, forggotThePasswordPage } from '../../../shared/routePath';
+import '../LogIn/log-in-page.scss';
+import { registrationPage, forgetThePasswordPage } from '../../shared/routePath';
 
-const SignedUpPage = () => (
+const LogInPage = () => (
     <section className='log-in-page'>
         <p className='log-in-page__header'>Log in</p>
-        <form className='log-in-page__form form'>
-            <input className='form__field' type='text' name='Login' placeholder='Login' />
+        <form className='log-in-page__form form' >
+            <input className='form__fieldEmail' type='email' placeholder='Email' required />
             <br /><br />
-            <input className='form__field' type='password' name='Password' placeholder='Password' />
+            <input className='form__fieldPassword' type='password' placeholder='Password' required />
             <br /><br />
+            <input className='form__button' type='submit' value='Submit' />
         </form>
-        <ul>
-            <li><Link to={registrationPage} className='menu__link'>Sign Up</Link>qwe</li>
-            <li><Link to={forggotThePasswordPage} className='menu__link'>Sign Up</Link>qwe</li>
-        </ul>
-        <div className='form__logInBtn button'>
-            <button className='button__field'>Log in</button>
+        <div className='log-in-page__optionalBtns optionalBtn'>
+            <Link to={registrationPage} className='optionalBtn__SignUp'>Sign Up</Link><pre />
+            <Link to={forgetThePasswordPage} className='optionalBtn__forgetPass'>Forgot your password?</Link>
         </div>
     </section>
 );
-export default SignedUpPage;
+export default LogInPage;

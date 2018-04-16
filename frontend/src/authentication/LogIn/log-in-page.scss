@@ -1,16 +1,11 @@
-.log-in-page__header {
-    font-size: 20pt;
-    font-weight: 300;
-}
-
 .log-in-page {
     position: relative;
     top: 230px;
 
     display: block;
 
-    width: 20%;
-    height: 20%;
+    max-width: 20em;
+    min-height: 20em;
 
     margin: 0 auto;
 
@@ -18,4 +13,43 @@
     border-radius: 6px;
 
     background-color: rgba($color: #eee, $alpha: 1);
+}
+
+.log-in-page__header {
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+
+    font-size: 20pt;
+    font-weight: 300;
+}
+
+.form__field {
+    display: block;
+
+    min-width: 15em;
+
+    margin: 0 auto;
+
+    border: 1px solid rgba($color: rgb(180, 167, 167), $alpha: 1);
+
+    border-radius: 5px;
+
+    outline: none;
+}
+
+.form__button {
+    border: 0.1em solid rgba($color: rgb(180, 167, 167), $alpha: 1);
+
+    border-radius: 0.1em;
+}
+
+.log-in-page__optionalBtns {
+    position: relative;
+    top: 1em;
+
+    display: block;
+
+    margin-bottom: 3em;
+
+    font-size: 12px;
 }
