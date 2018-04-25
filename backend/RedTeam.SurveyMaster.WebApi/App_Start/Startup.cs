@@ -1,4 +1,5 @@
-﻿using Owin;
+﻿using System.Data.Entity;
+using Owin;
 using Autofac;
 using Microsoft.Owin;
 using System.Web.Http;
@@ -10,6 +11,7 @@ using RedTeam.SurveyMaster.Foundation;
 using RedTeam.SurveyMaster.Repositories;
 using RedTeam.SurveyMaster.WebApi.Controllers;
 using RedTeam.SurveyMaster.Foundation.Interfaces;
+using RedTeam.SurveyMaster.Repositories.DbInitializers;
 using RedTeam.SurveyMaster.Repositories.Interfaces;
 
 [assembly: OwinStartup(typeof(Startup))]
@@ -24,6 +26,8 @@ namespace RedTeam.SurveyMaster.WebApi
             app.Use<GlobalExceptionMiddleware>();
             RegisterRoutes(config);
             ConfigureAutofac(config);
+            Database.SetInitializer(new UserDbInitializer());
+            config.MessageHandlers.Add(new TokenValidationHandler());
             app.UseWebApi(config);
         }
 
@@ -32,9 +36,16 @@ namespace RedTeam.SurveyMaster.WebApi
             var builder = new ContainerBuilder();
             builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>)).InstancePerLifetimeScope();
             builder.RegisterType<ValueController>();
+            builder.RegisterType<AuthController>();
+
             builder.RegisterType<SurveyMasterUnitOfWork>().As<ISurveyMasterUnitOfWork>().InstancePerLifetimeScope();
             builder.RegisterType<SurveyService>().As<ISurveyService>().InstancePerLifetimeScope();
             builder.RegisterType<SurveyMasterDbContext>().AsSelf().InstancePerLifetimeScope();
+
+            builder.RegisterType<UserUnitOfWork>().As<IUserUnitOfWork>().InstancePerLifetimeScope();
+            builder.RegisterType<UserService>().As<IUserService>().InstancePerLifetimeScope();
+            builder.RegisterType<UserDbContext>().AsSelf().InstancePerLifetimeScope();
+
             var container = builder.Build();
             configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);
         }
