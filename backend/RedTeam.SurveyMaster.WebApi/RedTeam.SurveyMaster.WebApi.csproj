@@ -139,6 +139,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\Startup.cs" />
+    <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\ValueController.cs" />
     <Compile Include="GlobalExceptionMiddleware.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -158,6 +159,7 @@
       <Name>RedTeam.SurveyMaster.Repositories</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
