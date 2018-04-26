@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace RedTeam.SurveyMaster.Repositories.Models
 {
@@ -16,7 +11,7 @@ namespace RedTeam.SurveyMaster.Repositories.Models
         public string Username { get; set; }
 
         [Required(ErrorMessage = "You should set Password")]
-        [DataType(DataType.Password)]
+        [MinLength(6, ErrorMessage = "Min length of password is 6 symbols")]
         public string Password { get; set; }
 
         public int RoleId { get; set; }
