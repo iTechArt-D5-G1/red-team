@@ -48,9 +48,8 @@ namespace RedTeam.SurveyMaster.WebApi.Controllers
             }
             else
             {
-                HttpResponseMessage responseMessage = new HttpResponseMessage();
-                responseMessage.StatusCode = HttpStatusCode.Unauthorized;
-                responseMessage.Content = new HttpMessageContent(new HttpResponseMessage(HttpStatusCode.Unauthorized));
+                HttpResponseMessage responseMessage = Request.CreateResponse(HttpStatusCode.Unauthorized,
+                    "The email or password you entered is invalid");
                 return ResponseMessage(responseMessage);
             }
         }
