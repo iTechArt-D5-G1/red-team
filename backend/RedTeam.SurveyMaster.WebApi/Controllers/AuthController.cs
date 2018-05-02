@@ -8,7 +8,6 @@ using System.Web.Http;
 using RedTeam.SurveyMaster.Foundation.Interfaces;
 using RedTeam.SurveyMaster.Repositories.Models;
 
-
 namespace RedTeam.SurveyMaster.WebApi.Controllers
 {
     [AllowAnonymous]

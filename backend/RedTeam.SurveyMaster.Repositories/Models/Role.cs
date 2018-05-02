@@ -1,5 +1,4 @@
 ﻿
-
 namespace RedTeam.SurveyMaster.Repositories.Models
 {
     public class Role
