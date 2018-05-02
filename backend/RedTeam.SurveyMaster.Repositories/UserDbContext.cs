@@ -13,6 +13,7 @@ namespace RedTeam.SurveyMaster.Repositories
 
         public DbSet<Role> Roles { get; set; }
 
+
         public UserDbContext()
             : base(ConnectionStringName)
         {
