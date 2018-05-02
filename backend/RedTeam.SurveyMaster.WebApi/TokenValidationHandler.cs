@@ -13,17 +13,16 @@ namespace RedTeam.SurveyMaster.WebApi
 {
     internal sealed class TokenValidationHandler : DelegatingHandler
     {
-        private static bool TryRetrieveToken(HttpRequestMessage request, out string token)
+        public bool LifetimeValidator(DateTime? notBefore, DateTime? expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
         {
-            token = null;
-            IEnumerable<string> authHeaders;
-            if (!request.Headers.TryGetValues("Authorization", out authHeaders) || authHeaders.Count() > 1)
+            if (expires != null)
             {
-                return false;
+                if (DateTime.UtcNow < expires)
+                {
+                    return true;
+                }
             }
-            var bearerToken = authHeaders.ElementAt(0);
-            token = bearerToken.StartsWith("Bearer ") ? bearerToken.Substring(7) : bearerToken;
-            return true;
+            return false;
         }
 
 
@@ -74,17 +73,17 @@ namespace RedTeam.SurveyMaster.WebApi
         }
 
 
-        public bool LifetimeValidator(DateTime? notBefore, DateTime? expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+        private static bool TryRetrieveToken(HttpRequestMessage request, out string token)
         {
-            if (expires != null)
+            token = null;
+            IEnumerable<string> authHeaders;
+            if (!request.Headers.TryGetValues("Authorization", out authHeaders) || authHeaders.Count() > 1)
             {
-                if (DateTime.UtcNow < expires)
-                {
-                    return true;
-                }
+                return false;
             }
-            return false;
+            var bearerToken = authHeaders.ElementAt(0);
+            token = bearerToken.StartsWith("Bearer ") ? bearerToken.Substring(7) : bearerToken;
+            return true;
         }
-
     }
 }
