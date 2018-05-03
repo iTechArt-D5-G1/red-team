@@ -8,10 +8,10 @@ namespace RedTeam.SurveyMaster.Foundation
 {
     public class UserService : IUserService
     {
-        private readonly IUserUnitOfWork _unitOfWork;
+        private readonly ISurveyMasterUnitOfWork _unitOfWork;
 
 
-        public UserService(IUserUnitOfWork unitOfWork)
+        public UserService(ISurveyMasterUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }

@@ -11,6 +11,10 @@ namespace RedTeam.SurveyMaster.Repositories
 
         public DbSet<Survey> Surveys { get; set; }
 
+        public DbSet<User> Users { get; set; }
+
+        public DbSet<Role> Roles { get; set; }
+
 
         public SurveyMasterDbContext()
             : base(ConnectionStringName)

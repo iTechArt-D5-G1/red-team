@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace RedTeam.SurveyMaster.Repositories.Models
 {
@@ -17,5 +18,13 @@ namespace RedTeam.SurveyMaster.Repositories.Models
         public int RoleId { get; set; }
 
         public Role Role { get; set; }
+
+        public ICollection<Survey> Surveys { get; set; }
+
+
+        public User()
+        {
+            Surveys = new List<Survey>();
+        }
     }
 }
