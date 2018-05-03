@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net;
@@ -68,8 +69,8 @@ namespace RedTeam.SurveyMaster.WebApi.Controllers
                 claimsIdentity = CreateUserClaim(username);
             }
 
-            const string sec =
-                "401b09eab3c013d4ca54922bb802bec8fd5318192b0a75f201d8b3727429090fb337591abd3e44453b954555b7a0812e1081c39b740293f765eae731f5a65ed1";
+            var sec = new AppSettingsReader().GetValue("SecurityKey", typeof(string)) as string;
+
             var now = DateTime.UtcNow;
             var securityKey =
                 new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(System.Text.Encoding.Default.GetBytes(sec));
