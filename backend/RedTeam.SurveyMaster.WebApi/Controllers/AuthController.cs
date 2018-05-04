@@ -6,43 +6,44 @@ using System.Net;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Web.Http;
+using RedTeam.Common.Token.Interfases;
 using RedTeam.SurveyMaster.Foundation.Interfaces;
+using RedTeam.SurveyMaster.Repositories.DataTransferObjectModels;
 using RedTeam.SurveyMaster.Repositories.Models;
 
 namespace RedTeam.SurveyMaster.WebApi.Controllers
 {
     [AllowAnonymous]
-    [RoutePrefix("api/auth")]
     public class AuthController : ApiController
     {
-        private readonly IUserService _service;
-        private enum UserRoles { Admin = 1, User };
+        private readonly IUserService _userService;
+
+        private readonly IRoleService _roleService;
+
+        private readonly ITokenFactory _tokenFactory;
 
 
-        public AuthController(IUserService service)
+        public AuthController(IUserService userService, IRoleService roleService, ITokenFactory tokenFactory)
         {
-            _service = service;
+            _userService = userService;
+            _roleService = roleService;
+            _tokenFactory = tokenFactory;
         }
 
-        [Route("token")]
         [HttpPost]
-        public IHttpActionResult Authenticate([FromBody] User userInfo)
+        public IHttpActionResult Authenticate([FromBody] UserDto userInfo)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            User user = null;
-
-            if (userInfo != null)
-                user = _service.GetAllUsers()
-                    .FirstOrDefault(u => u.Password == userInfo.Password && u.Username == userInfo.Username);
+            User user = FindUserInDb(userInfo);
 
             if (user != null)
             {
-                bool isUserAdmin = (user.RoleId == (int)UserRoles.Admin);
-                string token = CreateToken(userInfo.Username, isUserAdmin);
+                var userRole = _roleService.GetAllRoles().FirstOrDefault(r => r.Id == user.RoleId);
+                string token = CreateToken(userInfo.Username, userRole);
                 return Ok<string>(token);
             }
             else
@@ -53,59 +54,22 @@ namespace RedTeam.SurveyMaster.WebApi.Controllers
             }
         }
 
-        private string CreateToken(string username, bool isUserAdmin)
+        private User FindUserInDb(UserDto userInfo)
         {
-            DateTime issuedAt = DateTime.UtcNow;
-            DateTime expires = DateTime.UtcNow.AddDays(7);
-            var tokenHandler = new JwtSecurityTokenHandler();
-            ClaimsIdentity claimsIdentity = null;
-
-            if (isUserAdmin)
+            if (userInfo != null)
             {
-                claimsIdentity = CreateAdminClaim(username);
-            }
-            else
-            {
-                claimsIdentity = CreateUserClaim(username);
+                return _userService.GetAllUsers()
+                    .FirstOrDefault(u => u.Password == userInfo.Password && u.Username == userInfo.Username);
             }
 
-            var sec = new AppSettingsReader().GetValue("SecurityKey", typeof(string)) as string;
-
-            var now = DateTime.UtcNow;
-            var securityKey =
-                new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(System.Text.Encoding.Default.GetBytes(sec));
-            var signingCredentials = new Microsoft.IdentityModel.Tokens.SigningCredentials(securityKey,
-                Microsoft.IdentityModel.Tokens.SecurityAlgorithms.HmacSha256Signature);
-
-
-            //create the jwt
-            var token =
-                (JwtSecurityToken)
-                tokenHandler.CreateJwtSecurityToken(issuer: "http://localhost:12345",
-                    audience: "http://localhost:12345",
-                    subject: claimsIdentity, notBefore: issuedAt, expires: expires,
-                    signingCredentials: signingCredentials);
-            var tokenString = tokenHandler.WriteToken(token);
-
-            return tokenString;
+            return null;
         }
 
-        private ClaimsIdentity CreateUserClaim(string username)
+        private string CreateToken(string userName, Role userRole)
         {
-            return new ClaimsIdentity(new[]
-            {
-                new Claim(ClaimTypes.Name, username),
-                new Claim(ClaimTypes.Role, "user"),
-            });
-        }
-
-        private ClaimsIdentity CreateAdminClaim(string username)
-        {
-            return new ClaimsIdentity(new[]
-            {
-                new Claim(ClaimTypes.Name, username),
-                new Claim(ClaimTypes.Role, "admin"),
-            });
+            var tokenCreator = _tokenFactory.CreateTokenCreator();
+            var token = tokenCreator.CreateSecurityToken(userName, userRole);
+            return tokenCreator.SerializeToken(token);;
         }
     }
 }
