@@ -1,16 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Security.Principal;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Http.Filters;
-using Microsoft.IdentityModel.Tokens;
 using RedTeam.Common.Token.Interfases;
 
 namespace RedTeam.SurveyMaster.WebApi.Authentication_Filters

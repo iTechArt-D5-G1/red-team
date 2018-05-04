@@ -2,10 +2,7 @@ using RedTeam.SurveyMaster.Repositories.Models;
 
 namespace RedTeam.SurveyMaster.Repositories.Migrations
 {
-    using System;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
-    using System.Linq;
 
     internal sealed class Configuration : DbMigrationsConfiguration<RedTeam.SurveyMaster.Repositories.SurveyMasterDbContext>
     {

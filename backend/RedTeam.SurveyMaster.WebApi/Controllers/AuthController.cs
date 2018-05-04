@@ -1,10 +1,6 @@
-﻿using System;
-using System.Configuration;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
+﻿using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Security.Claims;
 using System.Web.Http;
 using RedTeam.Common.Token.Interfases;
 using RedTeam.SurveyMaster.Foundation.Interfaces;
