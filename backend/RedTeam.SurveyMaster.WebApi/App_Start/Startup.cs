@@ -1,10 +1,13 @@
-﻿using System.Data.Entity;
-using Owin;
+﻿using Owin;
 using Autofac;
 using Microsoft.Owin;
 using System.Web.Http;
 using RedTeam.Repositories;
 using Autofac.Integration.WebApi;
+using RedTeam.Common.Token.Concrete_Factories;
+using RedTeam.Common.Token.Concrete_Token_Creators;
+using RedTeam.Common.Token.Concrete_Validators;
+using RedTeam.Common.Token.Interfases;
 using RedTeam.SurveyMaster.WebApi;
 using RedTeam.Repositories.Interfaces;
 using RedTeam.SurveyMaster.Foundation;
@@ -12,6 +15,7 @@ using RedTeam.SurveyMaster.Repositories;
 using RedTeam.SurveyMaster.WebApi.Controllers;
 using RedTeam.SurveyMaster.Foundation.Interfaces;
 using RedTeam.SurveyMaster.Repositories.Interfaces;
+using RedTeam.SurveyMaster.WebApi.Authentication_Filters;
 
 [assembly: OwinStartup(typeof(Startup))]
 
@@ -25,7 +29,7 @@ namespace RedTeam.SurveyMaster.WebApi
             app.Use<GlobalExceptionMiddleware>();
             RegisterRoutes(config);
             ConfigureAutofac(config);
-            config.MessageHandlers.Add(new TokenValidationHandler());
+            config.Filters.Add(new AuthenticationTokenFilter(new JwtTokenFactory()));
             app.UseWebApi(config);
         }
 
@@ -41,6 +45,11 @@ namespace RedTeam.SurveyMaster.WebApi
             builder.RegisterType<SurveyMasterDbContext>().AsSelf().InstancePerLifetimeScope();
             
             builder.RegisterType<UserService>().As<IUserService>().InstancePerLifetimeScope();
+            builder.RegisterType<RoleService>().As<IRoleService>().InstancePerLifetimeScope();
+
+            builder.RegisterType<JwtTokenFactory>().As<ITokenFactory>();
+            builder.RegisterType<JwtTokenValidator>().As<ITokenValidator>();
+            builder.RegisterType<JwtTokenCreator>().As<ITokenCreator>();
 
             var container = builder.Build();
             configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);
