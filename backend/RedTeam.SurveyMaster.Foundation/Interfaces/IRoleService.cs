@@ -1,10 +1,11 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using RedTeam.SurveyMaster.Repositories.Models;
 
 namespace RedTeam.SurveyMaster.Foundation.Interfaces
 {
     public interface IRoleService
     {
-        IQueryable<Role> GetAllRoles();
+        Task<Role> GetByIdAsync(int id);
     }
 }

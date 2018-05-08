@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using RedTeam.SurveyMaster.Foundation.Interfaces;
 using RedTeam.SurveyMaster.Repositories.Interfaces;
 using RedTeam.SurveyMaster.Repositories.Models;
@@ -16,10 +17,11 @@ namespace RedTeam.SurveyMaster.Foundation
         }
 
 
-        public IQueryable<Role> GetAllRoles()
+        public async Task<Role> GetByIdAsync(int id)
         {
             var roleRepository = _unitOfWork.GetRepository<Role>();
-            return roleRepository.GetQuery();
+            var roleSelectedById = await roleRepository.GetByIdAsync(id);
+            return roleSelectedById;
         }
     }
 }
