@@ -1,11 +1,11 @@
-﻿using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Net;
+using System.Threading.Tasks;
 using System.Web.Http;
 using RedTeam.Common.Token.Interfases;
 using RedTeam.SurveyMaster.Foundation.Interfaces;
 using RedTeam.SurveyMaster.Repositories.DataTransferObjectModels;
 using RedTeam.SurveyMaster.Repositories.Models;
+using RedTeam.SurveyMaster.WebApi.Errors;
 
 namespace RedTeam.SurveyMaster.WebApi.Controllers
 {
@@ -27,38 +27,26 @@ namespace RedTeam.SurveyMaster.WebApi.Controllers
         }
 
         [HttpPost]
-        public IHttpActionResult Authenticate([FromBody] UserDto userInfo)
+        public async Task<IHttpActionResult> Authenticate([FromBody] UserDto userInfo)
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                ApiError error = new ApiError("username_password_mismatch", "User model validation error", ModelState);
+                return new ApiErrorResult(HttpStatusCode.BadRequest, error);
             }
 
-            User user = FindUserInDb(userInfo);
-
-            if (user != null)
+            if (await _userService.IsUserExistsAsync(userInfo.Password, userInfo.Username))
             {
-                var userRole = _roleService.GetAllRoles().FirstOrDefault(r => r.Id == user.RoleId);
+                var user = await _userService.GetUserAsync(userInfo.Password, userInfo.Username);
+                var userRole = await _roleService.GetByIdAsync(user.RoleId);
                 string token = CreateToken(userInfo.Username, userRole);
                 return Ok<string>(token);
             }
             else
             {
-                HttpResponseMessage responseMessage = Request.CreateResponse(HttpStatusCode.Unauthorized,
-                    "The email or password you entered is invalid");
-                return ResponseMessage(responseMessage);
+                ApiError error = new ApiError("user_not_found", "User with setted params not found");
+                return new ApiErrorResult(HttpStatusCode.NotFound, error);
             }
-        }
-
-        private User FindUserInDb(UserDto userInfo)
-        {
-            if (userInfo != null)
-            {
-                return _userService.GetAllUsers()
-                    .FirstOrDefault(u => u.Password == userInfo.Password && u.Username == userInfo.Username);
-            }
-
-            return null;
         }
 
         private string CreateToken(string userName, Role userRole)
