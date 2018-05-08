@@ -144,6 +144,8 @@
     <Compile Include="Authentication_Filters\AuthenticationTokenFilter.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\ValueController.cs" />
+    <Compile Include="Errors\ApiError.cs" />
+    <Compile Include="Errors\ApiErrorResult.cs" />
     <Compile Include="GlobalExceptionMiddleware.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
