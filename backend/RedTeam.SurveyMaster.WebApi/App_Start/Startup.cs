@@ -7,7 +7,7 @@ using Autofac.Integration.WebApi;
 using RedTeam.Common.Token.Concrete_Factories;
 using RedTeam.Common.Token.Concrete_Token_Creators;
 using RedTeam.Common.Token.Concrete_Validators;
-using RedTeam.Common.Token.Interfases;
+using RedTeam.Common.Token.Interfaces;
 using RedTeam.SurveyMaster.WebApi;
 using RedTeam.Repositories.Interfaces;
 using RedTeam.SurveyMaster.Foundation;

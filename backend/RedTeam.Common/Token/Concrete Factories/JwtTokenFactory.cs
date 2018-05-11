@@ -1,6 +1,6 @@
 ﻿using RedTeam.Common.Token.Concrete_Token_Creators;
 using RedTeam.Common.Token.Concrete_Validators;
-using RedTeam.Common.Token.Interfases;
+using RedTeam.Common.Token.Interfaces;
 
 namespace RedTeam.Common.Token.Concrete_Factories
 {

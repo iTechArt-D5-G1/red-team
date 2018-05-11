@@ -57,9 +57,9 @@
     <Compile Include="Token\Concrete Factories\JwtTokenFactory.cs" />
     <Compile Include="Token\Concrete Token Creators\JwtTokenCreator.cs" />
     <Compile Include="Token\Concrete Validators\JwtTokenValidator.cs" />
-    <Compile Include="Token\Interfases\ITokenCreator.cs" />
-    <Compile Include="Token\Interfases\ITokenFactory.cs" />
-    <Compile Include="Token\Interfases\ITokenValidator.cs" />
+    <Compile Include="Token\Interfaсes\ITokenCreator.cs" />
+    <Compile Include="Token\Interfaсes\ITokenFactory.cs" />
+    <Compile Include="Token\Interfaсes\ITokenValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
-using RedTeam.Common.Token.Interfases;
+using RedTeam.Common.Token.Interfaces;
 using RedTeam.SurveyMaster.Foundation.Interfaces;
 using RedTeam.SurveyMaster.Repositories.DataTransferObjectModels;
 using RedTeam.SurveyMaster.Repositories.Models;

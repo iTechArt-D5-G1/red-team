@@ -3,7 +3,7 @@ using System.Configuration;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
-using RedTeam.Common.Token.Interfases;
+using RedTeam.Common.Token.Interfaces;
 using RedTeam.SurveyMaster.Repositories.Models;
 
 namespace RedTeam.Common.Token.Concrete_Token_Creators

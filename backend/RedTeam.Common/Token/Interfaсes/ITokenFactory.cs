@@ -1,5 +1,5 @@
 ﻿
-namespace RedTeam.Common.Token.Interfases
+namespace RedTeam.Common.Token.Interfaces
 {
     public interface ITokenFactory
     {

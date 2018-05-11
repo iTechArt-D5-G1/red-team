@@ -4,7 +4,7 @@ using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http.Filters;
-using RedTeam.Common.Token.Interfases;
+using RedTeam.Common.Token.Interfaces;
 
 namespace RedTeam.SurveyMaster.WebApi.Authentication_Filters
 {

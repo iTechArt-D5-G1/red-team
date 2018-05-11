@@ -1,7 +1,7 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using RedTeam.SurveyMaster.Repositories.Models;
 
-namespace RedTeam.Common.Token.Interfases
+namespace RedTeam.Common.Token.Interfaces
 {
     public interface ITokenCreator
     {
