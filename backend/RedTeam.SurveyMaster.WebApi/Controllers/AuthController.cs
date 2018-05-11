@@ -6,9 +6,6 @@ using RedTeam.SurveyMaster.Foundation.Interfaces;
 using RedTeam.SurveyMaster.Repositories.DataTransferObjectModels;
 using RedTeam.SurveyMaster.Repositories.Models;
 using RedTeam.SurveyMaster.WebApi.Errors;
-using System.Linq;
-using System;
-using System.Web.Http.ModelBinding;
 
 namespace RedTeam.SurveyMaster.WebApi.Controllers
 {
