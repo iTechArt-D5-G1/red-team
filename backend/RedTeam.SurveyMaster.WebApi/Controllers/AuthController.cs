@@ -6,6 +6,9 @@ using RedTeam.SurveyMaster.Foundation.Interfaces;
 using RedTeam.SurveyMaster.Repositories.DataTransferObjectModels;
 using RedTeam.SurveyMaster.Repositories.Models;
 using RedTeam.SurveyMaster.WebApi.Errors;
+using System.Linq;
+using System;
+using System.Web.Http.ModelBinding;
 
 namespace RedTeam.SurveyMaster.WebApi.Controllers
 {
@@ -26,12 +29,13 @@ namespace RedTeam.SurveyMaster.WebApi.Controllers
             _tokenFactory = tokenFactory;
         }
 
+
         [HttpPost]
         public async Task<IHttpActionResult> Authenticate([FromBody] UserDto userInfo)
         {
             if (!ModelState.IsValid)
             {
-                ApiError error = new ApiError("username_password_mismatch", "User model validation error", ModelState);
+                ApiError error = new ApiError("invalid_credentials", "Invalid user credentials", ModelState);
                 return new ApiErrorResult(HttpStatusCode.BadRequest, error);
             }
 
@@ -48,6 +52,7 @@ namespace RedTeam.SurveyMaster.WebApi.Controllers
                 return new ApiErrorResult(HttpStatusCode.NotFound, error);
             }
         }
+
 
         private string CreateToken(string userName, Role userRole)
         {
