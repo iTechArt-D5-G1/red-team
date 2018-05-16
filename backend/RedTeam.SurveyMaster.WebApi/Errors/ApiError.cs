@@ -9,10 +9,10 @@ namespace RedTeam.SurveyMaster.WebApi.Errors
 
         public string Message;
 
-        public ICollection<KeyValuePair<string, ModelState>> Description;
+        public ICollection<string> Description;
 
 
-        public ApiError(string code, string message = "", ICollection<KeyValuePair<string, ModelState>> descriprion = null)
+        public ApiError(string code, string message = "", ICollection<string> descriprion = null)
         {
             Code = code;
             Message = message;
