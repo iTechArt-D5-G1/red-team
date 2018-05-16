@@ -139,7 +139,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\Startup.cs" />
-    <Compile Include="AuthenticationFilters\AddChallengeOnUnauthorizedResult.cs" />
     <Compile Include="AuthenticationFilters\AuthenticationFailureResult.cs" />
     <Compile Include="AuthenticationFilters\AuthenticationTokenFilter.cs" />
     <Compile Include="Controllers\AuthController.cs" />
