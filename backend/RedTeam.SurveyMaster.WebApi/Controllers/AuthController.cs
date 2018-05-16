@@ -1,10 +1,13 @@
-﻿using System.Net;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
-using RedTeam.Common.Token.Interfaces;
+using System.Web.Http.ModelBinding;
+using RedTeam.Common.Interfaсes;
 using RedTeam.SurveyMaster.Foundation.Interfaces;
-using RedTeam.SurveyMaster.Repositories.DataTransferObjectModels;
 using RedTeam.SurveyMaster.Repositories.Models;
+using RedTeam.SurveyMaster.WebApi.DataTransferObjectModels;
 using RedTeam.SurveyMaster.WebApi.Errors;
 
 namespace RedTeam.SurveyMaster.WebApi.Controllers
@@ -16,14 +19,14 @@ namespace RedTeam.SurveyMaster.WebApi.Controllers
 
         private readonly IRoleService _roleService;
 
-        private readonly ITokenFactory _tokenFactory;
+        private readonly ITokenService _tokenService;
 
 
-        public AuthController(IUserService userService, IRoleService roleService, ITokenFactory tokenFactory)
+        public AuthController(IUserService userService, IRoleService roleService, ITokenService tokenService)
         {
             _userService = userService;
             _roleService = roleService;
-            _tokenFactory = tokenFactory;
+            _tokenService = tokenService;
         }
 
 
@@ -32,7 +35,8 @@ namespace RedTeam.SurveyMaster.WebApi.Controllers
         {
             if (!ModelState.IsValid)
             {
-                ApiError error = new ApiError("invalid_credentials", "Invalid user credentials", ModelState);
+                ApiError error = new ApiError("invalid_credentials", "Invalid user credentials",
+                    FetchErrorsFromModelState(ModelState));
                 return new ApiErrorResult(HttpStatusCode.BadRequest, error);
             }
 
@@ -53,9 +57,25 @@ namespace RedTeam.SurveyMaster.WebApi.Controllers
 
         private string CreateToken(string userName, Role userRole)
         {
-            var tokenCreator = _tokenFactory.CreateTokenCreator();
-            var token = tokenCreator.CreateSecurityToken(userName, userRole);
-            return tokenCreator.SerializeToken(token);;
+            var token = _tokenService.CreateSecurityToken(userName, userRole);
+            return _tokenService.SerializeToken(token);
+            ;
+        }
+
+        private static List<string> FetchErrorsFromModelState(ModelStateDictionary modelStateDictionary)
+        {
+            List<string> errorDescriptionList =
+                new List<string>();
+
+            foreach (var modelState in modelStateDictionary)
+            {
+                foreach (var error in modelState.Value.Errors)
+                {
+                    errorDescriptionList.Add(error.ErrorMessage);
+                }
+            }
+
+            return errorDescriptionList;
         }
     }
 }

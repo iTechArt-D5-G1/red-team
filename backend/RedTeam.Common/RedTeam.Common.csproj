@@ -53,13 +53,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaсes\ITokenService.cs" />
+    <Compile Include="JwtTokenService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Token\Concrete Factories\JwtTokenFactory.cs" />
-    <Compile Include="Token\Concrete Token Creators\JwtTokenCreator.cs" />
-    <Compile Include="Token\Concrete Validators\JwtTokenValidator.cs" />
-    <Compile Include="Token\Interfaсes\ITokenCreator.cs" />
-    <Compile Include="Token\Interfaсes\ITokenFactory.cs" />
-    <Compile Include="Token\Interfaсes\ITokenValidator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

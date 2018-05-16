@@ -1,13 +1,12 @@
-﻿using Owin;
+﻿using System.Configuration;
+using Owin;
 using Autofac;
 using Microsoft.Owin;
 using System.Web.Http;
 using RedTeam.Repositories;
 using Autofac.Integration.WebApi;
-using RedTeam.Common.Token.Concrete_Factories;
-using RedTeam.Common.Token.Concrete_Token_Creators;
-using RedTeam.Common.Token.Concrete_Validators;
-using RedTeam.Common.Token.Interfaces;
+using RedTeam.Common;
+using RedTeam.Common.Interfaсes;
 using RedTeam.SurveyMaster.WebApi;
 using RedTeam.Repositories.Interfaces;
 using RedTeam.SurveyMaster.Foundation;
@@ -15,7 +14,7 @@ using RedTeam.SurveyMaster.Repositories;
 using RedTeam.SurveyMaster.WebApi.Controllers;
 using RedTeam.SurveyMaster.Foundation.Interfaces;
 using RedTeam.SurveyMaster.Repositories.Interfaces;
-using RedTeam.SurveyMaster.WebApi.Authentication_Filters;
+using RedTeam.SurveyMaster.WebApi.AuthenticationFilters;
 
 [assembly: OwinStartup(typeof(Startup))]
 
@@ -23,15 +22,36 @@ namespace RedTeam.SurveyMaster.WebApi
 {
     public sealed class Startup
     {
+
+        private readonly string _securityKey;
+
+        private readonly int _exparationTime;
+
+        private readonly string _issuerUrl;
+
+        private readonly string _audienceUrl;
+
+
+        public Startup()
+        {
+            var applicationSettingsReader = new AppSettingsReader();
+
+            _securityKey = applicationSettingsReader.GetValue("SecurityKey", typeof(string)) as string;
+            _exparationTime = (int)applicationSettingsReader.GetValue("ExpirationTokenTime", typeof(int));
+            _issuerUrl = _audienceUrl = "http://localhost:12345";
+        }
+
+
         public void Configuration(IAppBuilder app)
         {
             var config = new HttpConfiguration();
             app.Use<GlobalExceptionMiddleware>();
             RegisterRoutes(config);
             ConfigureAutofac(config);
-            config.Filters.Add(new AuthenticationTokenFilter(new JwtTokenFactory()));
+            config.Filters.Add(new AuthenticationTokenFilter(new JwtTokenService(_securityKey, _exparationTime, _issuerUrl, _audienceUrl)));
             app.UseWebApi(config);
         }
+
 
         private void ConfigureAutofac(HttpConfiguration configuration)
         {
@@ -47,9 +67,11 @@ namespace RedTeam.SurveyMaster.WebApi
             builder.RegisterType<UserService>().As<IUserService>().InstancePerLifetimeScope();
             builder.RegisterType<RoleService>().As<IRoleService>().InstancePerLifetimeScope();
 
-            builder.RegisterType<JwtTokenFactory>().As<ITokenFactory>();
-            builder.RegisterType<JwtTokenValidator>().As<ITokenValidator>();
-            builder.RegisterType<JwtTokenCreator>().As<ITokenCreator>();
+            builder.RegisterType<JwtTokenService>().As<ITokenService>()
+                .WithParameter("securityKey", _securityKey)
+                .WithParameter("exparationTime", _exparationTime)
+                .WithParameter("issuerUrl", _issuerUrl)
+                .WithParameter("audienceUrl", _audienceUrl);
 
             var container = builder.Build();
             configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);
