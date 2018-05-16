@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
 
-namespace RedTeam.SurveyMaster.WebApi.Authentication_Filters
+namespace RedTeam.SurveyMaster.WebApi.AuthenticationFilters
 {
     public class AuthenticationFailureResult : IHttpActionResult
     {

@@ -4,45 +4,39 @@ using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http.Filters;
-using RedTeam.Common.Token.Interfaces;
+using RedTeam.Common.Interfaсes;
 
-namespace RedTeam.SurveyMaster.WebApi.Authentication_Filters
+namespace RedTeam.SurveyMaster.WebApi.AuthenticationFilters
 {
     public class AuthenticationTokenFilter : Attribute, IAuthenticationFilter
     {
         public bool AllowMultiple { get; }
 
 
-        private readonly ITokenFactory _tokenFactory;
+        private readonly ITokenService _tokenService;
 
 
-        public AuthenticationTokenFilter(ITokenFactory tokenFactory)
+        public AuthenticationTokenFilter(ITokenService tokenService)
         {
-            _tokenFactory = tokenFactory;
+            _tokenService = tokenService;
         }
 
 
         public async Task AuthenticateAsync(HttpAuthenticationContext context, CancellationToken cancellationToken)
         {
-            // 1. Look for credentials in the request.
             HttpRequestMessage request = context.Request;
             AuthenticationHeaderValue authorization = request.Headers.Authorization;
 
-            // 2. If there are no credentials, do nothing.
             if (authorization == null)
             {
                 return;
             }
 
-            // 3. If there are credentials but the filter does not recognize the 
-            //    authentication scheme, do nothing.
             if (authorization.Scheme != "Bearer")
             {
                 return;
             }
 
-            // 4. If there are credentials that the filter understands, try to validate them.
-            // 5. If the credentials are bad, set the error result.
             if (String.IsNullOrEmpty(authorization.Parameter))
             {
                 context.ErrorResult = new AuthenticationFailureResult("Missing credentials", request);
@@ -50,15 +44,7 @@ namespace RedTeam.SurveyMaster.WebApi.Authentication_Filters
             }
 
             var token = authorization.Parameter;
-            
-            if (token == null)
-            {
-                context.ErrorResult = new AuthenticationFailureResult("Invalid credentials", request);
-            }
-
-            
-            // extract and assign the user of the jwt
-            var tokenPrincipal = _tokenFactory.CreateTokenValidator().ValidateToken(token);
+            var tokenPrincipal = _tokenService.ValidateToken(token);
 
             
             if (tokenPrincipal == null)
@@ -66,7 +52,6 @@ namespace RedTeam.SurveyMaster.WebApi.Authentication_Filters
                 context.ErrorResult = new AuthenticationFailureResult("Invalid username or password", request);
             }
 
-            //// 6. If the credentials are valid, set principal.
             else
             {
                 context.Principal = tokenPrincipal;
