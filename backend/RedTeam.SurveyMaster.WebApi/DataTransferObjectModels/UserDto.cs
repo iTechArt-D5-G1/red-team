@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace RedTeam.SurveyMaster.Repositories.DataTransferObjectModels
+namespace RedTeam.SurveyMaster.WebApi.DataTransferObjectModels
 {
     public class UserDto
     {

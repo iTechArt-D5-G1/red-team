@@ -139,11 +139,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\Startup.cs" />
-    <Compile Include="Authentication_Filters\AddChallengeOnUnauthorizedResult.cs" />
-    <Compile Include="Authentication_Filters\AuthenticationFailureResult.cs" />
-    <Compile Include="Authentication_Filters\AuthenticationTokenFilter.cs" />
+    <Compile Include="AuthenticationFilters\AddChallengeOnUnauthorizedResult.cs" />
+    <Compile Include="AuthenticationFilters\AuthenticationFailureResult.cs" />
+    <Compile Include="AuthenticationFilters\AuthenticationTokenFilter.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\ValueController.cs" />
+    <Compile Include="DataTransferObjectModels\UserDto.cs" />
     <Compile Include="Errors\ApiError.cs" />
     <Compile Include="Errors\ApiErrorResult.cs" />
     <Compile Include="GlobalExceptionMiddleware.cs" />

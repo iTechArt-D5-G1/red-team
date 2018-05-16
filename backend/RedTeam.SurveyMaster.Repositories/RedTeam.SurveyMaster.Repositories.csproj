@@ -51,7 +51,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataTransferObjectModels\UserDto.cs" />
     <Compile Include="Interfaces\ISurveyMasterUnitOfWork.cs" />
     <Compile Include="Migrations\201805031334535_Initial.cs" />
     <Compile Include="Migrations\201805031334535_Initial.Designer.cs">
