@@ -60,7 +60,6 @@ namespace RedTeam.SurveyMaster.WebApi.AuthenticationFilters
 
         public async Task ChallengeAsync(HttpAuthenticationChallengeContext context, CancellationToken cancellationToken)
         {
-            return;
         }
     }
 }

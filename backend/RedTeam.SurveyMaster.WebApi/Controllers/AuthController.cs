@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -45,7 +44,7 @@ namespace RedTeam.SurveyMaster.WebApi.Controllers
                 var user = await _userService.GetUserAsync(userInfo.Password, userInfo.Username);
                 var userRole = await _roleService.GetByIdAsync(user.RoleId);
                 string token = CreateToken(userInfo.Username, userRole);
-                return Ok<string>(token);
+                return Ok(token);
             }
             else
             {
@@ -59,7 +58,6 @@ namespace RedTeam.SurveyMaster.WebApi.Controllers
         {
             var token = _tokenService.CreateSecurityToken(userName, userRole);
             return _tokenService.SerializeToken(token);
-            ;
         }
 
         private static List<string> FetchErrorsFromModelState(ModelStateDictionary modelStateDictionary)

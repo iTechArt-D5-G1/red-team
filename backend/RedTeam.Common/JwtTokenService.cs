@@ -59,15 +59,14 @@ namespace RedTeam.Common
                 });
 
             var now = DateTime.UtcNow;
-            var signingCredentials = new Microsoft.IdentityModel.Tokens.SigningCredentials(_symmerticSecurityKey,
-                Microsoft.IdentityModel.Tokens.SecurityAlgorithms.HmacSha256Signature);
+            var signingCredentials = new SigningCredentials(_symmerticSecurityKey,
+                SecurityAlgorithms.HmacSha256Signature);
 
-            return (JwtSecurityToken)
-                _jwtSecurityTokenHandler.CreateJwtSecurityToken(
-                    issuer: _issuerUrl,
-                    audience: _audienceUrl,
-                    subject: claimsIdentity, notBefore: issuedAt, expires: expires,
-                    signingCredentials: signingCredentials);
+            return _jwtSecurityTokenHandler.CreateJwtSecurityToken(
+                issuer: _issuerUrl,
+                audience: _audienceUrl,
+                subject: claimsIdentity, notBefore: issuedAt, expires: expires,
+                signingCredentials: signingCredentials);
         }
 
         public string SerializeToken(SecurityToken token)
