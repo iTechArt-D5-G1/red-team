@@ -5,6 +5,9 @@ using Microsoft.Owin;
 using System.Web.Http;
 using RedTeam.Repositories;
 using Autofac.Integration.WebApi;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
 using RedTeam.Common;
 using RedTeam.Common.Interfaсes;
 using RedTeam.SurveyMaster.WebApi;
@@ -14,6 +17,7 @@ using RedTeam.SurveyMaster.Repositories;
 using RedTeam.SurveyMaster.WebApi.Controllers;
 using RedTeam.SurveyMaster.Foundation.Interfaces;
 using RedTeam.SurveyMaster.Repositories.Interfaces;
+using RedTeam.SurveyMaster.Repositories.Models;
 using RedTeam.SurveyMaster.WebApi.AuthenticationFilters;
 
 [assembly: OwinStartup(typeof(Startup))]
@@ -49,6 +53,15 @@ namespace RedTeam.SurveyMaster.WebApi
             RegisterRoutes(config);
             ConfigureAutofac(config);
             config.Filters.Add(new AuthenticationTokenFilter(new JwtTokenService(_securityKey, _exparationTime, _issuerUrl, _audienceUrl)));
+
+
+            app.CreatePerOwinContext(() => new SurveyMasterDbContext());
+            app.CreatePerOwinContext<UserManager>(UserManager.Create);
+            app.CreatePerOwinContext<RoleManager<Role>>((options, context) =>
+                new RoleManager<Role>(
+                    new RoleStore<Role>(context.Get<SurveyMasterDbContext>())));
+
+
             app.UseWebApi(config);
         }
 
@@ -63,9 +76,6 @@ namespace RedTeam.SurveyMaster.WebApi
             builder.RegisterType<SurveyMasterUnitOfWork>().As<ISurveyMasterUnitOfWork>().InstancePerLifetimeScope();
             builder.RegisterType<SurveyService>().As<ISurveyService>().InstancePerLifetimeScope();
             builder.RegisterType<SurveyMasterDbContext>().AsSelf().InstancePerLifetimeScope();
-            
-            builder.RegisterType<UserService>().As<IUserService>().InstancePerLifetimeScope();
-            builder.RegisterType<RoleService>().As<IRoleService>().InstancePerLifetimeScope();
 
             builder.RegisterType<JwtTokenService>().As<ITokenService>()
                 .WithParameter("securityKey", _securityKey)
