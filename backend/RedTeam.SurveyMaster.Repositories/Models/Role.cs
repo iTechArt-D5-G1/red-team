@@ -1,18 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace RedTeam.SurveyMaster.Repositories.Models
 {
-    public class Role
+    public class Role : IdentityRole
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-
-        public ICollection<User> Users { get; set; }
-
-
         public Role()
+        {}
+
+        public Role(string roleName) : base(roleName)
         {
-            Users = new List<User>();
         }
     }
 }
