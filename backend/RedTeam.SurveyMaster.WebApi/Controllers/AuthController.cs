@@ -1,10 +1,15 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.ModelBinding;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using RedTeam.Common.Interfaсes;
 using RedTeam.SurveyMaster.Foundation.Interfaces;
+using RedTeam.SurveyMaster.Repositories;
 using RedTeam.SurveyMaster.Repositories.Models;
 using RedTeam.SurveyMaster.WebApi.DataTransferObjectModels;
 using RedTeam.SurveyMaster.WebApi.Errors;
@@ -14,17 +19,12 @@ namespace RedTeam.SurveyMaster.WebApi.Controllers
     [AllowAnonymous]
     public class AuthController : ApiController
     {
-        private readonly IUserService _userService;
-
-        private readonly IRoleService _roleService;
 
         private readonly ITokenService _tokenService;
 
 
-        public AuthController(IUserService userService, IRoleService roleService, ITokenService tokenService)
+        public AuthController(ITokenService tokenService)
         {
-            _userService = userService;
-            _roleService = roleService;
             _tokenService = tokenService;
         }
 
@@ -32,6 +32,8 @@ namespace RedTeam.SurveyMaster.WebApi.Controllers
         [HttpPost]
         public async Task<IHttpActionResult> Authenticate([FromBody] UserDto userInfo)
         {
+            var userManager = HttpContext.Current.GetOwinContext().GetUserManager<UserManager>();
+
             if (!ModelState.IsValid)
             {
                 ApiError error = new ApiError("invalid_credentials", "Invalid user credentials",
@@ -39,10 +41,10 @@ namespace RedTeam.SurveyMaster.WebApi.Controllers
                 return new ApiErrorResult(HttpStatusCode.BadRequest, error);
             }
 
-            if (await _userService.IsUserExistsAsync(userInfo.Password, userInfo.Username))
+            if (await userManager.FindByEmailAsync(userInfo.Username) != null)
             {
-                var user = await _userService.GetUserAsync(userInfo.Password, userInfo.Username);
-                var userRole = await _roleService.GetByIdAsync(user.RoleId);
+                var userFromUserManager = await userManager.FindByEmailAsync(userInfo.Username);
+                var userRole = userManager.GetRoles(userFromUserManager.Id).FirstOrDefault();
                 string token = CreateToken(userInfo.Username, userRole);
                 return Ok(token);
             }
@@ -54,9 +56,9 @@ namespace RedTeam.SurveyMaster.WebApi.Controllers
         }
 
 
-        private string CreateToken(string userName, Role userRole)
+        private string CreateToken(string userName, string userRoleName)
         {
-            var token = _tokenService.CreateSecurityToken(userName, userRole);
+            var token = _tokenService.CreateSecurityToken(userName, userRoleName);
             return _tokenService.SerializeToken(token);
         }
 
