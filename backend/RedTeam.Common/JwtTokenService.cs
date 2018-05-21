@@ -46,7 +46,7 @@ namespace RedTeam.Common
             return _jwtSecurityTokenHandler.ValidateToken(token, validationParameters, out securityToken);
         }
 
-        public SecurityToken CreateSecurityToken(string userName, Role userRole)
+        public SecurityToken CreateSecurityToken(string userName, string userRoleName)
         {
             DateTime issuedAt = DateTime.UtcNow;
             DateTime expires = DateTime.UtcNow.AddDays(_exparationTime);
@@ -55,7 +55,7 @@ namespace RedTeam.Common
                 new ClaimsIdentity(new[]
                 {
                     new Claim(ClaimTypes.Name, userName),
-                    new Claim(ClaimTypes.Role, userRole.Name),
+                    new Claim(ClaimTypes.Role, userRoleName),
                 });
 
             var now = DateTime.UtcNow;

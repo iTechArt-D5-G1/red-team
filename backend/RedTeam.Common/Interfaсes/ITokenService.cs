@@ -8,7 +8,7 @@ namespace RedTeam.Common.Interfaсes
     {
         ClaimsPrincipal ValidateToken(string token);
 
-        SecurityToken CreateSecurityToken(string userName, Role userRole);
+        SecurityToken CreateSecurityToken(string userName, string userRoleName);
 
         string SerializeToken(SecurityToken token);
     }
