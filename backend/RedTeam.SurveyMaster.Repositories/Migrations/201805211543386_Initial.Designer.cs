@@ -13,7 +13,7 @@ namespace RedTeam.SurveyMaster.Repositories.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201805031334535_Initial"; }
+            get { return "201805211543386_Initial"; }
         }
         
         string IMigrationMetadata.Source

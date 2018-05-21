@@ -1,3 +1,5 @@
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using RedTeam.SurveyMaster.Repositories.Models;
 
 namespace RedTeam.SurveyMaster.Repositories.Migrations
@@ -13,15 +15,45 @@ namespace RedTeam.SurveyMaster.Repositories.Migrations
 
         protected override void Seed(RedTeam.SurveyMaster.Repositories.SurveyMasterDbContext context)
         {
-            context.Roles.AddOrUpdate(x=>x.Id,
-                new Role() { Id = 1, Name = "admin"},
-                new Role() { Id = 2, Name = "user"}
+            var userStore = new UserStore<User>(context);
+            var userManager = new UserManager<User>(userStore);
+
+            var passwordHasher = new PasswordHasher();
+
+            var adminRole = new Role(){Id = "1", Name = "admin"};
+            var userRole = new Role(){Id="2", Name = "user"};
+
+            var adminUser = new User()
+            {
+                Id = "1",
+                UserName = "admin@admin.com",
+                PasswordHash = passwordHasher.HashPassword("adminpassword"),
+                Email = "admin@admin.com"
+            };
+            var usualUser = new User()
+            {
+                Id = "2",
+                UserName = "user@user.com",
+                PasswordHash = passwordHasher.HashPassword("userpassword"),
+                Email = "user@user.com"
+            };
+
+            context.Roles.AddOrUpdate(
+                adminRole,
+                userRole
                 );
 
-            context.Users.AddOrUpdate(x=>x.Id,
-                new User() { Id = 1, Password = "userpassword",RoleId = 2,Username = "user@user.com"},
-                new User() { Id = 2, Password = "adminpassword", RoleId = 1, Username = "admin@admin.com" }
+            context.Users.AddOrUpdate(
+                adminUser,
+                usualUser
                 );
+
+            userManager.AddToRole("1", adminRole.Name);
+            userManager.AddToRole("2", userRole.Name);
+            //  This method will be called after migrating to the latest version.
+
+            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
+            //  to avoid creating duplicate seed data.
         }
     }
 }
