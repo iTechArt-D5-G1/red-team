@@ -9,14 +9,15 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { createBrowserHistory } from 'history';
-import { surveyRootPath, helloWorldPagePath, logIn } from './shared/routePath';
+import { surveyRootPath, helloWorldPagePath, logIn, notFoundPage } from './shared/routePath';
 import { SurveyService } from './survey/services/survey';
 import { http } from './shared/utils/';
-import App from './app/App.jsx';
 import reducer from './survey/reducer';
+import App from './app/App.jsx';
 import Surveys from './survey/containers/Surveys/Surveys.jsx';
 import HelloWorldPage from './helloWorld/HelloWorldPage.jsx';
-import LogInPage from './authentication/LogIn/LogInPage.jsx';
+import LogInPage from './authentication/components/login/LogInPage.jsx';
+import NotFoundPage from './shared/components/NotFoundPage/NotFoundPage.jsx';
 
 import './index.scss';
 
@@ -32,10 +33,11 @@ const history = createBrowserHistory();
 ReactDOM.render(
     <Provider store={store}>
         <Router history={history}>
-            <App >
+            <App>
                 <Route exact path={surveyRootPath} component={Surveys} />
                 <Route path={helloWorldPagePath} component={HelloWorldPage} />
                 <Route path={logIn} component={LogInPage} />
+                <Route path={notFoundPage} component={NotFoundPage} />
             </App>
         </Router>
     </Provider>,
