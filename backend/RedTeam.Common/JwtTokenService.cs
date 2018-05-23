@@ -3,7 +3,6 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using RedTeam.Common.Interfaсes;
-using RedTeam.SurveyMaster.Repositories.Models;
 
 namespace RedTeam.Common
 {
@@ -32,8 +31,7 @@ namespace RedTeam.Common
 
         public ClaimsPrincipal ValidateToken(string token)
         {
-            SecurityToken securityToken;
-            TokenValidationParameters validationParameters = new TokenValidationParameters()
+            TokenValidationParameters validationParameters = new TokenValidationParameters
             {
                 ValidAudience = _audienceUrl,
                 ValidIssuer = _issuerUrl,
@@ -43,29 +41,30 @@ namespace RedTeam.Common
                 IssuerSigningKey = _symmerticSecurityKey
             };
 
-            return _jwtSecurityTokenHandler.ValidateToken(token, validationParameters, out securityToken);
+            return _jwtSecurityTokenHandler.ValidateToken(token, validationParameters, out SecurityToken securityToken);
         }
 
         public SecurityToken CreateSecurityToken(string userName, string userRoleName)
         {
-            DateTime issuedAt = DateTime.UtcNow;
-            DateTime expires = DateTime.UtcNow.AddDays(_exparationTime);
-
             ClaimsIdentity claimsIdentity =
                 new ClaimsIdentity(new[]
                 {
                     new Claim(ClaimTypes.Name, userName),
-                    new Claim(ClaimTypes.Role, userRoleName),
+                    new Claim(ClaimTypes.Role, userRoleName)
                 });
 
-            var now = DateTime.UtcNow;
             var signingCredentials = new SigningCredentials(_symmerticSecurityKey,
                 SecurityAlgorithms.HmacSha256Signature);
+
+            DateTime issuedAt = DateTime.UtcNow;
+            DateTime expires = DateTime.UtcNow.AddDays(_exparationTime);
 
             return _jwtSecurityTokenHandler.CreateJwtSecurityToken(
                 issuer: _issuerUrl,
                 audience: _audienceUrl,
-                subject: claimsIdentity, notBefore: issuedAt, expires: expires,
+                subject: claimsIdentity,
+                notBefore: issuedAt,
+                expires: expires,
                 signingCredentials: signingCredentials);
         }
 
@@ -78,14 +77,7 @@ namespace RedTeam.Common
 
         private static bool ValidateLifetime(DateTime? notBefore, DateTime? expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
         {
-            if (expires != null)
-            {
-                if (DateTime.UtcNow < expires)
-                {
-                    return true;
-                }
-            }
-            return false;
+            return (expires != null && DateTime.UtcNow < expires);
         }
     }
 }
