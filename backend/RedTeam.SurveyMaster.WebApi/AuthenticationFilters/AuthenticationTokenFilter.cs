@@ -1,14 +1,17 @@
 ﻿using System;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http.Filters;
+using Autofac.Integration.WebApi;
 using RedTeam.Common.Interfaсes;
+using RedTeam.SurveyMaster.WebApi.Errors;
 
 namespace RedTeam.SurveyMaster.WebApi.AuthenticationFilters
 {
-    public class AuthenticationTokenFilter : Attribute, IAuthenticationFilter
+    public class AuthenticationTokenFilter : Attribute, IAutofacAuthenticationFilter
     {
         public bool AllowMultiple { get; }
 
@@ -39,19 +42,19 @@ namespace RedTeam.SurveyMaster.WebApi.AuthenticationFilters
 
             if (String.IsNullOrEmpty(authorization.Parameter))
             {
-                context.ErrorResult = new AuthenticationFailureResult("Missing credentials", request);
+                ApiError error = new ApiError("missing_credentials", "Missing credentials");
+                context.ErrorResult = new ApiErrorResult(HttpStatusCode.NotFound, error);
                 return;
             }
 
             var token = authorization.Parameter;
             var tokenPrincipal = _tokenService.ValidateToken(token);
 
-            
             if (tokenPrincipal == null)
             {
-                context.ErrorResult = new AuthenticationFailureResult("Invalid username or password", request);
+                ApiError error = new ApiError("invalid_credentials", "Invalid username or password");
+                context.ErrorResult = new ApiErrorResult(HttpStatusCode.BadRequest, error);
             }
-
             else
             {
                 context.Principal = tokenPrincipal;
