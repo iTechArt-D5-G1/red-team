@@ -1,4 +1,5 @@
 ﻿using System.Configuration;
+using System.Reflection;
 using Owin;
 using Autofac;
 using Microsoft.Owin;
@@ -14,11 +15,11 @@ using RedTeam.SurveyMaster.WebApi;
 using RedTeam.Repositories.Interfaces;
 using RedTeam.SurveyMaster.Foundation;
 using RedTeam.SurveyMaster.Repositories;
-using RedTeam.SurveyMaster.WebApi.Controllers;
 using RedTeam.SurveyMaster.Foundation.Interfaces;
 using RedTeam.SurveyMaster.Repositories.Interfaces;
 using RedTeam.SurveyMaster.Repositories.Models;
 using RedTeam.SurveyMaster.WebApi.AuthenticationFilters;
+using RedTeam.SurveyMaster.WebApi.Controllers;
 
 [assembly: OwinStartup(typeof(Startup))]
 
@@ -42,7 +43,7 @@ namespace RedTeam.SurveyMaster.WebApi
 
             _securityKey = applicationSettingsReader.GetValue("SecurityKey", typeof(string)) as string;
             _exparationTime = (int)applicationSettingsReader.GetValue("ExpirationTokenTime", typeof(int));
-            _issuerUrl = _audienceUrl = "http://localhost:12345";
+            _issuerUrl = _audienceUrl = applicationSettingsReader.GetValue("Url", typeof(string)) as string;
         }
 
 
@@ -52,15 +53,12 @@ namespace RedTeam.SurveyMaster.WebApi
             app.Use<GlobalExceptionMiddleware>();
             RegisterRoutes(config);
             ConfigureAutofac(config);
-            config.Filters.Add(new AuthenticationTokenFilter(new JwtTokenService(_securityKey, _exparationTime, _issuerUrl, _audienceUrl)));
-
 
             app.CreatePerOwinContext(() => new SurveyMasterDbContext());
             app.CreatePerOwinContext<UserManager>(UserManager.Create);
             app.CreatePerOwinContext<RoleManager<Role>>((options, context) =>
                 new RoleManager<Role>(
                     new RoleStore<Role>(context.Get<SurveyMasterDbContext>())));
-
 
             app.UseWebApi(config);
         }
@@ -69,19 +67,26 @@ namespace RedTeam.SurveyMaster.WebApi
         private void ConfigureAutofac(HttpConfiguration configuration)
         {
             var builder = new ContainerBuilder();
+            builder.RegisterWebApiFilterProvider(configuration);
             builder.RegisterGeneric(typeof(Repository<>)).As(typeof(IRepository<>)).InstancePerLifetimeScope();
-            builder.RegisterType<ValueController>();
-            builder.RegisterType<AuthController>();
+            builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 
             builder.RegisterType<SurveyMasterUnitOfWork>().As<ISurveyMasterUnitOfWork>().InstancePerLifetimeScope();
             builder.RegisterType<SurveyService>().As<ISurveyService>().InstancePerLifetimeScope();
             builder.RegisterType<SurveyMasterDbContext>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<AuthenticationService>().As<IAuthenticationService>().InstancePerLifetimeScope();
+            builder.RegisterType<UserManagerFactory>().As<IUserManagerFactory>().InstancePerLifetimeScope();
 
             builder.RegisterType<JwtTokenService>().As<ITokenService>()
                 .WithParameter("securityKey", _securityKey)
                 .WithParameter("exparationTime", _exparationTime)
                 .WithParameter("issuerUrl", _issuerUrl)
-                .WithParameter("audienceUrl", _audienceUrl);
+                .WithParameter("audienceUrl", _audienceUrl)
+                .InstancePerLifetimeScope();
+
+            builder.Register(c => new AuthenticationTokenFilter(c.Resolve<ITokenService>()))
+                .AsWebApiAuthenticationFilterFor<ValueController>()
+                .InstancePerDependency();
 
             var container = builder.Build();
             configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);
