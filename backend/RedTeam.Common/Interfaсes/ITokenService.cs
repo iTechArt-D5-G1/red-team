@@ -1,6 +1,5 @@
 ﻿using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
-using RedTeam.SurveyMaster.Repositories.Models;
 
 namespace RedTeam.Common.Interfaсes
 {
