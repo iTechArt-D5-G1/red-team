@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using RedTeam.Common.Interfaсes;
 
@@ -8,16 +9,16 @@ namespace RedTeam.Common
 {
     public class JwtTokenService : ITokenService
     {
+        private readonly string _audienceUrl;
+
         private readonly int _exparationTime;
 
         private readonly string _issuerUrl;
 
-        private readonly string _audienceUrl;
+        private readonly JwtSecurityTokenHandler _jwtSecurityTokenHandler
+            = new JwtSecurityTokenHandler();
 
         private readonly SymmetricSecurityKey _symmerticSecurityKey;
-
-        private readonly JwtSecurityTokenHandler _jwtSecurityTokenHandler 
-            = new JwtSecurityTokenHandler();
 
 
         public JwtTokenService(string securityKey, int exparationTime, string issuerUrl, string audienceUrl)
@@ -25,13 +26,13 @@ namespace RedTeam.Common
             _exparationTime = exparationTime;
             _issuerUrl = issuerUrl;
             _audienceUrl = audienceUrl;
-            _symmerticSecurityKey = new SymmetricSecurityKey(System.Text.Encoding.Default.GetBytes(securityKey));
+            _symmerticSecurityKey = new SymmetricSecurityKey(Encoding.Default.GetBytes(securityKey));
         }
 
 
         public ClaimsPrincipal ValidateToken(string token)
         {
-            TokenValidationParameters validationParameters = new TokenValidationParameters
+            var validationParameters = new TokenValidationParameters
             {
                 ValidAudience = _audienceUrl,
                 ValidIssuer = _issuerUrl,
@@ -41,12 +42,12 @@ namespace RedTeam.Common
                 IssuerSigningKey = _symmerticSecurityKey
             };
 
-            return _jwtSecurityTokenHandler.ValidateToken(token, validationParameters, out SecurityToken securityToken);
+            return _jwtSecurityTokenHandler.ValidateToken(token, validationParameters, out var securityToken);
         }
 
         public SecurityToken CreateSecurityToken(string userName, string userRoleName)
         {
-            ClaimsIdentity claimsIdentity =
+            var claimsIdentity =
                 new ClaimsIdentity(new[]
                 {
                     new Claim(ClaimTypes.Name, userName),
@@ -56,15 +57,15 @@ namespace RedTeam.Common
             var signingCredentials = new SigningCredentials(_symmerticSecurityKey,
                 SecurityAlgorithms.HmacSha256Signature);
 
-            DateTime issuedAt = DateTime.UtcNow;
-            DateTime expires = DateTime.UtcNow.AddDays(_exparationTime);
+            var issuedAt = DateTime.UtcNow;
+            var expires = DateTime.UtcNow.AddDays(_exparationTime);
 
             return _jwtSecurityTokenHandler.CreateJwtSecurityToken(
-                issuer: _issuerUrl,
-                audience: _audienceUrl,
-                subject: claimsIdentity,
-                notBefore: issuedAt,
-                expires: expires,
+                _issuerUrl,
+                _audienceUrl,
+                claimsIdentity,
+                issuedAt,
+                expires,
                 signingCredentials: signingCredentials);
         }
 
@@ -75,9 +76,10 @@ namespace RedTeam.Common
         }
 
 
-        private static bool ValidateLifetime(DateTime? notBefore, DateTime? expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+        private static bool ValidateLifetime(DateTime? notBefore, DateTime? expires, SecurityToken securityToken,
+            TokenValidationParameters validationParameters)
         {
-            return (expires != null && DateTime.UtcNow < expires);
+            return expires != null && DateTime.UtcNow < expires;
         }
     }
 }
