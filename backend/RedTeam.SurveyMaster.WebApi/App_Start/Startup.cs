@@ -53,16 +53,24 @@ namespace RedTeam.SurveyMaster.WebApi
             app.Use<GlobalExceptionMiddleware>();
             RegisterRoutes(config);
             ConfigureAutofac(config);
-
-            app.CreatePerOwinContext(() => new SurveyMasterDbContext());
-            app.CreatePerOwinContext<UserManager>(UserManager.Create);
-            app.CreatePerOwinContext<RoleManager<Role>>((options, context) =>
-                new RoleManager<Role>(
-                    new RoleStore<Role>(context.Get<SurveyMasterDbContext>())));
+            ConfigureIdentity(app);
 
             app.UseWebApi(config);
         }
 
+
+        private void ConfigureIdentity(IAppBuilder app)
+        {
+            app.CreatePerOwinContext(() => new SurveyMasterDbContext());
+
+            app.CreatePerOwinContext<UserManager>((option, context) =>
+                new UserManager(
+                new UserStore<User>(context.Get<SurveyMasterDbContext>())));
+            
+            app.CreatePerOwinContext<RoleManager<Role>>((options, context) =>
+                new RoleManager<Role>(
+                    new RoleStore<Role>(context.Get<SurveyMasterDbContext>())));
+        }
 
         private void ConfigureAutofac(HttpConfiguration configuration)
         {
