@@ -1,9 +1,9 @@
 ﻿using System.Web;
 using Microsoft.AspNet.Identity.Owin;
+using RedTeam.SurveyMaster.Foundation;
 using RedTeam.SurveyMaster.Foundation.Interfaces;
-using RedTeam.SurveyMaster.Repositories;
 
-namespace RedTeam.SurveyMaster.Foundation
+namespace RedTeam.SurveyMaster.WebApi
 {
     public class UserManagerFactory : IUserManagerFactory
     {
