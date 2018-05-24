@@ -1,17 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { loginUser } from './../../containers/loginUser';
+import loginUser from './../../containers/loginUser';
 import './log-in-page.scss';
 
 const form = reduxForm({
     form: 'login',
 });
 
-class LogInPage extends React.Component() {
-    componentWillMount() {
-        this.props.logoutUser();
-    }
+class LogInPage extends React.Component {
     handleFormSubmit(formProps) {
         this.props.loginUser(formProps);
     }
@@ -37,11 +35,13 @@ class LogInPage extends React.Component() {
                     {this.renderAlert()}
                     <p className='log-in-page__header'>Log in</p>
                     <div className='log-in-page__form form'>
-                        <Field className='form__fieldEmail' name='email' component='input' placeholder='Email' type='email' />
+                        <Field className='form__fieldEmail' name='email' placeholder='Email' type='email' component='input' required />
                     </div>
+                    <br />
                     <div>
-                        <Field className='form__button' name='password' component='input' placeholder='Password' type='password' />
+                        <Field className='form__button' name='password' placeholder='Password' type='password' component='input' required />
                     </div>
+                    <br /><br />
                     <button className='form__button' type='submit'>Login</button>
                 </form>
             </div>
@@ -50,9 +50,15 @@ class LogInPage extends React.Component() {
 }
 
 const mapStateToProps = state => ({
-    errorMessage: state.auth.error,
-    message: state.auth.message,
-    authenticated: state.auth.authencticated,
+    errorMessage: state.error,
+    message: state.message,
+    authenticated: state.authencticated,
 });
+
+LogInPage.propTypes = {
+    errorMessage: PropTypes.string.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    loginUser: PropTypes.func.isRequired,
+};
 
 export default connect(mapStateToProps, { loginUser })(form(LogInPage));

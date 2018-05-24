@@ -9,12 +9,12 @@ class LogOutPage extends React.Component {
     }
 
     render() {
-        return <form>Sorry to see you go!</form>;
+        return <div>Sorry to see you go!</div>;
     }
 }
 
 LogOutPage.propTypes = {
-    logoutUser: PropTypes.string.isRequired,
+    logoutUser: PropTypes.func.isRequired,
 };
 
 export default connect(null, { logoutUser })(LogOutPage);

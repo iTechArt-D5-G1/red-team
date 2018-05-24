@@ -1,6 +1,12 @@
 import { AuthActions } from '../actions/index';
 
-const authenticationHandler = (state = {}, action) => {
+const initialState = {
+    errorMessage: 'check',
+    message: 'check',
+    authenticated: false,
+};
+
+const authenticationHandler = (state = initialState, action) => {
     switch (action.type) {
         case AuthActions.AUTH_USER:
             return {

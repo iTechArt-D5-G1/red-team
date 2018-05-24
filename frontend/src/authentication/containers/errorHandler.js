@@ -16,7 +16,7 @@ const errorHandler = (dispatch, error, type) => {
             type,
             payload: 'You are not authorized to do this. Please, login and try again.',
         });
-        logoutUser();// fix it
+        logoutUser();
     } else {
         dispatch({
             type,
