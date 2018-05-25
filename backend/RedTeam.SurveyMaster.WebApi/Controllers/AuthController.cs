@@ -45,7 +45,7 @@ namespace RedTeam.SurveyMaster.WebApi.Controllers
         }
 
 
-        private IHttpActionResult CreateUserNotFoundResult()
+        private ApiErrorResult CreateUserNotFoundResult()
         {
             ApiError error = new ApiError("user_not_found", "User with setted params not found");
             return new ApiErrorResult(HttpStatusCode.NotFound, error);
