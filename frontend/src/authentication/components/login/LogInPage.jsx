@@ -31,6 +31,18 @@ class LogInPage extends React.Component {
         }
     }
 
+    renderAlert() {
+        if (this.props.errorMessage) {
+            return (
+                <div>
+                    <span><strong>Error!</strong> {this.props.errorMessage}</span>
+                </div>
+            );
+        } else {
+            return null;
+        }
+    }
+
     render() {
         const { username, password, submitted } = this.state;
         return (
@@ -75,12 +87,14 @@ class LogInPage extends React.Component {
     }
 }
 
-const mapStateToProps = state => ({
-    loggingIn: state.authencticated,
-});
-
 LogInPage.propTypes = {
     dispatch: PropTypes.func.isRequired,
+    errorMessage: PropTypes.func.isRequired,
 };
 
+function mapStateToProps(state) {
+    return {
+        errorMessage: state.error,
+    };
+}
 export default connect(mapStateToProps)(LogInPage);
