@@ -1,48 +1,74 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
 import loginUser from './../../containers/loginUser';
 import './log-in-page.scss';
 
-const form = reduxForm({
-    form: 'login',
-});
-
 class LogInPage extends React.Component {
-    handleFormSubmit(formProps) {
-        this.props.loginUser(formProps);
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            username: '',
+            password: '',
+            submitted: false,
+        };
     }
 
-    renderAlert() {
-        if (this.props.errorMessage) {
-            return (
-                <div>
-                    <span><strong>Error!</strong> {this.props.errorMessage}</span>
-                </div>
-            );
-        } else {
-            return null;
+    handleChange = (e) => {
+        const { name, value } = e.target;
+        this.setState({ [name]: value });
+    };
+
+    handleSubmit = (e) => {
+        e.preventDefault();
+
+        this.setState({ submitted: true });
+        const { username, password } = this.state;
+        const { dispatch } = this.props;
+        if (username && password) {
+            dispatch(loginUser(username, password));
         }
     }
 
     render() {
-        const { handleSubmit } = this.props;
-
+        const { username, password, submitted } = this.state;
         return (
             <div className='log-in-page'>
-                <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
-                    {this.renderAlert()}
-                    <p className='log-in-page__header'>Log in</p>
-                    <div className='log-in-page__form form'>
-                        <Field className='form__fieldEmail' name='email' placeholder='Email' type='email' component='input' required />
+                <h2 className='log-in-page__header'>Login</h2>
+                <br />
+                <form name='form' onSubmit={this.handleSubmit}>
+                    <div>
+                        <input
+                            type='email'
+                            className={submitted && !username ? 'validation__error' : 'form__field'}
+                            name='username'
+                            placeholder='Email'
+                            value={username}
+                            onChange={this.handleChange}
+                        />
+                        {submitted && !username &&
+                            <div className='help-block'>Username is required</div>
+                        }
                     </div>
                     <br />
                     <div>
-                        <Field className='form__button' name='password' placeholder='Password' type='password' component='input' required />
+                        <input
+                            type='password'
+                            className={submitted && !username ? 'validation__error' : 'form__field'}
+                            name='password'
+                            placeholder='Password'
+                            value={password}
+                            onChange={this.handleChange}
+                        />
+                        {submitted && !password &&
+                            <div className='help-block'>Password is required</div>
+                        }
                     </div>
                     <br /><br />
-                    <button className='form__button' type='submit'>Login</button>
+                    <div className='form-group'>
+                        <button className='form__button'>Login</button>
+                    </div>
                 </form>
             </div>
         );
@@ -50,15 +76,11 @@ class LogInPage extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    errorMessage: state.error,
-    message: state.message,
-    authenticated: state.authencticated,
+    loggingIn: state.authencticated,
 });
 
 LogInPage.propTypes = {
-    errorMessage: PropTypes.string.isRequired,
-    handleSubmit: PropTypes.func.isRequired,
-    loginUser: PropTypes.func.isRequired,
+    dispatch: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, { loginUser })(form(LogInPage));
+export default connect(mapStateToProps)(LogInPage);

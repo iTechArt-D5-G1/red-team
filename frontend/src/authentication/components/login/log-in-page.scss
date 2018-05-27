@@ -43,13 +43,16 @@
     border-radius: 0.1em;
 }
 
-.log-in-page__optionalBtns {
-    position: relative;
-    top: 1em;
-
+.validation__error {
     display: block;
 
-    margin-bottom: 3em;
+    min-width: 15em;
 
-    font-size: 12px;
+    margin: 0 auto;
+
+    border: 0.1em solid rgba($color: rgb(255, 0, 0), $alpha: 1);
+
+    border-radius: 0.2em;
+
+    outline: none;
 }
