@@ -1,10 +1,19 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
 import loginUser from './../../containers/loginUser';
 import './log-in-page.scss';
 
-class LogInPage extends React.Component {
+class LogInPage extends Component {
+    static defaultProps = {
+        errorMessage: null,
+    }
+
+    static propTypes = {
+        errorMessage: PropTypes.string,
+        dispatch: PropTypes.func.isRequired,
+    }
+
     constructor(props) {
         super(props);
 
@@ -87,14 +96,8 @@ class LogInPage extends React.Component {
     }
 }
 
-LogInPage.propTypes = {
-    dispatch: PropTypes.func.isRequired,
-    errorMessage: PropTypes.func.isRequired,
-};
+const mapStateToProps = state => ({
+    errorMessage: state.error,
+});
 
-function mapStateToProps(state) {
-    return {
-        errorMessage: state.error,
-    };
-}
 export default connect(mapStateToProps)(LogInPage);

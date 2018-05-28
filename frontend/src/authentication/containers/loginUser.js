@@ -15,7 +15,7 @@ function loginUser(email, password) {
                 window.location.href = `${ServerUrl}/hello`;
             })
             .catch((error) => {
-                errorHandler(dispatch, error.response, AuthActions.AUTH_ERROR);
+                errorHandler(error.response, AuthActions.AUTH_ERROR);
             });
     };
 }

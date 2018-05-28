@@ -1,7 +1,7 @@
 import axios from 'axios';
 import cookie from 'react-cookie';
-import { errorHandler } from '../containers/errorHandler';
-import { AuthActions } from '../actions/index';
+import errorHandler from '../containers/errorHandler';
+import AuthActions from '../actions/index';
 import { ServerUrl } from './../../config';
 
 const registerUser = (dispatch, {

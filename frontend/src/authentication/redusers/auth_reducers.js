@@ -1,8 +1,8 @@
-import { AuthActions } from '../actions/index';
+import AuthActions from '../actions/index';
 
 const initialState = {
-    errorMessage: 'check',
-    message: 'check',
+    errorMessage: null,
+    message: null,
     authenticated: false,
 };
 

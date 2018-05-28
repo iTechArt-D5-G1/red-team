@@ -1,5 +1,5 @@
 import cookie from 'react-cookie';
-import { AuthActions } from '../actions/index';
+import AuthActions from '../actions/index';
 import { ServerUrl } from './../../config';
 
 function logoutUser() {

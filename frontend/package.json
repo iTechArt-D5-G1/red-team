@@ -43,7 +43,6 @@
         "webpack-merge": "4.1.1"
     },
     "dependencies": {
-        "auth0-js": "^9.4.2",
         "axios": "^0.13.1",
         "bootstrap": "4.0.0",
         "history": "4.7.2",
