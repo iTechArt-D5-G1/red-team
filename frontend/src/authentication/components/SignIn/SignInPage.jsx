@@ -55,40 +55,40 @@ class SignInPage extends Component {
     render() {
         const { username, password, submitted } = this.state;
         return (
-            <div className='log-in-page'>
-                <h2 className='log-in-page__header'>Sign In</h2>
+            <div className='sign-in-page'>
+                <h2 className='sign-in-page__header'>Sign In</h2>
                 <br />
-                <form name='form' onSubmit={this.handleSubmit}>
+                <form name='sign-in-form' onSubmit={this.handleSubmit}>
                     <div>
                         <input
                             type='email'
-                            className={submitted && !username ? 'validation__error' : 'form__field'}
+                            className={submitted && !username ? 'sign-in-validation' : 'sign-in-form__field'}
                             name='username'
                             placeholder='Email'
                             value={username}
                             onChange={this.handleChange}
                         />
                         {submitted && !username &&
-                            <div className='help-block'>Username is required</div>
+                            <div className='sign-in-validation__help-block'>Username is required</div>
                         }
                     </div>
                     <br />
                     <div>
                         <input
                             type='password'
-                            className={submitted && !username ? 'validation__error' : 'form__field'}
+                            className={submitted && !username ? 'sign-in-validation' : 'sign-in-form__field'}
                             name='password'
                             placeholder='Password'
                             value={password}
                             onChange={this.handleChange}
                         />
                         {submitted && !password &&
-                            <div className='help-block'>Password is required</div>
+                            <div className='sign-in-validation__help-block'>Password is required</div>
                         }
                     </div>
                     <br /><br />
                     <div className='form-group'>
-                        <button className='form__button'>Sign In</button>
+                        <button className='sign-in-form__button'>Sign In</button>
                     </div>
                 </form>
             </div>

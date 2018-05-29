@@ -1,4 +1,4 @@
-.log-in-page {
+.sign-in-page {
     position: relative;
     top: 230px;
 
@@ -15,7 +15,7 @@
     background-color: rgba($color: #eee, $alpha: 1);
 }
 
-.log-in-page__header {
+.sign-in-page__header {
     padding-top: 0.5em;
     padding-bottom: 0.5em;
 
@@ -23,7 +23,7 @@
     font-weight: 300;
 }
 
-.form__field {
+.sign-in-form__field {
     display: block;
 
     min-width: 15em;
@@ -37,13 +37,13 @@
     outline: none;
 }
 
-.form__button {
+.sign-in-form__button {
     border: 0.1em solid rgba($color: rgb(180, 167, 167), $alpha: 1);
 
     border-radius: 0.1em;
 }
 
-.validation__error {
+.sign-in-validation {
     display: block;
 
     min-width: 15em;
