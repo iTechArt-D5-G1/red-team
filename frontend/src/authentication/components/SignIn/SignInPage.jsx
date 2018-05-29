@@ -11,7 +11,7 @@ class SignInPage extends Component {
 
     static propTypes = {
         errorMessage: PropTypes.string,
-        dispatch: PropTypes.func.isRequired,
+        submit: PropTypes.func.isRequired,
     }
 
     constructor(props) {
@@ -34,9 +34,8 @@ class SignInPage extends Component {
 
         this.setState({ submitted: true });
         const { username, password } = this.state;
-        const { dispatch } = this.props;
         if (username && password) {
-            dispatch(SignInUser(username, password));
+            this.props.submit(username, password);
         }
     }
 
@@ -100,4 +99,8 @@ const mapStateToProps = state => ({
     errorMessage: state.error,
 });
 
-export default connect(mapStateToProps)(SignInPage);
+const mapDispatchToProps = dispatch => ({
+    submit: (username, password) => { dispatch(SignInUser(username, password)); },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignInPage);
