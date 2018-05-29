@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
-import loginUser from './../../containers/loginUser';
-import './log-in-page.scss';
+import SignInUser from './../../containers/SignInUser';
+import './sign-in-page.scss';
 
-class LogInPage extends Component {
+class SignInPage extends Component {
     static defaultProps = {
         errorMessage: null,
     }
@@ -36,7 +36,7 @@ class LogInPage extends Component {
         const { username, password } = this.state;
         const { dispatch } = this.props;
         if (username && password) {
-            dispatch(loginUser(username, password));
+            dispatch(SignInUser(username, password));
         }
     }
 
@@ -56,7 +56,7 @@ class LogInPage extends Component {
         const { username, password, submitted } = this.state;
         return (
             <div className='log-in-page'>
-                <h2 className='log-in-page__header'>Login</h2>
+                <h2 className='log-in-page__header'>Sign In</h2>
                 <br />
                 <form name='form' onSubmit={this.handleSubmit}>
                     <div>
@@ -88,7 +88,7 @@ class LogInPage extends Component {
                     </div>
                     <br /><br />
                     <div className='form-group'>
-                        <button className='form__button'>Login</button>
+                        <button className='form__button'>Sign In</button>
                     </div>
                 </form>
             </div>
@@ -100,4 +100,4 @@ const mapStateToProps = state => ({
     errorMessage: state.error,
 });
 
-export default connect(mapStateToProps)(LogInPage);
+export default connect(mapStateToProps)(SignInPage);

@@ -1,5 +1,4 @@
 export const surveyRootPath = '/';
 export const helloWorldPagePath = '/hello';
-export const logInPath = '/login';
+export const signInPath = '/sign_in';
 export const registerPath = '/register';
-

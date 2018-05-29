@@ -1,6 +1,6 @@
-export const AuthActions = {
-    AUTH_USER: 'AUTH_USER',
-    UNAUTH_USER: 'UNAUTH_USER',
-    AUTH_ERROR: 'AUTH_ERROR',
+export const signInActions = {
+    SIGN_IN_USER: 'SIGN_IN_USER',
+    UNSIGN_IN_USER: 'UNSIGN_IN_USER',
+    SIGN_IN_ERROR: 'SIGN_IN_ERROR',
 };
 

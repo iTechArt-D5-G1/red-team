@@ -9,14 +9,14 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { createBrowserHistory } from 'history';
-import { surveyRootPath, helloWorldPagePath, logInPath } from './shared/routePath';
+import { surveyRootPath, helloWorldPagePath, signInPath } from './shared/routePath';
 import { SurveyService } from './survey/services/survey';
 import { http } from './shared/utils/';
 import reducer from './survey/reducer';
 import App from './app/App.jsx';
 import Surveys from './survey/containers/Surveys/Surveys.jsx';
 import HelloWorldPage from './helloWorld/HelloWorldPage.jsx';
-import LogInPage from './authentication/components/login/LogInPage.jsx';
+import SignInPage from './authentication/components/SignIn/SignInPage.jsx';
 
 import './index.scss';
 
@@ -35,7 +35,7 @@ ReactDOM.render(
             <App>
                 <Route exact path={surveyRootPath} component={Surveys} />
                 <Route path={helloWorldPagePath} component={HelloWorldPage} />
-                <Route path={logInPath} component={LogInPage} />
+                <Route path={signInPath} component={SignInPage} />
             </App>
         </Router>
     </Provider>,

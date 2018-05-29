@@ -1,4 +1,4 @@
-import AuthActions from '../actions/index';
+import signInActions from '../actions/index';
 
 const initialState = {
     errorMessage: null,
@@ -6,19 +6,19 @@ const initialState = {
     authenticated: false,
 };
 
-const authenticationHandler = (state = initialState, action) => {
+const signInReducers = (state = initialState, action) => {
     switch (action.type) {
-        case AuthActions.AUTH_USER:
+        case signInActions.SIGN_IN_USER:
             return {
                 ...state,
                 authentication: true,
             };
-        case AuthActions.UNAUTH_USER:
+        case signInActions.UNSIGN_IN_USER:
             return {
                 ...state,
                 authentication: false,
             };
-        case AuthActions.AUTH_ERROR:
+        case signInActions.SIGN_IN_ERROR:
             return {
                 ...state,
                 error: action.payload,
@@ -28,4 +28,4 @@ const authenticationHandler = (state = initialState, action) => {
     }
 };
 
-export default authenticationHandler;
+export default signInReducers;
