@@ -4,6 +4,7 @@ using Owin;
 using Autofac;
 using Microsoft.Owin;
 using System.Web.Http;
+using System.Web.Http.Dependencies;
 using RedTeam.Repositories;
 using Autofac.Integration.WebApi;
 using Microsoft.AspNet.Identity;
@@ -20,6 +21,10 @@ using RedTeam.SurveyMaster.Repositories.Interfaces;
 using RedTeam.SurveyMaster.Repositories.Models;
 using RedTeam.SurveyMaster.WebApi.AuthenticationFilters;
 using RedTeam.SurveyMaster.WebApi.Controllers;
+using RedTeam.SurveyMaster.WebApi.Factories;
+using RedTeam.SurveyMaster.WebApi.Factories.Interfaces;
+using RedTeam.SurveyMaster.WebApi.OwinMiddleware;
+using GlobalApplicationErrorsFactory = RedTeam.SurveyMaster.WebApi.Factories.GlobalApplicationErrorsFactory;
 
 [assembly: OwinStartup(typeof(Startup))]
 
@@ -53,24 +58,10 @@ namespace RedTeam.SurveyMaster.WebApi
             app.Use<GlobalExceptionMiddleware>();
             RegisterRoutes(config);
             ConfigureAutofac(config);
-            ConfigureIdentity(app);
-
+            ConfigureIdentity(app, config.DependencyResolver);
             app.UseWebApi(config);
         }
 
-
-        private void ConfigureIdentity(IAppBuilder app)
-        {
-            app.CreatePerOwinContext(() => new SurveyMasterDbContext());
-
-            app.CreatePerOwinContext<UserManager>((option, context) =>
-                new UserManager(
-                new UserStore<User>(context.Get<SurveyMasterDbContext>())));
-            
-            app.CreatePerOwinContext<RoleManager<Role>>((options, context) =>
-                new RoleManager<Role>(
-                    new RoleStore<Role>(context.Get<SurveyMasterDbContext>())));
-        }
 
         private void ConfigureAutofac(HttpConfiguration configuration)
         {
@@ -84,6 +75,9 @@ namespace RedTeam.SurveyMaster.WebApi
             builder.RegisterType<SurveyMasterDbContext>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<AuthenticationService>().As<IAuthenticationService>().InstancePerLifetimeScope();
             builder.RegisterType<UserManagerFactory>().As<IUserManagerFactory>().InstancePerLifetimeScope();
+            builder.RegisterType<GlobalApplicationErrorsFactory>().As<IGlobalApplicationErrorsFactory>().InstancePerLifetimeScope();
+            builder.RegisterType<AuthenticationTokenFilter>().AsWebApiAuthenticationFilterFor<ValueController>()
+                .InstancePerLifetimeScope();
 
             builder.RegisterType<JwtTokenService>().As<ITokenService>()
                 .WithParameter("securityKey", _securityKey)
@@ -92,12 +86,24 @@ namespace RedTeam.SurveyMaster.WebApi
                 .WithParameter("audienceUrl", _audienceUrl)
                 .InstancePerLifetimeScope();
 
-            builder.Register(c => new AuthenticationTokenFilter(c.Resolve<ITokenService>()))
-                .AsWebApiAuthenticationFilterFor<ValueController>()
-                .InstancePerDependency();
+            builder.RegisterType<SurveyMasterDbContext>().AsSelf().InstancePerDependency();
 
             var container = builder.Build();
             configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);
+        }
+
+        private void ConfigureIdentity(IAppBuilder app, IDependencyResolver dependencyResolver)
+        {
+            app.CreatePerOwinContext(() =>
+                (SurveyMasterDbContext)dependencyResolver.GetService(typeof(SurveyMasterDbContext)));
+
+            app.CreatePerOwinContext<UserManager>((option, context) =>
+            new UserManager(
+                new UserStore<User>(context.Get<SurveyMasterDbContext>())));
+
+            app.CreatePerOwinContext<RoleManager<Role>>((options, context) =>
+            new RoleManager<Role>(
+                new RoleStore<Role>(context.Get<SurveyMasterDbContext>())));
         }
 
         private void RegisterRoutes(HttpConfiguration config)
