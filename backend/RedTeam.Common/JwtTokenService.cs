@@ -15,7 +15,7 @@ namespace RedTeam.Common
 
         private readonly string _issuerUrl;
 
-        private readonly JwtSecurityTokenHandler _jwtSecurityTokenHandler
+        private readonly JwtSecurityTokenHandler _jwtTokenHandler
             = new JwtSecurityTokenHandler();
 
         private readonly SymmetricSecurityKey _symmerticSecurityKey;
@@ -32,7 +32,29 @@ namespace RedTeam.Common
 
         public ClaimsPrincipal ValidateToken(string token)
         {
-            var validationParameters = new TokenValidationParameters
+            try
+            {
+                TokenValidationParameters validationParameters = CreateValidationParameters();
+                var tokenToReturn =
+                    _jwtTokenHandler.ValidateToken(token, validationParameters, out var securityToken);
+                return tokenToReturn;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+
+        public string CreateSecurityToken(string userName, string userRoleName)
+        {
+            var jwtToken = CreateConfiguredToken(userName, userRoleName);
+            return SerializeToken(jwtToken);
+        }
+
+
+        private TokenValidationParameters CreateValidationParameters()
+        {
+            return new TokenValidationParameters
             {
                 ValidAudience = _audienceUrl,
                 ValidIssuer = _issuerUrl,
@@ -41,11 +63,9 @@ namespace RedTeam.Common
                 LifetimeValidator = ValidateLifetime,
                 IssuerSigningKey = _symmerticSecurityKey
             };
-
-            return _jwtSecurityTokenHandler.ValidateToken(token, validationParameters, out var securityToken);
         }
 
-        public SecurityToken CreateSecurityToken(string userName, string userRoleName)
+        private SecurityToken CreateConfiguredToken(string userName, string userRoleName)
         {
             var claimsIdentity =
                 new ClaimsIdentity(new[]
@@ -60,7 +80,7 @@ namespace RedTeam.Common
             var issuedAt = DateTime.UtcNow;
             var expires = DateTime.UtcNow.AddDays(_exparationTime);
 
-            return _jwtSecurityTokenHandler.CreateJwtSecurityToken(
+            return _jwtTokenHandler.CreateJwtSecurityToken(
                 _issuerUrl,
                 _audienceUrl,
                 claimsIdentity,
@@ -69,9 +89,9 @@ namespace RedTeam.Common
                 signingCredentials: signingCredentials);
         }
 
-        public string SerializeToken(SecurityToken token)
+        private string SerializeToken(SecurityToken token)
         {
-            var serializedToken = _jwtSecurityTokenHandler.WriteToken(token);
+            var serializedToken = _jwtTokenHandler.WriteToken(token);
             return serializedToken;
         }
 
