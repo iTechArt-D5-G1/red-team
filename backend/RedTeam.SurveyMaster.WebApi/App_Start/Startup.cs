@@ -63,6 +63,16 @@ namespace RedTeam.SurveyMaster.WebApi
         }
 
 
+        private void RegisterRoutes(HttpConfiguration config)
+        {
+            config.MapHttpAttributeRoutes();
+            config.Routes.MapHttpRoute(
+                "DefaultApi",
+                "api/{controller}/{id}",
+                new { id = RouteParameter.Optional }
+            );
+        }
+
         private void ConfigureAutofac(HttpConfiguration configuration)
         {
             var builder = new ContainerBuilder();
@@ -104,16 +114,6 @@ namespace RedTeam.SurveyMaster.WebApi
             app.CreatePerOwinContext<RoleManager<Role>>((options, context) =>
             new RoleManager<Role>(
                 new RoleStore<Role>(context.Get<SurveyMasterDbContext>())));
-        }
-
-        private void RegisterRoutes(HttpConfiguration config)
-        {
-            config.MapHttpAttributeRoutes();
-            config.Routes.MapHttpRoute(
-                "DefaultApi",
-                "api/{controller}/{id}",
-                new { id = RouteParameter.Optional }
-            );
         }
     }
 }
