@@ -1,12 +1,10 @@
-﻿using System.Net;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.Http.ModelBinding;
 using RedTeam.Common.ExtentionMethods;
 using RedTeam.Common.Interfaсes;
 using RedTeam.SurveyMaster.Foundation.Interfaces;
 using RedTeam.SurveyMaster.WebApi.Dtos;
-using RedTeam.SurveyMaster.WebApi.Errors;
+using RedTeam.SurveyMaster.WebApi.Factories.Interfaces;
 
 namespace RedTeam.SurveyMaster.WebApi.Controllers
 {
@@ -18,10 +16,14 @@ namespace RedTeam.SurveyMaster.WebApi.Controllers
 
         private readonly ITokenService _tokenService;
 
-        public AuthController(IAuthenticationService authenticationService, ITokenService tokenService)
+        private readonly IGlobalApplicationErrorsFactory _errorsFactory;
+
+
+        public AuthController(IAuthenticationService authenticationService, ITokenService tokenService, IGlobalApplicationErrorsFactory errorsFactory)
         {
             _authenticationService = authenticationService;
             _tokenService = tokenService;
+            _errorsFactory = errorsFactory;
         }
 
 
@@ -31,37 +33,18 @@ namespace RedTeam.SurveyMaster.WebApi.Controllers
 
             if (!ModelState.IsValid)
             {
-                return CreateInvalidModelStateResult(ModelState);
+                return _errorsFactory.InvalidCredentialsResult("Invalid credentials",
+                    ModelState.FetchErrorsFromModelState());
             }
 
             if (await _authenticationService.IsUserExistsAsync(userInfo.Username, userInfo.Password))
             {
                 var userRoleName = await _authenticationService.GetUserRoleNameAsync(userInfo.Username);
-                string token = CreateToken(userInfo.Username, userRoleName);
+                string token = _tokenService.CreateSecurityToken(userInfo.Username, userRoleName);
                 return Ok(token);
             }
 
-            return CreateUserNotFoundResult();
-        }
-
-
-        private ApiErrorResult CreateUserNotFoundResult()
-        {
-            ApiError error = new ApiError("user_not_found", "User with setted params not found");
-            return new ApiErrorResult(HttpStatusCode.NotFound, error);
-        }
-
-        private ApiErrorResult CreateInvalidModelStateResult(ModelStateDictionary modelState)
-        {
-            ApiError error = new ApiError("invalid_credentials", "Invalid user credentials",
-                ModelState.FetchErrorsFromModelState());
-            return new ApiErrorResult(HttpStatusCode.BadRequest, error);
-        }
-
-        private string CreateToken(string userName, string userRoleName)
-        {
-            var token = _tokenService.CreateSecurityToken(userName, userRoleName);
-            return _tokenService.SerializeToken(token);
+            return _errorsFactory.UserNotFoundResult();
         }
     }
 }
