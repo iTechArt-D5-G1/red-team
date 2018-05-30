@@ -1,21 +1,26 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace RedTeam.SurveyMaster.WebApi.Errors
 {
+    [DataContract]
     public class ApiError
     {
-        public string Code;
+        [DataMember(Name = "Code")]
+        private string _code;
 
-        public string Message;
+        [DataMember(Name = "Error Message")]
+        private string _message;
 
-        public ICollection<string> Description;
+        [DataMember(Name = "Description")]
+        private ICollection<string> _description;
 
 
         public ApiError(string code, string message = "", ICollection<string> descriprion = null)
         {
-            Code = code;
-            Message = message;
-            Description = descriprion;
+            _code = code;
+            _message = message;
+            _description = descriprion;
         }
     }
 }
