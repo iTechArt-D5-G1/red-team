@@ -2,11 +2,11 @@
 using System.Threading.Tasks;
 using Microsoft.Owin;
 
-namespace RedTeam.SurveyMaster.WebApi
+namespace RedTeam.SurveyMaster.WebApi.OwinMiddleware
 {
-    public class GlobalExceptionMiddleware : OwinMiddleware
+    public class GlobalExceptionMiddleware : Microsoft.Owin.OwinMiddleware
     {
-        public GlobalExceptionMiddleware(OwinMiddleware next) : base(next)
+        public GlobalExceptionMiddleware(Microsoft.Owin.OwinMiddleware next) : base(next)
         {
         }
 

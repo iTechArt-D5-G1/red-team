@@ -3,7 +3,7 @@ using Microsoft.AspNet.Identity.Owin;
 using RedTeam.SurveyMaster.Foundation;
 using RedTeam.SurveyMaster.Foundation.Interfaces;
 
-namespace RedTeam.SurveyMaster.WebApi
+namespace RedTeam.SurveyMaster.WebApi.Factories
 {
     public class UserManagerFactory : IUserManagerFactory
     {

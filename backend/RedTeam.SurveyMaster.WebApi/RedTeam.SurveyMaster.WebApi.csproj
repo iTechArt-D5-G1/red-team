@@ -158,9 +158,11 @@
     <Compile Include="Dtos\UserDto.cs" />
     <Compile Include="Errors\ApiError.cs" />
     <Compile Include="Errors\ApiErrorResult.cs" />
-    <Compile Include="GlobalExceptionMiddleware.cs" />
+    <Compile Include="Factories\GlobalApplicationErrorsFactory.cs" />
+    <Compile Include="OwinMiddleware\GlobalExceptionMiddleware.cs" />
+    <Compile Include="Factories\Interfaces\IGlobalApplicationErrorsFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserManagerFactory.cs" />
+    <Compile Include="Factories\UserManagerFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RedTeam.Common\RedTeam.Common.csproj">
