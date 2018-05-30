@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http.Filters;
 using Autofac.Integration.WebApi;
 using RedTeam.Common.Interfaсes;
-using RedTeam.SurveyMaster.WebApi.Errors;
+using RedTeam.SurveyMaster.WebApi.Factories.Interfaces;
 
 namespace RedTeam.SurveyMaster.WebApi.AuthenticationFilters
 {
@@ -18,10 +18,13 @@ namespace RedTeam.SurveyMaster.WebApi.AuthenticationFilters
 
         private readonly ITokenService _tokenService;
 
+        private readonly IGlobalApplicationErrorsFactory _errorsFactory;
 
-        public AuthenticationTokenFilter(ITokenService tokenService)
+
+        public AuthenticationTokenFilter(ITokenService tokenService, IGlobalApplicationErrorsFactory errorsFactory)
         {
             _tokenService = tokenService;
+            _errorsFactory = errorsFactory;
         }
 
 
@@ -42,23 +45,31 @@ namespace RedTeam.SurveyMaster.WebApi.AuthenticationFilters
 
             if (String.IsNullOrEmpty(authorization.Parameter))
             {
-                ApiError error = new ApiError("missing_credentials", "Missing credentials");
-                context.ErrorResult = new ApiErrorResult(HttpStatusCode.NotFound, error);
+                context.ErrorResult = _errorsFactory.MissingCredentialsResult("Token is empty");
                 return;
             }
 
             var token = authorization.Parameter;
-            var tokenPrincipal = _tokenService.ValidateToken(token);
+            Validate(token, context);
+        }
 
-            if (tokenPrincipal == null)
-            {
-                ApiError error = new ApiError("invalid_credentials", "Invalid username or password");
-                context.ErrorResult = new ApiErrorResult(HttpStatusCode.BadRequest, error);
-            }
-            else
-            {
-                context.Principal = tokenPrincipal;
-            }
+        private void Validate(string token, HttpAuthenticationContext context)
+        {
+                ValidateToken(token, out ClaimsPrincipal tokenPrincipal);
+
+                if (tokenPrincipal == null)
+                {
+                    context.ErrorResult = _errorsFactory.InvalidCredentialsResult("Token is invalid");
+                }
+                else
+                {
+                    context.Principal = tokenPrincipal;
+                }
+        }
+
+        private void ValidateToken(string token, out ClaimsPrincipal tokenPrincipal)
+        {
+            tokenPrincipal = _tokenService.ValidateToken(token);
         }
 
         public async Task ChallengeAsync(HttpAuthenticationChallengeContext context, CancellationToken cancellationToken)
