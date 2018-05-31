@@ -11,8 +11,12 @@ namespace RedTeam.Common.ExtentionMethods
                 new List<string>();
 
             foreach (var modelState in modelStateDictionary)
-            foreach (var error in modelState.Value.Errors)
-                errorDescriptionList.Add(error.ErrorMessage);
+            {
+                foreach (var error in modelState.Value.Errors)
+                {
+                    errorDescriptionList.Add(error.ErrorMessage);
+                }
+            }
 
             return errorDescriptionList;
         }
