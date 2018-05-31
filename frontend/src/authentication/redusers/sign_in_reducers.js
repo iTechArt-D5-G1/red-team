@@ -1,4 +1,8 @@
-import signInActions from '../actions/index';
+import {
+    SIGN_IN_USER,
+    UNSIGN_IN_USER,
+    SIGN_IN_ERROR,
+} from '../actions/actions';
 
 const initialState = {
     errorMessage: null,
@@ -8,17 +12,17 @@ const initialState = {
 
 const signInReducers = (state = initialState, action) => {
     switch (action.type) {
-        case signInActions.SIGN_IN_USER:
+        case SIGN_IN_USER:
             return {
                 ...state,
                 authentication: true,
             };
-        case signInActions.UNSIGN_IN_USER:
+        case UNSIGN_IN_USER:
             return {
                 ...state,
                 authentication: false,
             };
-        case signInActions.SIGN_IN_ERROR:
+        case SIGN_IN_ERROR:
             return {
                 ...state,
                 error: action.payload,
