@@ -22,9 +22,7 @@ using RedTeam.SurveyMaster.Repositories.Models;
 using RedTeam.SurveyMaster.WebApi.AuthenticationFilters;
 using RedTeam.SurveyMaster.WebApi.Controllers;
 using RedTeam.SurveyMaster.WebApi.Factories;
-using RedTeam.SurveyMaster.WebApi.Factories.Interfaces;
 using RedTeam.SurveyMaster.WebApi.OwinMiddleware;
-using GlobalApplicationErrorsFactory = RedTeam.SurveyMaster.WebApi.Factories.GlobalApplicationErrorsFactory;
 
 [assembly: OwinStartup(typeof(Startup))]
 
@@ -85,7 +83,6 @@ namespace RedTeam.SurveyMaster.WebApi
             builder.RegisterType<SurveyMasterDbContext>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<AuthenticationService>().As<IAuthenticationService>().InstancePerLifetimeScope();
             builder.RegisterType<UserManagerFactory>().As<IUserManagerFactory>().InstancePerLifetimeScope();
-            builder.RegisterType<GlobalApplicationErrorsFactory>().As<IGlobalApplicationErrorsFactory>().InstancePerLifetimeScope();
             builder.RegisterType<AuthenticationTokenFilter>().AsWebApiAuthenticationFilterFor<ValueController>()
                 .InstancePerLifetimeScope();
 

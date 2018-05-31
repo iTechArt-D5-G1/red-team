@@ -1,10 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net;
+using System.Threading.Tasks;
 using System.Web.Http;
 using RedTeam.Common.ExtentionMethods;
 using RedTeam.Common.Interfaсes;
 using RedTeam.SurveyMaster.Foundation.Interfaces;
 using RedTeam.SurveyMaster.WebApi.Dtos;
-using RedTeam.SurveyMaster.WebApi.Factories.Interfaces;
+using RedTeam.SurveyMaster.WebApi.Errors;
 
 namespace RedTeam.SurveyMaster.WebApi.Controllers
 {
@@ -16,14 +17,11 @@ namespace RedTeam.SurveyMaster.WebApi.Controllers
 
         private readonly ITokenService _tokenService;
 
-        private readonly IGlobalApplicationErrorsFactory _errorsFactory;
 
-
-        public AuthController(IAuthenticationService authenticationService, ITokenService tokenService, IGlobalApplicationErrorsFactory errorsFactory)
+        public AuthController(IAuthenticationService authenticationService, ITokenService tokenService)
         {
             _authenticationService = authenticationService;
             _tokenService = tokenService;
-            _errorsFactory = errorsFactory;
         }
 
 
@@ -33,8 +31,8 @@ namespace RedTeam.SurveyMaster.WebApi.Controllers
 
             if (!ModelState.IsValid)
             {
-                return _errorsFactory.InvalidCredentialsResult("Invalid credentials",
-                    ModelState.FetchErrorsFromModelState());
+                return new ApiErrorResult(HttpStatusCode.BadRequest, new ApiError(AuthenticationErrorCodes.InvalidCredentials, "Invalid credentials",
+                    ModelState.FetchErrorsFromModelState()));
             }
 
             if (await _authenticationService.IsUserExistsAsync(userInfo.Username, userInfo.Password))
@@ -44,7 +42,8 @@ namespace RedTeam.SurveyMaster.WebApi.Controllers
                 return Ok(token);
             }
 
-            return _errorsFactory.UserNotFoundResult();
+            return new ApiErrorResult(HttpStatusCode.NotFound,
+                new ApiError(AuthenticationErrorCodes.UserNotFound, "User not found"));
         }
     }
 }

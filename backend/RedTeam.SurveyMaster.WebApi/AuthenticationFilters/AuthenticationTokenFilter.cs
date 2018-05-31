@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Net.Http;
-using System.Net.Http.Headers;
+using System.Net;
 using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http.Filters;
 using Autofac.Integration.WebApi;
 using RedTeam.Common.Interfaсes;
-using RedTeam.SurveyMaster.WebApi.Factories.Interfaces;
+using RedTeam.SurveyMaster.WebApi.Errors;
 
 namespace RedTeam.SurveyMaster.WebApi.AuthenticationFilters
 {
@@ -18,13 +17,11 @@ namespace RedTeam.SurveyMaster.WebApi.AuthenticationFilters
 
         private readonly ITokenService _tokenService;
 
-        private readonly IGlobalApplicationErrorsFactory _errorsFactory;
 
 
-        public AuthenticationTokenFilter(ITokenService tokenService, IGlobalApplicationErrorsFactory errorsFactory)
+        public AuthenticationTokenFilter(ITokenService tokenService)
         {
             _tokenService = tokenService;
-            _errorsFactory = errorsFactory;
         }
 
 
@@ -45,7 +42,8 @@ namespace RedTeam.SurveyMaster.WebApi.AuthenticationFilters
 
             if (String.IsNullOrEmpty(authorization.Parameter))
             {
-                context.ErrorResult = _errorsFactory.MissingCredentialsResult("Token is empty");
+                context.ErrorResult = new ApiErrorResult(HttpStatusCode.BadRequest,
+                    new ApiError(AuthenticationErrorCodes.MissingCredentials, "Token is empty"));
                 return;
             }
 
@@ -59,8 +57,9 @@ namespace RedTeam.SurveyMaster.WebApi.AuthenticationFilters
 
                 if (tokenPrincipal == null)
                 {
-                    context.ErrorResult = _errorsFactory.InvalidCredentialsResult("Token is invalid");
-                }
+                    context.ErrorResult = new ApiErrorResult(HttpStatusCode.BadRequest, 
+                        new ApiError(AuthenticationErrorCodes.InvalidCredentials, "Token is invalid"));
+            }
                 else
                 {
                     context.Principal = tokenPrincipal;
