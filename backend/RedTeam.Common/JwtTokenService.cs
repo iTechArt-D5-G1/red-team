@@ -34,7 +34,7 @@ namespace RedTeam.Common
         {
             try
             {
-                TokenValidationParameters validationParameters = CreateValidationParameters();
+                var validationParameters = CreateValidationParameters();
                 var tokenToReturn =
                     _jwtTokenHandler.ValidateToken(token, validationParameters, out var securityToken);
                 return tokenToReturn;

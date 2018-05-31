@@ -30,8 +30,8 @@ namespace RedTeam.SurveyMaster.WebApi.AuthenticationFilters
 
         public async Task AuthenticateAsync(HttpAuthenticationContext context, CancellationToken cancellationToken)
         {
-            HttpRequestMessage request = context.Request;
-            AuthenticationHeaderValue authorization = request.Headers.Authorization;
+            var request = context.Request;
+            var authorization = request.Headers.Authorization;
 
             if (authorization == null)
             {

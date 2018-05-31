@@ -40,7 +40,7 @@ namespace RedTeam.SurveyMaster.WebApi.Controllers
             if (await _authenticationService.IsUserExistsAsync(userInfo.Username, userInfo.Password))
             {
                 var userRoleName = await _authenticationService.GetUserRoleNameAsync(userInfo.Username);
-                string token = _tokenService.CreateSecurityToken(userInfo.Username, userRoleName);
+                var token = _tokenService.CreateSecurityToken(userInfo.Username, userRoleName);
                 return Ok(token);
             }
 

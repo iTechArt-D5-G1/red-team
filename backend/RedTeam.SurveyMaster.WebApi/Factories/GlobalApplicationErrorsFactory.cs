@@ -9,19 +9,19 @@ namespace RedTeam.SurveyMaster.WebApi.Factories
     {
         public ApiErrorResult UserNotFoundResult(string message = "User not found", List<string> descriptionList = null)
         {
-            ApiError error = new ApiError("user_not_found", message, descriptionList);
+            var error = new ApiError("user_not_found", message, descriptionList);
             return new ApiErrorResult(HttpStatusCode.NotFound, error);
         }
 
         public ApiErrorResult InvalidCredentialsResult(string message = "Invalid credentials", List<string> descriptionList = null)
         {
-            ApiError error = new ApiError("invalid_credentials", message, descriptionList);
+            var error = new ApiError("invalid_credentials", message, descriptionList);
             return new ApiErrorResult(HttpStatusCode.BadRequest, error);
         }
 
         public ApiErrorResult MissingCredentialsResult(string message = "Missing credentials", List<string> descriptionList = null)
         {
-            ApiError error = new ApiError("missing_credentials", message, descriptionList);
+            var error = new ApiError("missing_credentials", message, descriptionList);
             return new ApiErrorResult(HttpStatusCode.NotFound, error);
         }
     }
