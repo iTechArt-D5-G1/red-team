@@ -18,7 +18,6 @@ namespace RedTeam.SurveyMaster.WebApi.AuthenticationFilters
         private readonly ITokenService _tokenService;
 
 
-
         public AuthenticationTokenFilter(ITokenService tokenService)
         {
             _tokenService = tokenService;
@@ -51,28 +50,29 @@ namespace RedTeam.SurveyMaster.WebApi.AuthenticationFilters
             Validate(token, context);
         }
 
+        public async Task ChallengeAsync(HttpAuthenticationChallengeContext context, CancellationToken cancellationToken)
+        {
+        }
+
+
         private void Validate(string token, HttpAuthenticationContext context)
         {
-                ValidateToken(token, out ClaimsPrincipal tokenPrincipal);
+            ValidateToken(token, out ClaimsPrincipal tokenPrincipal);
 
-                if (tokenPrincipal == null)
-                {
-                    context.ErrorResult = new ApiErrorResult(HttpStatusCode.BadRequest, 
-                        new ApiError(AuthenticationErrorCodes.InvalidCredentials, "Token is invalid"));
+            if (tokenPrincipal == null)
+            {
+                context.ErrorResult = new ApiErrorResult(HttpStatusCode.BadRequest,
+                    new ApiError(AuthenticationErrorCodes.InvalidCredentials, "Token is invalid"));
             }
-                else
-                {
-                    context.Principal = tokenPrincipal;
-                }
+            else
+            {
+                context.Principal = tokenPrincipal;
+            }
         }
 
         private void ValidateToken(string token, out ClaimsPrincipal tokenPrincipal)
         {
             tokenPrincipal = _tokenService.ParseSecurityToken(token);
-        }
-
-        public async Task ChallengeAsync(HttpAuthenticationChallengeContext context, CancellationToken cancellationToken)
-        {
         }
     }
 }
