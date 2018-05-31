@@ -30,7 +30,7 @@ namespace RedTeam.Common
         }
 
 
-        public ClaimsPrincipal ValidateToken(string token)
+        public ClaimsPrincipal ParseSecurityToken(string token)
         {
             try
             {

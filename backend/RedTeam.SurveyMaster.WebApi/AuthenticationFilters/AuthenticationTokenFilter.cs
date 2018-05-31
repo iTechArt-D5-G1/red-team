@@ -69,7 +69,7 @@ namespace RedTeam.SurveyMaster.WebApi.AuthenticationFilters
 
         private void ValidateToken(string token, out ClaimsPrincipal tokenPrincipal)
         {
-            tokenPrincipal = _tokenService.ValidateToken(token);
+            tokenPrincipal = _tokenService.ParseSecurityToken(token);
         }
 
         public async Task ChallengeAsync(HttpAuthenticationChallengeContext context, CancellationToken cancellationToken)
