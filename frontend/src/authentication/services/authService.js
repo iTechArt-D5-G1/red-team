@@ -1,4 +1,3 @@
-import cookie from 'react-cookie';
 import errorHandler from '../containers/errorHandler';
 import { signInUser, signInError, unSignInUser } from '../actions/actions';
 
@@ -10,7 +9,7 @@ export class AuthService {
     SignOutUser() {
         return (dispatch) => {
             dispatch(unSignInUser());
-            cookie.remove('token', { path: '/' });
+            localStorage.removeItem('token');
         };
     }
 
@@ -20,7 +19,7 @@ export class AuthService {
                 email, password,
             })
                 .then((response) => {
-                    cookie.save('token', response.data.token, { path: '/' });
+                    localStorage.setItem('token', response.data.token);
                     dispatch(signInUser());
                 })
                 .catch((error) => {
@@ -36,7 +35,7 @@ export class AuthService {
             email, firstName, lastName, password,
         })
             .then((response) => {
-                cookie.save('token', response.data.token, { path: '/' });
+                localStorage.setItem('token', response.data.token);
                 dispatch(signInUser());
             })
             .catch((error) => {
