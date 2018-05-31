@@ -1,10 +1,12 @@
 import cookie from 'react-cookie';
-import axios from 'axios';
 import errorHandler from '../containers/errorHandler';
-import { ServerUrl } from './../../config';
 import { signInUser, signInError, unSignInUser } from '../actions/actions';
 
 export class AuthService {
+    constructor(http) {
+        this.http = http;
+    }
+
     SignOutUser() {
         return (dispatch) => {
             dispatch(unSignInUser());
@@ -14,7 +16,7 @@ export class AuthService {
 
     SignInUser(email, password) {
         return (dispatch) => {
-            axios.post(`${ServerUrl}/register`, {
+            this.http.post('/register', {
                 email, password,
             })
                 .then((response) => {
@@ -30,7 +32,7 @@ export class AuthService {
     RegisterUser(dispatch, {
         email, firstName, lastName, password,
     }) {
-        axios.post(`${ServerUrl}/register`, {
+        this.http.post('/register', {
             email, firstName, lastName, password,
         })
             .then((response) => {
