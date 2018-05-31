@@ -9,7 +9,6 @@ export class AuthService {
         return (dispatch) => {
             dispatch(unSignInUser());
             cookie.remove('token', { path: '/' });
-            this.window.location.href = `${ServerUrl}/sign_in`;
         };
     }
 
@@ -21,7 +20,6 @@ export class AuthService {
                 .then((response) => {
                     cookie.save('token', response.data.token, { path: '/' });
                     dispatch(signInUser());
-                    this.window.location.href = `${ServerUrl}/hello`;
                 })
                 .catch((error) => {
                     errorHandler(error.response, signInError());
@@ -38,7 +36,6 @@ export class AuthService {
             .then((response) => {
                 cookie.save('token', response.data.token, { path: '/' });
                 dispatch(signInUser());
-                this.window.location.href = `${ServerUrl}/hello`;
             })
             .catch((error) => {
                 errorHandler(dispatch, error.response, signInError());
