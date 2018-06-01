@@ -1,8 +1,10 @@
 ﻿using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
+using RedTeam.Common.ExtentionMethods;
 using RedTeam.Common.Interfaсes;
 
 namespace RedTeam.Common
@@ -30,13 +32,14 @@ namespace RedTeam.Common
         }
 
 
-        public ClaimsPrincipal ParseSecurityToken(string token)
+        public ClaimsPrincipal ParseSecurityToken(ClaimsPrincipal userClaims)
         {
             try
             {
+                var authenticationClaim = userClaims.FetchAuthenticationClaim();
                 var validationParameters = CreateValidationParameters();
                 var tokenToReturn =
-                    _jwtTokenHandler.ValidateToken(token, validationParameters, out var securityToken);
+                    _jwtTokenHandler.ValidateToken(authenticationClaim.Value, validationParameters, out var securityToken);
                 return tokenToReturn;
             }
             catch (Exception e)
@@ -45,10 +48,18 @@ namespace RedTeam.Common
             }
         }
 
-        public string CreateSecurityToken(string userName, string userRoleName)
+        public ClaimsPrincipal CreateSecurityToken(ClaimsPrincipal userClaims)
         {
-            var jwtToken = CreateConfiguredToken(userName, userRoleName);
-            return SerializeToken(jwtToken);
+            var jwtToken = CreateConfiguredToken(userClaims.Identities.FirstOrDefault());
+            var serializedToken = SerializeToken(jwtToken);
+
+            var claimIdentity = new ClaimsIdentity(new[]
+                {
+                    new Claim(ClaimTypes.Authentication, serializedToken), 
+                });
+
+            var claimsPrincipal = new ClaimsPrincipal(claimIdentity);
+            return claimsPrincipal;
         }
 
 
@@ -65,14 +76,8 @@ namespace RedTeam.Common
             };
         }
 
-        private SecurityToken CreateConfiguredToken(string userName, string userRoleName)
+        private SecurityToken CreateConfiguredToken(ClaimsIdentity userClaimsIdentity)
         {
-            var claimsIdentity =
-                new ClaimsIdentity(new[]
-                {
-                    new Claim(ClaimTypes.Name, userName),
-                    new Claim(ClaimTypes.Role, userRoleName)
-                });
 
             var signingCredentials = new SigningCredentials(_symmerticSecurityKey,
                 SecurityAlgorithms.HmacSha256Signature);
@@ -83,7 +88,7 @@ namespace RedTeam.Common
             return _jwtTokenHandler.CreateJwtSecurityToken(
                 _issuerUrl,
                 _audienceUrl,
-                claimsIdentity,
+                userClaimsIdentity,
                 issuedAt,
                 expires,
                 signingCredentials: signingCredentials);
