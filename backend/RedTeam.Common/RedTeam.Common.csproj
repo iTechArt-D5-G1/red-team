@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExtentionMethods\ClaimsPrincipalExtention.cs" />
     <Compile Include="ExtentionMethods\ModelStateDictionaryExtention.cs" />
     <Compile Include="Interfaсes\ITokenService.cs" />
     <Compile Include="JwtTokenService.cs" />
