@@ -11,6 +11,7 @@ import thunk from 'redux-thunk';
 import { createBrowserHistory } from 'history';
 import { surveyRootPath, helloWorldPagePath, signInPath } from './shared/routePath';
 import { SurveyService } from './survey/services/survey';
+import { AuthService } from './authentication/services/authService';
 import { http } from './shared/utils/';
 import reducer from './survey/reducer';
 import App from './app/App.jsx';
@@ -22,6 +23,7 @@ import './index.scss';
 
 const services = {
     surveyService: new SurveyService(http),
+    authService: new AuthService(http),
 };
 
 const createStoreWithMiddleware = applyMiddleware(thunk.withExtraArgument(services))(createStore);
