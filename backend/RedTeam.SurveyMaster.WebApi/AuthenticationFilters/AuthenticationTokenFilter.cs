@@ -72,7 +72,13 @@ namespace RedTeam.SurveyMaster.WebApi.AuthenticationFilters
 
         private void ValidateToken(string token, out ClaimsPrincipal tokenPrincipal)
         {
-            tokenPrincipal = _tokenService.ParseSecurityToken(token);
+            var claimIdentity = new ClaimsIdentity(new []
+            {
+                new Claim(ClaimTypes.Authentication, token), 
+            });
+            var claimPrincipal = new ClaimsPrincipal(claimIdentity);
+
+            tokenPrincipal = _tokenService.ParseSecurityToken(claimPrincipal);
         }
     }
 }
