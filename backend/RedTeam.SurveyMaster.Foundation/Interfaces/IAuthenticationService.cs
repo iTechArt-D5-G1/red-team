@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace RedTeam.SurveyMaster.Foundation.Interfaces
 {
@@ -9,5 +10,6 @@ namespace RedTeam.SurveyMaster.Foundation.Interfaces
 
         Task<string> GetUserRoleNameAsync(string userName);
 
+        Task<ClaimsPrincipal> AuthenticateUserAsync(string userName, string password);
     }
 }

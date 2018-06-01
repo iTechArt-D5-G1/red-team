@@ -48,6 +48,10 @@
     <Compile Include="SurveyService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RedTeam.Common\RedTeam.Common.csproj">
+      <Project>{19C3229A-F0F8-459C-A72E-DF34B5C03DDF}</Project>
+      <Name>RedTeam.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RedTeam.Repositories\RedTeam.Repositories.csproj">
       <Project>{abefc461-c4f5-4cb1-94b4-f570f084474a}</Project>
       <Name>RedTeam.Repositories</Name>
