@@ -22,7 +22,6 @@ using RedTeam.SurveyMaster.Repositories.Models;
 using RedTeam.SurveyMaster.WebApi.AuthenticationFilters;
 using RedTeam.SurveyMaster.WebApi.Controllers;
 using RedTeam.SurveyMaster.WebApi.Factories;
-using RedTeam.SurveyMaster.WebApi.OwinMiddleware;
 
 [assembly: OwinStartup(typeof(Startup))]
 
@@ -53,7 +52,6 @@ namespace RedTeam.SurveyMaster.WebApi
         public void Configuration(IAppBuilder app)
         {
             var config = new HttpConfiguration();
-            app.Use<GlobalExceptionMiddleware>();
             RegisterRoutes(config);
             ConfigureAutofac(config);
             ConfigureIdentity(app, config.DependencyResolver);
