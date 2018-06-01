@@ -1,4 +1,6 @@
-﻿using System.Net;
+﻿using System.Linq;
+using System.Net;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Http;
 using RedTeam.Common.ExtentionMethods;
@@ -15,13 +17,10 @@ namespace RedTeam.SurveyMaster.WebApi.Controllers
 
         private readonly IAuthenticationService _authenticationService;
 
-        private readonly ITokenService _tokenService;
 
-
-        public AuthController(IAuthenticationService authenticationService, ITokenService tokenService)
+        public AuthController(IAuthenticationService authenticationService)
         {
             _authenticationService = authenticationService;
-            _tokenService = tokenService;
         }
 
 
@@ -37,9 +36,16 @@ namespace RedTeam.SurveyMaster.WebApi.Controllers
 
             if (await _authenticationService.IsUserExistsAsync(userInfo.Username, userInfo.Password))
             {
-                var userRoleName = await _authenticationService.GetUserRoleNameAsync(userInfo.Username);
-                var token = _tokenService.CreateSecurityToken(userInfo.Username, userRoleName);
-                return Ok(token);
+                var userClaimsPrincipal = await _authenticationService.AuthenticateUserAsync(userInfo.Username, userInfo.Password);
+                var userAuthenticationClaim = userClaimsPrincipal.FetchAuthenticationClaim();
+
+                if (userAuthenticationClaim != null)
+                {
+                    return Ok(userAuthenticationClaim.Value);
+                }
+
+                return new ApiErrorResult(HttpStatusCode.BadRequest, 
+                    new ApiError(AuthenticationErrorCodes.MissingCredentials, "Token is empty"));
             }
 
             return new ApiErrorResult(HttpStatusCode.NotFound,
