@@ -31,13 +31,15 @@ const store = createStoreWithMiddleware(reducer);
 
 const history = createBrowserHistory();
 
+const checkToken = localStorage.getItem('token');
+
 ReactDOM.render(
     <Provider store={store}>
         <Router history={history}>
             <App>
-                <Route exact path={surveyRootPath} component={Surveys} />
+                {checkToken}: <Route exact path={surveyRootPath} component={Surveys} />
+                ? <Route exact path={signInPath} component={SignInPage} />
                 <Route path={helloWorldPagePath} component={HelloWorldPage} />
-                <Route path={signInPath} component={SignInPage} />
             </App>
         </Router>
     </Provider>,
