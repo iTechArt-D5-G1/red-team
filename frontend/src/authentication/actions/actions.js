@@ -12,3 +12,20 @@ export const SIGN_IN_ERROR = 'SIGN_IN_ERROR';
 export const signInError = () => ({
     type: SIGN_IN_ERROR,
 });
+
+export const SIGN_IN_SUCCESS = 'SIGN_IN_SUCCESS';
+export const signInSuccess = () => ({
+    type: SIGN_IN_SUCCESS,
+});
+
+export function signInRequest() {
+    return async (dispatch, services) => {
+        try {
+            dispatch(signInUser());
+            await services.authServise.signInUser();
+            dispatch(signInSuccess());
+        } catch (e) {
+            dispatch(signInError());
+        }
+    };
+}
