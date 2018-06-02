@@ -5,6 +5,7 @@ import {
     Route,
 } from 'react-router-dom';
 import ReactDOM from 'react-dom';
+import jwtDecode from 'jwt-decode';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
@@ -31,7 +32,15 @@ const store = createStoreWithMiddleware(reducer);
 
 const history = createBrowserHistory();
 
-const checkToken = localStorage.getItem('token');
+const checkToken = () => {
+    const token = JSON.parse(localStorage.getItem('token'));
+    if (token && jwtDecode(token).exp < Date.now().valueOf() / 1000) {
+        localStorage.clear();
+        return false;
+    } else {
+        return true;
+    }
+};
 
 ReactDOM.render(
     <Provider store={store}>
