@@ -18,11 +18,11 @@ export const signInSuccess = () => ({
     type: SIGN_IN_SUCCESS,
 });
 
-export function signInRequest() {
+export function signInRequest(userName, password) {
     return async (dispatch, services) => {
         try {
             dispatch(signInUser());
-            await services.authServise.SignInUser();
+            await services.authServise.SignInUser(userName, password);
             dispatch(signInSuccess());
         } catch (e) {
             dispatch(signInError());

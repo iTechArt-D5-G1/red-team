@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import './sign-in-page.scss';
+import { signInRequest } from './../../actions/actions';
 
 class SignInPage extends Component {
     static defaultProps = {
@@ -98,8 +100,8 @@ const mapStateToProps = state => ({
     errorMessage: state.error,
 });
 
-const mapDispatchToProps = services => ({
-    submit: (username, password) => { services.surveyService.SignInUser(username, password); },
+const mapDispatchToProps = dispatch => ({
+    submit: (username, password) => bindActionCreators(signInRequest(username, password), dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignInPage);
