@@ -22,7 +22,7 @@ export function signInRequest() {
     return async (dispatch, services) => {
         try {
             dispatch(signInUser());
-            await services.authServise.signInUser();
+            await services.authServise.SignInUser();
             dispatch(signInSuccess());
         } catch (e) {
             dispatch(signInError());

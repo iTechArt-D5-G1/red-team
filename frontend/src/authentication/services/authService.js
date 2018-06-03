@@ -1,13 +1,11 @@
 import errorHandler from '../containers/errorHandler';
-import { signInUser, signInError, unSignInUser } from '../actions/actions';
 
 export class AuthService {
     constructor(http) {
         this.http = http;
     }
 
-    static SignOutUser(dispatch) {
-        dispatch(unSignInUser());
+    static SignOutUser() {
         localStorage.removeItem('token');
     }
 
@@ -15,9 +13,8 @@ export class AuthService {
         try {
             const response = await this.http.post('/register', { email, password });
             localStorage.setItem('token', response.data.token);
-            dispatch(signInUser());
         } catch (error) {
-            errorHandler(dispatch, error.response, signInError());
+            errorHandler(dispatch, error.response);
         }
     }
 
@@ -29,9 +26,8 @@ export class AuthService {
                 email, firstName, lastName, password,
             });
             localStorage.setItem('token', response.data.token);
-            dispatch(signInUser());
         } catch (error) {
-            errorHandler(dispatch, error.response, signInError());
+            errorHandler(dispatch, error.response);
         }
     }
 }
