@@ -24,7 +24,7 @@
 
     color: $menuButtonsColor;
 
-    & :hover {
+    .menu__btn :hover {
         background-color: $onMainColorHover;
     }
 }

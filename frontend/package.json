@@ -13,7 +13,7 @@
     "devDependencies": {
         "babel-cli": "6.26.0",
         "babel-core": "6.26.0",
-        "babel-eslint": "8.2.1",
+        "babel-eslint": "^8.2.1",
         "babel-loader": "7.1.2",
         "babel-polyfill": "6.26.0",
         "babel-preset-env": "1.6.1",
@@ -22,7 +22,7 @@
         "babel-preset-stage-0": "6.24.1",
         "babel-preset-stage-1": "6.24.1",
         "css-loader": "0.28.9",
-        "eslint": "4.17.0",
+        "eslint": "^4.19.1",
         "eslint-config-airbnb": "16.1.0",
         "eslint-loader": "1.9.0",
         "eslint-plugin-import": "2.8.0",
@@ -43,12 +43,14 @@
         "webpack-merge": "4.1.1"
     },
     "dependencies": {
-        "axios": "0.13.1",
+        "axios": "^0.13.1",
         "bootstrap": "4.0.0",
         "history": "4.7.2",
         "jquery": "3.3.1",
+        "jwt-decode": "^2.2.0",
         "prop-types": "15.6.0",
         "react": "16.2.0",
+        "react-cookie": "^2.1.4",
         "react-dom": "16.2.0",
         "react-redux": "5.0.6",
         "react-router": "4.2.0",

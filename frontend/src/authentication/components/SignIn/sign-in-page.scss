@@ -1,0 +1,58 @@
+.sign-in-page {
+    position: relative;
+    top: 230px;
+
+    display: block;
+
+    max-width: 20em;
+    min-height: 20em;
+
+    margin: 0 auto;
+
+    border-color: rgba($color: #000, $alpha: 1);
+    border-radius: 6px;
+
+    background-color: rgba($color: #eee, $alpha: 1);
+}
+
+.sign-in-page__header {
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+
+    font-size: 20pt;
+    font-weight: 300;
+}
+
+.sign-in-form__field {
+    display: block;
+
+    min-width: 15em;
+
+    margin: 0 auto;
+
+    border: 1px solid rgba($color: rgb(180, 167, 167), $alpha: 1);
+
+    border-radius: 5px;
+
+    outline: none;
+}
+
+.sign-in-form__button {
+    border: 0.1em solid rgba($color: rgb(180, 167, 167), $alpha: 1);
+
+    border-radius: 0.1em;
+}
+
+.sign-in-validation {
+    display: block;
+
+    min-width: 15em;
+
+    margin: 0 auto;
+
+    border: 0.1em solid rgba($color: rgb(255, 0, 0), $alpha: 1);
+
+    border-radius: 0.2em;
+
+    outline: none;
+}
