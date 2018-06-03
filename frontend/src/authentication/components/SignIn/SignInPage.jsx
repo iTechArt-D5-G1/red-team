@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 import { connect } from 'react-redux';
-import SignInUser from './../../containers/SignInUser';
 import './sign-in-page.scss';
 
 class SignInPage extends Component {
@@ -99,8 +98,8 @@ const mapStateToProps = state => ({
     errorMessage: state.error,
 });
 
-const mapDispatchToProps = dispatch => ({
-    submit: (username, password) => { dispatch(SignInUser(username, password)); },
+const mapDispatchToProps = services => ({
+    submit: (username, password) => { services.surveyService.SignInUser(username, password); },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignInPage);

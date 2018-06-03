@@ -32,13 +32,15 @@ const store = createStoreWithMiddleware(reducer);
 
 const history = createBrowserHistory();
 
-const checkToken = () => {
+const checkTokenExpired = () => {
     const token = JSON.parse(localStorage.getItem('token'));
     if (token && jwtDecode(token).exp < Date.now().valueOf() / 1000) {
         localStorage.clear();
         return false;
-    } else {
+    } else if (token) {
         return true;
+    } else {
+        return false;
     }
 };
 
@@ -46,8 +48,11 @@ ReactDOM.render(
     <Provider store={store}>
         <Router history={history}>
             <App>
-                {checkToken}: <Route exact path={surveyRootPath} component={Surveys} />
-                ? <Route exact path={signInPath} component={SignInPage} />
+                <Route
+                    exact
+                    path={checkTokenExpired ? surveyRootPath : signInPath}
+                    component={checkTokenExpired ? Surveys : SignInPage}
+                />
                 <Route path={helloWorldPagePath} component={HelloWorldPage} />
             </App>
         </Router>

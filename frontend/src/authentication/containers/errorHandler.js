@@ -1,5 +1,3 @@
-import logoutUser from './logoutUser';
-
 function errorHandler(error, type) {
     return (dispatch) => {
         let errorMessage = '';
@@ -17,7 +15,6 @@ function errorHandler(error, type) {
                 type,
                 payload: 'You are not authorized to do this. Please, login and try again.',
             });
-            logoutUser();
         } else {
             dispatch({
                 type,
