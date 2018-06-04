@@ -10,6 +10,7 @@ namespace RedTeam.SurveyMaster.Repositories
             RegisterRepositories();
         }
 
+
         private void RegisterRepositories()
         {
             // register custom repositories here

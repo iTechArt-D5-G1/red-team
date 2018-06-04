@@ -13,6 +13,7 @@ namespace RedTeam.Repositories
 
         protected IDbContext Context { get; private set; }
 
+
         public RepositoryProvider(TContext dbContext)
         {
             Context = dbContext;
@@ -20,6 +21,7 @@ namespace RedTeam.Repositories
             _entityTypeToCustomRepositoryTypeMappings = new Dictionary<Type, Type>();
             _disposed = false;
         }
+
 
         IRepository<TEntity> IRepositoryProvider.GetRepository<TEntity>()
         {
