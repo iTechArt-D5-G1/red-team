@@ -42,7 +42,6 @@
     <Compile Include="AuthenticationService.cs" />
     <Compile Include="UserManager.cs" />
     <Compile Include="Interfaces\IAuthenticationService.cs" />
-    <Compile Include="Interfaces\IUserManagerFactory.cs" />
     <Compile Include="Interfaces\ISurveyService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SurveyService.cs" />

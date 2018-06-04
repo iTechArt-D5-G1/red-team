@@ -160,7 +160,6 @@
     <Compile Include="Errors\ApiErrorResult.cs" />
     <Compile Include="Errors\AuthenticationErrorCodes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Factories\UserManagerFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RedTeam.Common\RedTeam.Common.csproj">

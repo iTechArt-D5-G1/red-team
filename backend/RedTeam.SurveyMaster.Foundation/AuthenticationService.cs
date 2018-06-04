@@ -4,35 +4,33 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using RedTeam.Common.Interfaсes;
 using RedTeam.SurveyMaster.Foundation.Interfaces;
+using RedTeam.SurveyMaster.Repositories.Models;
 
 namespace RedTeam.SurveyMaster.Foundation
 {
     public class AuthenticationService : IAuthenticationService
     {
-
-        private readonly IUserManagerFactory _userManagerFactory;
+        private readonly UserManager<User> _userManager;
 
         private readonly ITokenService _tokenService;
 
 
-        public AuthenticationService(IUserManagerFactory userManagerFactory, ITokenService tokenService)
+        public AuthenticationService(ITokenService tokenService, UserManager<User> userManager)
         {
-            _userManagerFactory = userManagerFactory;
+            _userManager = userManager;
             _tokenService = tokenService;
         }
 
 
         public async Task<bool> IsUserExistsAsync(string userName, string password)
         {
-            var userManager = _userManagerFactory.GetUserManager();
-            return await userManager.FindAsync(userName, password) != null;
+            return await _userManager.FindAsync(userName, password) != null;
         }
 
         public async Task<string> GetUserRoleNameAsync(string userName)
         {
-            var userManager = _userManagerFactory.GetUserManager();
-            var user = await userManager.FindByNameAsync(userName);
-            var userRoleName = userManager.GetRoles(user.Id).FirstOrDefault();
+            var user = await _userManager.FindByNameAsync(userName);
+            var userRoleName = _userManager.GetRoles(user.Id).FirstOrDefault();
             return userRoleName;
         }
 
