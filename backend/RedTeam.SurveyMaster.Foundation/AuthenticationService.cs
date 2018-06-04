@@ -40,18 +40,32 @@ namespace RedTeam.SurveyMaster.Foundation
             {
                 var userRoleName = await GetUserRoleNameAsync(userName);
 
-                var userClaimsIdentity =
-                    new ClaimsIdentity(new[]
-                    {
-                        new Claim(ClaimTypes.Name, userName),
-                        new Claim(ClaimTypes.Role, userRoleName)
-                    });
-                var userClaimsPrincipal = new ClaimsPrincipal(userClaimsIdentity);
+                var securityToken = CreateSecurityToken(userName, userRoleName);
 
-                return _tokenService.CreateSecurityToken(userClaimsPrincipal);
+                var userAuthenticationIdentityClaims = new ClaimsIdentity(new[]
+                {
+                    new Claim(ClaimTypes.Authentication, securityToken) 
+                });
+
+                var userAuthenticationClaimsPrincipal = new ClaimsPrincipal(userAuthenticationIdentityClaims);
+                return userAuthenticationClaimsPrincipal;
             }
 
             return null;
+        }
+
+
+        private string CreateSecurityToken(string userName, string userRoleName)
+        {
+            var userClaimsIdentity =
+                new ClaimsIdentity(new[]
+                {
+                    new Claim(ClaimTypes.Name, userName),
+                    new Claim(ClaimTypes.Role, userRoleName)
+                });
+            var userClaimsPrincipal = new ClaimsPrincipal(userClaimsIdentity);
+
+            return _tokenService.CreateSecurityToken(userClaimsPrincipal);
         }
     }
 }
