@@ -1,4 +1,5 @@
 ﻿using System.Configuration;
+using System.Data.Entity;
 using System.Reflection;
 using Owin;
 using Autofac;
@@ -52,8 +53,8 @@ namespace RedTeam.SurveyMaster.WebApi
         {
             var config = new HttpConfiguration();
             RegisterRoutes(config);
-            ConfigureAutofac(config);
-            ConfigureIdentity(app, config.DependencyResolver);
+            ConfigureAutofac(config, app);
+            ConfigureIdentityPerOwinContext(app, config.DependencyResolver);
             app.UseWebApi(config);
         }
 
@@ -68,7 +69,7 @@ namespace RedTeam.SurveyMaster.WebApi
             );
         }
 
-        private void ConfigureAutofac(HttpConfiguration configuration)
+        private void ConfigureAutofac(HttpConfiguration configuration, IAppBuilder app)
         {
             var builder = new ContainerBuilder();
             builder.RegisterWebApiFilterProvider(configuration);
@@ -89,20 +90,22 @@ namespace RedTeam.SurveyMaster.WebApi
                 .WithParameter("audienceUrl", _audienceUrl)
                 .InstancePerLifetimeScope();
 
-            builder.RegisterType<SurveyMasterDbContext>().AsSelf().InstancePerDependency();
+            builder.RegisterType<SurveyMasterDbContext>().As<DbContext>().InstancePerLifetimeScope();
+            builder.RegisterType<UserStore<User>>().As<IUserStore<User>>().InstancePerLifetimeScope();
+            builder.RegisterType<ApplicationUserManager>().As<UserManager<User>>().InstancePerLifetimeScope();
 
             var container = builder.Build();
             configuration.DependencyResolver = new AutofacWebApiDependencyResolver(container);
+
         }
 
-        private void ConfigureIdentity(IAppBuilder app, IDependencyResolver dependencyResolver)
+        private void ConfigureIdentityPerOwinContext(IAppBuilder app, IDependencyResolver dependencyResolver)
         {
             app.CreatePerOwinContext(() =>
                 (SurveyMasterDbContext)dependencyResolver.GetService(typeof(SurveyMasterDbContext)));
 
-            app.CreatePerOwinContext<UserManager>((option, context) =>
-            new UserManager(
-                new UserStore<User>(context.Get<SurveyMasterDbContext>())));
+            app.CreatePerOwinContext(() =>
+                (UserManager<User>)dependencyResolver.GetService(typeof(UserManager<User>)));
 
             app.CreatePerOwinContext<RoleManager<Role>>((options, context) =>
             new RoleManager<Role>(
