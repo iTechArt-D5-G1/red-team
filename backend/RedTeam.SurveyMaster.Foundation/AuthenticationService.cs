@@ -22,18 +22,6 @@ namespace RedTeam.SurveyMaster.Foundation
         }
 
 
-        public async Task<bool> IsUserExistsAsync(string userName, string password)
-        {
-            return await _userManager.FindAsync(userName, password) != null;
-        }
-
-        public async Task<string> GetUserRoleNameAsync(string userName)
-        {
-            var user = await _userManager.FindByNameAsync(userName);
-            var userRoleName = _userManager.GetRoles(user.Id).FirstOrDefault();
-            return userRoleName;
-        }
-
         public async Task<ClaimsPrincipal> AuthenticateUserAsync(string userName, string password)
         {
             if (await IsUserExistsAsync(userName, password))
@@ -54,6 +42,18 @@ namespace RedTeam.SurveyMaster.Foundation
             return null;
         }
 
+
+        private async Task<bool> IsUserExistsAsync(string userName, string password)
+        {
+            return await _userManager.FindAsync(userName, password) != null;
+        }
+
+        private async Task<string> GetUserRoleNameAsync(string userName)
+        {
+            var user = await _userManager.FindByNameAsync(userName);
+            var userRoleName = _userManager.GetRoles(user.Id).FirstOrDefault();
+            return userRoleName;
+        }
 
         private string CreateSecurityToken(string userName, string userRoleName)
         {
