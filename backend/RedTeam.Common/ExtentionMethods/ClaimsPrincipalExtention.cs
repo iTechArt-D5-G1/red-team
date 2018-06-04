@@ -10,16 +10,6 @@ namespace RedTeam.Common.ExtentionMethods
             return FetchClaimByClaimType(claimsPrincipal, ClaimTypes.Authentication);
         }
 
-        public static Claim FetchNameClaim(this ClaimsPrincipal claimsPrincipal)
-        {
-            return FetchClaimByClaimType(claimsPrincipal, ClaimTypes.Name);
-        }
-
-        public static Claim FetchRoleClaim(this ClaimsPrincipal claimsPrincipal)
-        {
-            return FetchClaimByClaimType(claimsPrincipal, ClaimTypes.Role);
-        }
-
 
         private static Claim FetchClaimByClaimType(ClaimsPrincipal claimsPrincipal, string claimType)
         {
