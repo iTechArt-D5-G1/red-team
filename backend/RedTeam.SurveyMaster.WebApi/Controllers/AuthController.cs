@@ -24,29 +24,21 @@ namespace RedTeam.SurveyMaster.WebApi.Controllers
         [HttpPost]
         public async Task<IHttpActionResult> Authenticate([FromBody] UserDto userInfo)
         {
-
             if (!ModelState.IsValid)
             {
                 return new ApiErrorResult(HttpStatusCode.BadRequest, new ApiError(AuthenticationErrorCodes.InvalidCredentials, "Invalid credentials",
                     ModelState.FetchErrorsFromModelState()));
             }
 
-            if (await _authenticationService.IsUserExistsAsync(userInfo.Username, userInfo.Password))
+            var userClaimsPrincipal = await _authenticationService.AuthenticateUserAsync(userInfo.Username, userInfo.Password);
+            if (userClaimsPrincipal == null)
             {
-                var userClaimsPrincipal = await _authenticationService.AuthenticateUserAsync(userInfo.Username, userInfo.Password);
-                var userAuthenticationClaim = userClaimsPrincipal.FetchAuthenticationClaim();
-
-                if (userAuthenticationClaim != null)
-                {
-                    return Ok(userAuthenticationClaim.Value);
-                }
-
-                return new ApiErrorResult(HttpStatusCode.BadRequest, 
-                    new ApiError(AuthenticationErrorCodes.MissingCredentials, "Token is empty"));
+                return new ApiErrorResult(HttpStatusCode.NotFound,
+                    new ApiError(AuthenticationErrorCodes.UserNotFound, "User not found"));
             }
 
-            return new ApiErrorResult(HttpStatusCode.NotFound,
-                new ApiError(AuthenticationErrorCodes.UserNotFound, "User not found"));
+            var userAuthenticationClaim = userClaimsPrincipal.FetchAuthenticationClaim();
+            return Ok(userAuthenticationClaim.Value);
         }
     }
 }
