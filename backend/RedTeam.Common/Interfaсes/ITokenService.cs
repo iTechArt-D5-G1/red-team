@@ -4,9 +4,9 @@ namespace RedTeam.Common.Interfaсes
 {
     public interface ITokenService
     {
-        ClaimsPrincipal ParseSecurityToken(ClaimsPrincipal userClaims);
+        ClaimsPrincipal ParseSecurityToken(string securityToken);
 
-        ClaimsPrincipal CreateSecurityToken(ClaimsPrincipal userClaims);
+        string CreateSecurityToken(ClaimsPrincipal userClaims);
 
     }
 }

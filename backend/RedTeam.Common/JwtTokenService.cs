@@ -32,15 +32,14 @@ namespace RedTeam.Common
         }
 
 
-        public ClaimsPrincipal ParseSecurityToken(ClaimsPrincipal userClaims)
+        public ClaimsPrincipal ParseSecurityToken(string securityToken)
         {
             try
             {
-                var authenticationClaim = userClaims.FetchAuthenticationClaim();
                 var tokenValidationParameters = CreateTokenValidationParameters();
-                var tokenToReturn =
-                    _jwtTokenHandler.ValidateToken(authenticationClaim.Value, tokenValidationParameters, out var securityToken);
-                return tokenToReturn;
+                var claimsPrincipal =
+                    _jwtTokenHandler.ValidateToken(securityToken, tokenValidationParameters, out var secToken);
+                return claimsPrincipal;
             }
             catch (Exception e)
             {
@@ -48,18 +47,11 @@ namespace RedTeam.Common
             }
         }
 
-        public ClaimsPrincipal CreateSecurityToken(ClaimsPrincipal userClaims)
+        public string CreateSecurityToken(ClaimsPrincipal userClaims)
         {
             var jwtToken = CreateConfiguredToken(userClaims.Identities.FirstOrDefault());
             var serializedToken = SerializeToken(jwtToken);
-
-            var claimIdentity = new ClaimsIdentity(new[]
-                {
-                    new Claim(ClaimTypes.Authentication, serializedToken)
-                });
-
-            var claimsPrincipal = new ClaimsPrincipal(claimIdentity);
-            return claimsPrincipal;
+            return serializedToken;
         }
 
 
