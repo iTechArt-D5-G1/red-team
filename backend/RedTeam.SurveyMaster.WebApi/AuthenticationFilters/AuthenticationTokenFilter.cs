@@ -47,7 +47,7 @@ namespace RedTeam.SurveyMaster.WebApi.AuthenticationFilters
             }
 
             var token = authorization.Parameter;
-            Validate(token, context);
+            Parse(token, context);
         }
 
         public async Task ChallengeAsync(HttpAuthenticationChallengeContext context, CancellationToken cancellationToken)
@@ -55,7 +55,7 @@ namespace RedTeam.SurveyMaster.WebApi.AuthenticationFilters
         }
 
 
-        private void Validate(string token, HttpAuthenticationContext context)
+        private void Parse(string token, HttpAuthenticationContext context)
         {
             ParseToken(token, out ClaimsPrincipal tokenPrincipal);
 
