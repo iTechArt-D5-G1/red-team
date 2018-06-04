@@ -3,9 +3,9 @@ using RedTeam.SurveyMaster.Repositories.Models;
 
 namespace RedTeam.SurveyMaster.Foundation
 {
-    public class UserManager : UserManager<User>
+    public class ApplicationUserManager : UserManager<User>
     {
-        public UserManager(IUserStore<User> store)
+        public ApplicationUserManager(IUserStore<User> store)
             : base(store)
         {
         }

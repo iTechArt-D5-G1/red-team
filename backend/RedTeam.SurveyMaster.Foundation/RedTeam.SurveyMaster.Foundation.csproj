@@ -40,7 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthenticationService.cs" />
-    <Compile Include="UserManager.cs" />
+    <Compile Include="ApplicationUserManager.cs" />
     <Compile Include="Interfaces\IAuthenticationService.cs" />
     <Compile Include="Interfaces\ISurveyService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
