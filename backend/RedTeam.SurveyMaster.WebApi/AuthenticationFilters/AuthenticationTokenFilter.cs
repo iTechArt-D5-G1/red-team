@@ -74,7 +74,7 @@ namespace RedTeam.SurveyMaster.WebApi.AuthenticationFilters
         {
             var claimIdentity = new ClaimsIdentity(new []
             {
-                new Claim(ClaimTypes.Authentication, token), 
+                new Claim(ClaimTypes.Authentication, token) 
             });
             var claimPrincipal = new ClaimsPrincipal(claimIdentity);
 

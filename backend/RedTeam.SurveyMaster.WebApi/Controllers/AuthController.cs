@@ -1,10 +1,7 @@
-﻿using System.Linq;
-using System.Net;
-using System.Security.Claims;
+﻿using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
 using RedTeam.Common.ExtentionMethods;
-using RedTeam.Common.Interfaсes;
 using RedTeam.SurveyMaster.Foundation.Interfaces;
 using RedTeam.SurveyMaster.WebApi.Dtos;
 using RedTeam.SurveyMaster.WebApi.Errors;

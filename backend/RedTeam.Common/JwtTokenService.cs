@@ -37,9 +37,9 @@ namespace RedTeam.Common
             try
             {
                 var authenticationClaim = userClaims.FetchAuthenticationClaim();
-                var validationParameters = CreateValidationParameters();
+                var tokenValidationParameters = CreateTokenValidationParameters();
                 var tokenToReturn =
-                    _jwtTokenHandler.ValidateToken(authenticationClaim.Value, validationParameters, out var securityToken);
+                    _jwtTokenHandler.ValidateToken(authenticationClaim.Value, tokenValidationParameters, out var securityToken);
                 return tokenToReturn;
             }
             catch (Exception e)
@@ -55,7 +55,7 @@ namespace RedTeam.Common
 
             var claimIdentity = new ClaimsIdentity(new[]
                 {
-                    new Claim(ClaimTypes.Authentication, serializedToken), 
+                    new Claim(ClaimTypes.Authentication, serializedToken)
                 });
 
             var claimsPrincipal = new ClaimsPrincipal(claimIdentity);
@@ -63,7 +63,7 @@ namespace RedTeam.Common
         }
 
 
-        private TokenValidationParameters CreateValidationParameters()
+        private TokenValidationParameters CreateTokenValidationParameters()
         {
             return new TokenValidationParameters
             {
