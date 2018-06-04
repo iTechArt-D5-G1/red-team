@@ -57,7 +57,7 @@ namespace RedTeam.SurveyMaster.WebApi.AuthenticationFilters
 
         private void Validate(string token, HttpAuthenticationContext context)
         {
-            ValidateToken(token, out ClaimsPrincipal tokenPrincipal);
+            ParseToken(token, out ClaimsPrincipal tokenPrincipal);
 
             if (tokenPrincipal == null)
             {
@@ -70,7 +70,7 @@ namespace RedTeam.SurveyMaster.WebApi.AuthenticationFilters
             }
         }
 
-        private void ValidateToken(string token, out ClaimsPrincipal tokenPrincipal)
+        private void ParseToken(string token, out ClaimsPrincipal tokenPrincipal)
         {
             tokenPrincipal = _tokenService.ParseSecurityToken(token);
         }
